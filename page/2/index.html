@@ -76,6 +76,77 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-09-06T16:00:00.000Z"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">2018-09-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">在Linux上使用 i3 作为窗口管理器的入门教程</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>注：本文首发于linux中国<br>本篇文章会介绍如何在Fedora系统中，安装、配置、使用i3桌面管理器。</p>
+<p><img src="https://opensource.com/sites/default/files/styles/image-full-size/public/lead-images/windows-tiling-windows-wall.png?itok=mTH7uVrn" alt=""></p>
+<p>在我的文章<a href="https://opensource.com/article/18/8/i3-tiling-window-manager" target="_blank" rel="noopener">i3 桌面让Linux更好的5个理由</a>，我分享了选择 <a href="https://i3wm.org" target="_blank" rel="noopener">i3 桌面管理器</a> 作为一种Linux桌面替代方案的最主要五个理由。<br>在本篇文章中，我将向大家展示，如何在 Fedora 28 上安装与配置 i3。</p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>首先进入 Fedora 系统中，打开一个终端。使用 <code>dnf</code> 来安装需要的软件包，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y i3 i3-ipc i3status i3lock dmenu terminator --exclude=rxvt-unicode</span><br><span class="line">Last metadata expiration check: 1:36:15 ago on Wed 08 Aug 2018 12:04:31 PM EDT.</span><br><span class="line">Dependencies resolved.</span><br><span class="line">================================================================================================</span><br><span class="line"> Package                     Arch         Version                           Repository     Size</span><br><span class="line">================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> dmenu                       x86_64       4.8-1.fc28                        fedora         33 k</span><br><span class="line"> i3                          x86_64       4.15-1.fc28                       fedora        323 k</span><br><span class="line"> i3-ipc                      noarch       0.1.4-12.fc28                     fedora         14 k</span><br><span class="line"> i3lock                      x86_64       2.9.1-2.fc28                      fedora         33 k</span><br><span class="line"> i3status                    x86_64       2.12-1.fc28                       updates        62 k</span><br><span class="line"> terminator                  noarch       1.91-4.fc28                       fedora        570 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> dzen2                       x86_64       0.8.5-21.20100104svn.fc28         fedora         60 k</span><br><span class="line"></span><br><span class="line">... Skipping dependencies/install messages</span><br><span class="line"></span><br><span class="line">Complete!</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></table></figure></p>
+<p>注意：在这个命令中，我排除了 <code>rxvt-unicode</code> 这个包，因为我更喜欢 <code>terminator</code> 作为我的终端模拟器。</p>
+<p>据用户目前的系统状态，在命令执行过程中可能会安装很多依赖。等待所有的依赖安装完成，之后重启你的电脑。</p>
+<h3 id="2-登录与初始化"><a href="#2-登录与初始化" class="headerlink" title="2. 登录与初始化"></a>2. 登录与初始化</h3><p>在你的机器重启之后，你便可以第一次体验 i3 了。在 GNOME Display Manager （GDM），选择你的用户名，之后先别着急输密码，点击下方的密码输入框下方的小齿轮，之后选择 i3 ，像下方这样：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_login_small.png" alt=""></p>
+<p>输入你的密码，并点击 <code>Sign In</code>。在你第一次登入之后，会先看到 i3 的配置界面：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_configuration_small.png" alt=""></p>
+<p>点击 <code>ENTER</code> 就会在 <code>$HOME/.config/i3</code> 生成一个配置文件，之后你可以通过这个配置文件来定制化 i3’s 的一些行为。</p>
+<p>在下一屏，你需要选择你的 <code>Mod</code> 键。这一步很关键，因为 <code>Mod</code> 键通常都会作为 i3’s 命令快捷键的发起键。按 <code>ENTER</code> 会选择 <code>Win</code> 键作为默认的 <code>Mod</code> 键。如果你的键盘没有 <code>Win</code> 键，用 <code>Alt</code> 键做替代，用方向键键选择后按 <code>ENTER</code> 确认。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_generate_config_small.png" alt=""></p>
+<p>现在你就登录到了 i3 的系统中。由于 i3 是一个最小化的窗口管理器，你会看到一个黑屏窗口，以及屏幕底端显式的状态栏：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_start_small.png" alt=""></p>
+<p>接下来，让我们看看 i3 的如何实际使用。</p>
+<h3 id="3-基本的快捷键"><a href="#3-基本的快捷键" class="headerlink" title="3. 基本的快捷键"></a>3. 基本的快捷键</h3><p>现在你已经登录到了 i3 的会话中，你需要几个基本的快捷键来应对基本的操作。</p>
+<p>大多数的 i3 快捷键都会用到之前配置的 <code>Mod</code> 键。在下面的例子中，当我提到 <code>Mod</code> 键，请根据情况使用你定义的做替换。通常使用 <code>Win</code> 键或者 <code>Alt</code> 键。</p>
+<p>首先，打开一个终端，使用 <code>Mod+ENTER</code>。重复打开几个终端，观察 i3 是如何自动将它们在桌面中排列。默认情况下， i3 会在水平的方向分割屏幕；使用 <code>Mod + v</code> 来垂直分割，再按 <code>Mod + h</code> 会恢复水平分割模式。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_3terminal_tiled_small.png" alt=""></p>
+<p>当需要启动其他的应用，按 <code>Mod + d</code> 来打开 <code>dmenu</code>，一个简单的文字应用菜单。默认情况下，<code>dmenu</code> 会呈现出所有在你 <code>$PATH</code> 中设置的应用。使用方向键来选择你想启动的应用，同时你可以键入应用的名称，来缩小选择的范围，之后按 <code>ENTER</code> 来启动选择的应用。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_dmenu.png" alt=""></p>
+<p>如果你的应用没有提供退出的方法，你可以使用 i3 来关闭对应的窗口，通过按 <code>Mod + Shift +q</code>。注意，你可能会丢失未保存的工作内容。</p>
+<p>最后，当你想关闭会话并退出 i3，按 <code>Mod + Shift +e</code>。之后会在窗口的上方提示你是否退出。点击 <code>Yes, exit i3</code> 退出，或选择 <code>X</code> 来取消。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_exit_small.png" alt=""></p>
+<p>这些就是 i3 中最基本的快捷键，如果想了解更多，请查阅官方文档 <a href="https://i3wm.org/docs/userguide.html#_default_keybindings" target="_blank" rel="noopener">documentation</a>。</p>
+<h3 id="4-替换GDM"><a href="#4-替换GDM" class="headerlink" title="4. 替换GDM"></a>4. 替换GDM</h3><p>使用 i3 window manager 会降低你操作系统的内存占用；然而，Fedora 依然会使用 GDM 作为登录的窗口。GDM 会载入几个与 GNOME 相关的库从而占用内存。</p>
+<p>如果你想进一步的降低你的内存占用，你可以使用一些更轻量级的窗口管理器来替换 GDM，比如 <code>lightdm</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y lightdm</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl disable gdm</span><br><span class="line">Removed /etc/systemd/system/display-manager.service.</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl enable lightdm</span><br><span class="line">Created symlink /etc/systemd/system/display-manager.service -&gt; /usr/lib/systemd/system/lightdm.service.</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></table></figure></p>
+<p>之后重启你的机器来使用 Lightdm 的登录界面。</p>
+<p>现在你可以继续登录并使用 i3了。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_lightdm_small.png" alt=""></p>
+<hr>
+<p>via: <a href="https://opensource.com/article/18/8/getting-started-i3-window-manager" target="_blank" rel="noopener">https://opensource.com/article/18/8/getting-started-i3-window-manager</a></p>
+<p>作者：<a href="https://opensource.com/users/rgerardi" target="_blank" rel="noopener">Ricardo Gerardi</a><br>选题：<a href="https://github.com/lujun9972" target="_blank" rel="noopener">lujun9972</a><br>译者：<a href="https://github.com/littleji" target="_blank" rel="noopener">littleji</a><br>校对：<a href="https://github.com/校对者ID" target="_blank" rel="noopener">校对者ID</a></p>
+<p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="noopener">LCTT</a> 原创编译，<a href="https://linux.cn/" target="_blank" rel="noopener">Linux中国</a> 荣誉推出</p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-03T16:00:00.000Z"><a href="/2018/02/04/20180204ProgrammingInGo1/">2018-02-04</a></time>
       
       
@@ -589,52 +660,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-11-28T11:50:20.000Z"><a href="/2016/11/28/20161128Don'tForgetTheResultMapWhenYouUseMybatis/">2016-11-28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/11/28/20161128Don'tForgetTheResultMapWhenYouUseMybatis/">别忘了使用Mybatis  ResultMap(Don&#39;t forget the ResultMap when you use Mybatis)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近需要使用Mybatis来操作MySQL,由于入门就随意的拿来一篇入门介绍和官方的教程,照着走一遍,奈何写好了Mapper,Bean,以及配置好数据库,以及对应的xml后会发现无论如何也无法得到实例化后的Bean.事实上,并没有一些bug信息,也没有抛异常.</p>
-<h3 id="解决1"><a href="#解决1" class="headerlink" title="解决1"></a>解决1</h3><p>判断是否是数据库本身的连接的问题.<br>尝试更改mybatis的数据库mysql配置 =&gt; 数据库连接没问题</p>
-<h3 id="解决2"><a href="#解决2" class="headerlink" title="解决2"></a>解决2</h3><p>判断是否是数据库得命令没有正常执行<br>查找mysql的general日志,发现没有,于是查看general的设置使用下面的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%gener%&apos;;</span><br></pre></td></tr></table></figure></p>
-<p>返回下面的信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------------------+-------------------------------------------------+</span><br><span class="line">| Variable_name    | Value                                           |</span><br><span class="line">+------------------+-------------------------------------------------+</span><br><span class="line">| general_log      | OFF                                              |</span><br><span class="line">| general_log_file | /tmp/mysql/general.log |</span><br><span class="line">+------------------+-------------------------------------------------+</span><br></pre></td></tr></table></figure></p>
-<p>打开general_log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log=on;</span><br></pre></td></tr></table></figure></p>
-<p>如果需要自定义日志的路径,同理设置不再赘述.<br>使用<code>tail -F /tmp/mysql/general.log</code> 监控mysql的查询信息<br>运行自己得mybatis 测试用例,可以看到上面的命令打印到了控制台,结果如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">161129 18:01:33       15 Connect    root@192.168.1.188 on test</span><br><span class="line">           15 Query    /* mysql-connector-java-5.1.38 ( Revision: fe541c166cec739c74cc727c5da96c1028b4834a ) */SELECT  @@session.auto_increment_increment AS auto_increment_increment, @@character_set_client AS character_set_client, @@character_set_connection AS character_set_connection, @@character_set_results AS character_set_results, @@character_set_server AS character_set_server, @@init_connect AS init_connect, @@interactive_timeout AS interactive_timeout, @@license AS license, @@lower_case_table_names AS lower_case_table_names, @@max_allowed_packet AS max_allowed_packet, @@net_buffer_length AS net_buffer_length, @@net_write_timeout AS net_write_timeout, @@query_cache_size AS query_cache_size, @@query_cache_type AS query_cache_type, @@sql_mode AS sql_mode, @@system_time_zone AS system_time_zone, @@time_zone AS time_zone, @@tx_isolation AS tx_isolation, @@wait_timeout AS wait_timeout</span><br><span class="line">           15 Query    SELECT @@session.autocommit</span><br><span class="line">           15 Query    SET character_set_results = NULL</span><br><span class="line">           15 Query    SET autocommit=1</span><br><span class="line">           15 Query    SET autocommit=0</span><br><span class="line">           15 Query    SELECT * FROM t_cloud_uba_vm_action WHERE C_ID = 1</span><br><span class="line">           15 Query    SET autocommit=1</span><br></pre></td></tr></table></figure></p>
-<p>说明数据库的命令执行也没问题</p>
-<h3 id="解决3"><a href="#解决3" class="headerlink" title="解决3"></a>解决3</h3><p>回想起,自身项目与参考的项目唯一的不同就是Bean不同,MySQL表不同<br>将Bean中的属性名称完全与MySQL一一对应,运行后解决</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>查看mybatis的Result_Maps文档,发现定义了一个Java Bean后,select语句会精确的匹配JavaBean中的属性,然后映射到结果集.这个就是关键所在,当然可以不完全的对应起来,不过需要 ResultMap来,使用select语句的别名,最终匹配到对应的属性上,如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectUsers&quot; resultType=&quot;User&quot;&gt;</span><br><span class="line">  select</span><br><span class="line">    user_id             as &quot;id&quot;,</span><br><span class="line">    user_name           as &quot;userName&quot;,</span><br><span class="line">    hashed_password     as &quot;hashedPassword&quot;</span><br><span class="line">  from some_table</span><br><span class="line">  where id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html#Result_Maps" target="_blank" rel="noopener">http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html#Result_Maps</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2016/11/28/20161128Don&#39;tForgetTheResultMapWhenYouUseMybatis/">http://littleji.com/2016/11/28/20161128Don&#39;tForgetTheResultMapWhenYouUseMybatis/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -658,7 +683,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-02/">2019-02</a><small>1</small></li>
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
     <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
   
@@ -742,7 +767,7 @@
   
     <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
   
-    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>1</small></li>
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>2</small></li>
   
     <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
   
@@ -780,7 +805,11 @@
   <ul class="entry">
     
       <li>
-        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess - 副本/">用gitlab来优化我们的软件开发流程</a>
       </li>
     
       <li>
@@ -793,10 +822,6 @@
     
       <li>
         <a href="/2018/12/18/20181218MLReview1/">七天算法梳理之线性回归</a>
-      </li>
-    
-      <li>
-        <a href="/2018/11/27/20181127GenerativeVSDiscriminative/">Gnerative VS Discriminative</a>
       </li>
     
   </ul>
