@@ -76,6 +76,90 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-09-24T16:00:00.000Z"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">2018-09-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">在alpine上，从零开始安装DVWA</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="alpine系统"><a href="#alpine系统" class="headerlink" title="alpine系统"></a>alpine系统</h2><p>目前 alpine 系统已经作为 docker 容器的默认安装系统，其最大的特点是安装的体积非常小，镜像的大小最少只有 5M ，这对于在 docker 集群中大规模使用容器的情况下，极大的降低了磁盘占用，并且其还有：</p>
+<ol>
+<li>因体积较小，从而提升了启动速度<br>2.因体积小，组件少，从而暴露面降低，最终提升系统的安全</li>
+</ol>
+<p>当我们能够熟练的配置该系统之后，可以大大加快 devops 的整体流程，迅速搭建原型系统，提高资源的利用率。</p>
+<h2 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h2><p>DVWA:Damn Vulnerable Web Application</p>
+<p>老牌的安全测试靶场，后端使用的是 PHP + MySQL 的组合，可以方便快捷的让安全从业者，对常见的安全漏洞的原理进行学习，并在实践中巩固自己的学习成果。</p>
+<p>DVWA的官网在<a href="2">这里</a>。</p>
+<h1 id="安装alpine系统"><a href="#安装alpine系统" class="headerlink" title="安装alpine系统"></a>安装alpine系统</h1><p>首先从 alpine 的<a href="1">官网</a>，根据需要下载指定的alpine安装包，这里选择了 3.8.1 的Extend版本。</p>
+<p>之后，可以将下载的iso文件制作成U盘启动器进行安装，这里由于演示使用 VMware Fusion 进行安装演示。</p>
+<p>虚拟机的配置为默认配置如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/45987778-f5285c80-c0a5-11e8-8fbe-b63975cc7999.png" alt="image"></p>
+<p>启动后直接使用 root 账号登录，并输入 <code>setup-alpine</code> ，进入配置界面，这里的操作的目的是将目前运行在内存中的系统，配置完整后安装至实际的硬盘上，如下图所示：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45991497-c6b37d00-c0b7-11e8-9e4e-93541bb790f3.png" alt="image"></p>
+<p>图中可根据自己的需要配置，如键盘的布局、主机名、网卡信息、时间服务器组件、root密码、时区等，本文选择时区为Asia/Shanghai，重点是选择安装的实际物理磁盘（ sda ）以及安装的用途（ sys ）</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45996293-48aea080-c0ce-11e8-99da-a06a52475a94.png" alt="image"></p>
+<p>安装完成后 reboot</p>
+<h1 id="安装系统必备组件"><a href="#安装系统必备组件" class="headerlink" title="安装系统必备组件"></a>安装系统必备组件</h1><h2 id="安装Bash、Vim"><a href="#安装Bash、Vim" class="headerlink" title="安装Bash、Vim"></a>安装Bash、Vim</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add bash vim</span><br></pre></td></tr></table></figure>
+<h1 id="开启远程root登录的权限以及扩展的包镜像源"><a href="#开启远程root登录的权限以及扩展的包镜像源" class="headerlink" title="开启远程root登录的权限以及扩展的包镜像源"></a>开启远程root登录的权限以及扩展的包镜像源</h1><p>方便直接通过远程终端进行操作，打开<code>vim /etc/ssh/sshd_config</code>，在配置文件的末尾添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes</span><br></pre></td></tr></table></figure>
+<p>重启 ssh 服务，<code>service sshd restart</code></p>
+<h1 id="开启community-testing-edge包仓库"><a href="#开启community-testing-edge包仓库" class="headerlink" title="开启community testing edge包仓库"></a>开启community testing edge包仓库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apk/repositories</span><br></pre></td></tr></table></figure>
+<p>将其中所有对应的库链接注释打开</p>
+<h1 id="安装配置-MySQL-MariaDB"><a href="#安装配置-MySQL-MariaDB" class="headerlink" title="安装配置 MySQL/MariaDB"></a>安装配置 MySQL/MariaDB</h1><h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add mariadb mariadb-client</span><br></pre></td></tr></table></figure>
+<h2 id="配置MariaDB"><a href="#配置MariaDB" class="headerlink" title="配置MariaDB"></a>配置MariaDB</h2><p>MariaDB安装后还不能直接使用，需要创建用户等配置工作</p>
+<h3 id="设定环境变量，稍后使用"><a href="#设定环境变量，稍后使用" class="headerlink" title="设定环境变量，稍后使用"></a>设定环境变量，稍后使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export DB_DATA_PATH=/var/lib/mysql</span><br><span class="line">export DB_ROOT_PASS=root_password</span><br><span class="line">export DB_USER=dvwa</span><br><span class="line">export DB_PASS=dvwa_password</span><br></pre></td></tr></table></figure>
+<h2 id="启动配置MariaDB"><a href="#启动配置MariaDB" class="headerlink" title="启动配置MariaDB"></a>启动配置MariaDB</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --user=mysql --datadir=$&#123;DB_DATA_PATH&#125; &amp;&amp;\</span><br><span class="line">chown -R mysql:mysql $&#123;DB_DATA_PATH&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="启动-MariaDB-并添加默认启动"><a href="#启动-MariaDB-并添加默认启动" class="headerlink" title="启动 MariaDB 并添加默认启动"></a>启动 MariaDB 并添加默认启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc-service mariadb start</span><br><span class="line">rc-update add mariadb default</span><br></pre></td></tr></table></figure>
+<h2 id="改-root-密码"><a href="#改-root-密码" class="headerlink" title="改 root 密码"></a>改 root 密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password &quot;$&#123;DB_ROOT_PASS&#125;&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="创建一个dvwa用户，以及dvwa数据库"><a href="#创建一个dvwa用户，以及dvwa数据库" class="headerlink" title="创建一个dvwa用户，以及dvwa数据库"></a>创建一个dvwa用户，以及dvwa数据库</h2><p><em>建议添加该用户，不建议使用 MariaDB 的 root 账户登录MariaDB</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;CREATE DATABASE dvwa;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;127.0.0.1&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;localhost&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;::1&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;DELETE FROM mysql.user WHERE User=&apos;&apos;;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;DROP DATABASE test;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;FLUSH PRIVILEGES;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">cat /tmp/sql | mysql -u root --password=&quot;$&#123;DB_ROOT_PASS&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="重启主机，验证是否安装完成"><a href="#重启主机，验证是否安装完成" class="headerlink" title="重启主机，验证是否安装完成"></a>重启主机，验证是否安装完成</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">ps -ef | grep mysql</span><br></pre></td></tr></table></figure>
+<h1 id="安装PHP-以及所需要的库组件"><a href="#安装PHP-以及所需要的库组件" class="headerlink" title="安装PHP 以及所需要的库组件"></a>安装PHP 以及所需要的库组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add lighttpd php5-common php5-iconv php5-json php5-gd php5-curl php5-xml php5-pgsql php5-mysql php5-imap php5-cgi fcgi php5-pdo php5-pdo_pgsql  php5-pdo_mysql  php5-soap php5-xmlrpc php5-posix php5-mcrypt php5-gettext php5-ldap php5-ctype php5-dom</span><br></pre></td></tr></table></figure>
+<h1 id="安装配置-lighttp"><a href="#安装配置-lighttp" class="headerlink" title="安装配置 lighttp"></a>安装配置 lighttp</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/lighttpd.conf</span><br></pre></td></tr></table></figure>
+<p>取消掉注释<code>include &quot;mod_fastcgi.conf&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/mod_fastcgi.conf</span><br></pre></td></tr></table></figure>
+<p>替换<code>/usr/bin/php-cgi</code> 为 <code>/usr/bin/php-cgi5</code></p>
+<p>打开对应的选项，便于漏洞学习<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/php5/php.ini</span><br></pre></td></tr></table></figure></p>
+<p>找到<code>allow_url_open</code> 和 <code>allow_url_include</code> 均设置为 <code>On</code></p>
+<p>启动Lighttpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service lighttpd start &amp;&amp; rc-update add lighttpd default</span><br></pre></td></tr></table></figure></p>
+<h1 id="安装配置-DVWA"><a href="#安装配置-DVWA" class="headerlink" title="安装配置 DVWA"></a>安装配置 DVWA</h1><h2 id="创建项目文件夹"><a href="#创建项目文件夹" class="headerlink" title="创建项目文件夹"></a>创建项目文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/webapps/</span><br></pre></td></tr></table></figure>
+<h2 id="下载DVWA"><a href="#下载DVWA" class="headerlink" title="下载DVWA"></a>下载DVWA</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webapps/</span><br><span class="line">wget https://github.com/RandomStorm/DVWA/archive/v1.9.zip</span><br></pre></td></tr></table></figure>
+<h2 id="将DVWA放到指定的web项目目录中"><a href="#将DVWA放到指定的web项目目录中" class="headerlink" title="将DVWA放到指定的web项目目录中"></a>将DVWA放到指定的web项目目录中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip v1.9.zip</span><br><span class="line">rm v1.9.zip</span><br><span class="line">chmod -R 777 /usr/share/webapps/</span><br><span class="line">ln -s /usr/share/webapps/DVWA-1.9/ /var/www/localhost/htdocs/dvwa</span><br></pre></td></tr></table></figure>
+<h2 id="配置DVWA"><a href="#配置DVWA" class="headerlink" title="配置DVWA"></a>配置DVWA</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/webapps/DVWA-1.9/config/config.inc.php</span><br></pre></td></tr></table></figure>
+<p>设置用户名 密码 以及端口号</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46000851-53703200-c0dc-11e8-91ad-9afe94ab15fb.png" alt="image"></p>
+<h2 id="验证安装情况"><a href="#验证安装情况" class="headerlink" title="验证安装情况"></a>验证安装情况</h2><p>打开<code>http://IP/dvwa/setup.php</code><br>查看 Setup Check  各项应均为绿色</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46001168-3b4ce280-c0dd-11e8-902d-f4516d0f6439.png" alt="image"></p>
+<p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-09-06T16:00:00.000Z"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">2018-09-07</a></time>
       
       
@@ -608,58 +692,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-11-30T06:27:20.000Z"><a href="/2016/11/30/20161130UseJavaApiForElasticSearch1/">2016-11-30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/11/30/20161130UseJavaApiForElasticSearch1/">使用ElasticSearch的JavaAPI 1(UseJavaApiForElasticSearch 1)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="配置-configuration"><a href="#配置-configuration" class="headerlink" title="配置(configuration)"></a>配置(configuration)</h2><h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p>要使用相应的API,必须引入所需要的jar包,这里使用的ElasticSearch5.0版本相应的Maven配置如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;transport&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.0.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="日志-Logger"><a href="#日志-Logger" class="headerlink" title="日志(Logger)"></a>日志(Logger)</h3><p>之后配置日志,这里使用的是log4j2,在<code>src/main/resources</code>下添加名为<code>log4f2.properties</code>的文件,并在其中添加如下的内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">appender.console.type = Console</span><br><span class="line">appender.console.name = console</span><br><span class="line">appender.console.layout.type = PatternLayout</span><br><span class="line"> </span><br><span class="line">rootLogger.level = info</span><br><span class="line">rootLogger.appenderRef.console.ref = console</span><br></pre></td></tr></table></figure></p>
-<h3 id="整体打包-Embedding-jar-with-dependencies"><a href="#整体打包-Embedding-jar-with-dependencies" class="headerlink" title="整体打包(Embedding jar with dependencies)"></a>整体打包(Embedding jar with dependencies)</h3><p>将所使用的jar依赖包和你的应用同时打包为一个jar文件,此时不应该使用<code>maven-assembly-plugin</code>, 因为没有Lucene的jar包,导致该插件无法解析<code>META-INF/service</code>的结构,相应的你可以使用<code>maven-shade-plugin</code>插件,配置如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.4.1&lt;/version&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;&lt;goal&gt;shade&lt;/goal&gt;&lt;/goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;transformers&gt;</span><br><span class="line">                    &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ServicesResourceTransformer&quot;/&gt;</span><br><span class="line">                &lt;/transformers&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
-<p>如果有main.class 可加入下面的配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">    &lt;mainClass&gt;org.elasticsearch.demo.Generate&lt;/mainClass&gt;</span><br><span class="line">&lt;/transformer&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="使用客户端-Client"><a href="#使用客户端-Client" class="headerlink" title="使用客户端(Client)"></a>使用客户端(Client)</h3><p>客户端可以做以下几件事情:</p>
-<ol>
-<li>在已有的集群之上进行,索引,插入,删除,搜索等操作</li>
-<li>在已有的集群上运行管理员的任务</li>
-</ol>
-<ul>
-<li>注意: 客户端的主版本号必须同集群节点的版本号相一致<br>一般通过<code>TransportClient</code> 来连接ES集群</li>
-</ul>
-<h3 id="TransportClient"><a href="#TransportClient" class="headerlink" title="TransportClient"></a>TransportClient</h3><p>当你使用TansportClient来连接一个ES集群的时候,你并不参与到这个集群中,而是获得这个集群的一个或多个地址,并在实际执行操作的时候,依次的操作它们,尽管大多数的操作都可能是两段式的(It does not join the cluster, but simply gets one or more initial transport addresses and communicates with them in round robin fashion on each action(though most actions will probably be “two hop” operations).)<br>下面是如何开始和结束一个TransportClient<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// on startup</span><br><span class="line"> </span><br><span class="line">TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)</span><br><span class="line">        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(&quot;host1&quot;), 9300))</span><br><span class="line">        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(&quot;host2&quot;), 9300));</span><br><span class="line"> </span><br><span class="line">// on shutdown</span><br><span class="line"> </span><br><span class="line">client.close();</span><br></pre></td></tr></table></figure></p>
-<p>其中得Setting,按照下面所示进行设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Settings settings = Settings.builder()</span><br><span class="line">        .put(&quot;cluster.name&quot;, &quot;myClusterName&quot;).build();</span><br><span class="line">TransportClient client = new PreBuiltTransportClient(settings);</span><br><span class="line">//Add transport addresses and do something with the client...</span><br></pre></td></tr></table></figure></p>
-<p>TransportClient 自身有一个集群发现的功能,其能够动态的添加host和移除之前已有的.<br>一旦发现功能启用,transport client就将根据其配置的节点列表进行连接,而节点列表的配置则是通过<code>addTransportAddress</code>来配置的.之后,客户端将调用集群内部的状态API,来发现可用的数据节点.内部客户端的节点列表将替换为只有数据节点,并且这份列表默认每过5秒,刷新一次<br>如果需要开启发现功能,设置<code>client.trasport.sniff</code>为true</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/" target="_blank" rel="noopener">ElasticSearch Java API</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2016/11/30/20161130UseJavaApiForElasticSearch1/">http://littleji.com/2016/11/30/20161130UseJavaApiForElasticSearch1/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -682,6 +714,8 @@
 <div class="widget tag">
   <h3 class="title">分类</h3>
   <ul class="entry">
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>1</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -751,7 +785,7 @@
   
     <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
   
-    <li><a href="/tags/NLP/">NLP</a><small>3</small></li>
+    <li><a href="/tags/NLP/">NLP</a><small>4</small></li>
   
     <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
   
@@ -805,11 +839,15 @@
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
         <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
       </li>
     
       <li>
-        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess - 副本/">用gitlab来优化我们的软件开发流程</a>
+        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
       </li>
     
       <li>
@@ -818,10 +856,6 @@
     
       <li>
         <a href="/2018/12/22/20181222MLReview2/">七天算法梳理之逻辑回归</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/18/20181218MLReview1/">七天算法梳理之线性回归</a>
       </li>
     
   </ul>

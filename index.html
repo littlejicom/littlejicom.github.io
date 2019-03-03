@@ -76,6 +76,62 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2019-03-02T16:00:00.000Z"><a href="/2019/03/03/20190303DataWhaleNLPTask1/">2019-03-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="windows下进行TensorFlow-GPU版本安装-不适用于CPU版本"><a href="#windows下进行TensorFlow-GPU版本安装-不适用于CPU版本" class="headerlink" title="windows下进行TensorFlow GPU版本安装(不适用于CPU版本)"></a>windows下进行TensorFlow GPU版本安装(不适用于CPU版本)</h2><p>基于各种原因，本次的实验环境在windows下进行。<br>其中本机的配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">硬件：</span><br><span class="line"> - CPU：Intel Xeon E3-1505M</span><br><span class="line"> - RAM：64GB</span><br><span class="line"> - GPU：NVIDIA Quadro M2000M</span><br><span class="line">软件：</span><br><span class="line"> - OS：Windows 10 专业工作站 1809 x64</span><br></pre></td></tr></table></figure></p>
+<p>正确的步骤如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 请务必保证安装的 `Python` 版本为 `3.6.X`, `TensorFlow` 对于 `3.7.X`还未支持完全</span><br><span class="line">2. 安装 Cuda 10.0, 目前不要使用Cuda 10.1的版本,因为还未支持</span><br><span class="line">3. 安装 cudnn for 10.0 </span><br><span class="line">4. 安装 tensorflow-gpu</span><br><span class="line">5. 添加对应的环境变量</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;%PATH%</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64;%PATH%</span><br><span class="line">SET PATH=C:\tools\cuda\bin;%PATH%</span><br><span class="line">6. 验证(在输入下面的代码并运行后,会出现3min的等待,目前原因不明)</span><br><span class="line">python -c &quot;import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))&quot;</span><br><span class="line">7. 结果</span><br><span class="line">2019-03-03 17:28:53.391788: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</span><br><span class="line">2019-03-03 17:28:53.569006: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties:</span><br><span class="line">name: Quadro M2000M major: 5 minor: 0 memoryClockRate(GHz): 1.137</span><br><span class="line">pciBusID: 0000:01:00.0</span><br><span class="line">totalMemory: 4.00GiB freeMemory: 3.34GiB</span><br><span class="line">2019-03-03 17:28:53.600653: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0</span><br><span class="line">2019-03-03 17:28:54.903988: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:</span><br><span class="line">2019-03-03 17:28:54.921578: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0</span><br><span class="line">2019-03-03 17:28:54.932974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0: N</span><br><span class="line">2019-03-03 17:28:54.946509: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3048 MB memory) -&gt; physical GPU (device: 0, name: Quadro M2000M, pci bus id: 0000:01:00.0, compute capability: 5.0)</span><br><span class="line">tf.Tensor(1187.2697, shape=(), dtype=float32)</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-imdb数据集进行文本分类"><a href="#使用-imdb数据集进行文本分类" class="headerlink" title="使用 imdb数据集进行文本分类"></a>使用 imdb数据集进行文本分类</h2><p>首先使用下属的代码下载数据集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imdb = keras.datasets.imdb</span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)</span><br></pre></td></tr></table></figure></p>
+<p>下载完之后我们可以看到该数据集包含了25000条训练数据和25000条测试数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;Training entries: &#123;&#125;, labels: &#123;&#125;&quot;.format(len(train_data), len(test_data)))</span><br></pre></td></tr></table></figure></p>
+<p>我们查看某一条具体的imdb影评是什么样的格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(train_data[0])</span><br><span class="line">----</span><br><span class="line">[1, 14, 22, 16, 43, 530, 973, 1622, 1385, 65, 458, 4468, 66, 3941, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 4536, 1111, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2025, 19, 14, 22, 4, 1920, 4613, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 1247, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2223, 5244, 16, 480, 66, 3785, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 1415, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 5952, 15, 256, 4, 2, 7, 3766, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 1029, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2071, 56, 26, 141, 6, 194, 7486, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 5535, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 1334, 88, 12, 16, 283, 5, 16, 4472, 113, 103, 32, 15, 16, 5345, 19, 178, 32]</span><br></pre></td></tr></table></figure></p>
+<p>说明所有的影评根据词典已经转化为相应的数字,我们尝试将对应的数字转换为真实的词<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 构建一个词与数字的映射字典</span><br><span class="line">word_index = imdb.get_word_index()</span><br><span class="line"># 创建一个数字与词的映射字典</span><br><span class="line">word_index = &#123;k:(v+3) for k,v in word_index.items()&#125; </span><br><span class="line">word_index[&quot;&lt;PAD&gt;&quot;] = 0</span><br><span class="line">word_index[&quot;&lt;START&gt;&quot;] = 1</span><br><span class="line">word_index[&quot;&lt;UNK&gt;&quot;] = 2 # unknown</span><br><span class="line">word_index[&quot;&lt;UNUSED&gt;&quot;] = 3</span><br><span class="line"></span><br><span class="line">index_word = dict([(value, key) for (key, value) in word_index.items()])</span><br><span class="line"></span><br><span class="line">def decode_review(text):</span><br><span class="line">    return &apos; &apos;.join([index_word.get(i, &apos;?&apos;) for i in text])</span><br></pre></td></tr></table></figure></p>
+<p>现在我们就可以通过<code>decode_review(train_data[0])</code>来获得原始的影评了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;START&gt; this film was just brilliant casting location scenery story direction everyone&apos;s really suited the part they played and you could just imagine being there robert &lt;UNK&gt; is an amazing actor and now the same being director &lt;UNK&gt; father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for &lt;UNK&gt; and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also &lt;UNK&gt; to the two little boy&apos;s that played the &lt;UNK&gt; of norman and paul they were just brilliant children are often left out of the &lt;UNK&gt; list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don&apos;t you think the whole story was so lovely because it was true and was someone&apos;s life after all that was shared with us all&quot;</span><br></pre></td></tr></table></figure></p>
+<p>为了更好的进行下一步的神经网络处理,我们将对应的影评数据进行向量化,向量的长度为256<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">train_data = keras.preprocessing.sequence.pad_sequences(train_data,</span><br><span class="line">                                                        value=word_index[&quot;&lt;PAD&gt;&quot;],</span><br><span class="line">                                                        padding=&apos;post&apos;,</span><br><span class="line">                                                        maxlen=256)</span><br><span class="line"></span><br><span class="line">test_data = keras.preprocessing.sequence.pad_sequences(test_data,</span><br><span class="line">                                                       value=word_index[&quot;&lt;PAD&gt;&quot;],</span><br><span class="line">                                                       padding=&apos;post&apos;,</span><br><span class="line">                                                       maxlen=256)</span><br></pre></td></tr></table></figure></p>
+<h3 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 初始化10000词的词典</span><br><span class="line">vocab_size = 10000</span><br><span class="line"></span><br><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(keras.layers.Embedding(vocab_size, 16))#每个词的向量长度为16</span><br><span class="line">model.add(keras.layers.GlobalAveragePooling1D())</span><br><span class="line">model.add(keras.layers.Dense(16, activation=tf.nn.relu))</span><br><span class="line">model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<h3 id="创建优化器"><a href="#创建优化器" class="headerlink" title="创建优化器"></a>创建优化器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 使用adam算法</span><br><span class="line">model.compile(optimizer=&apos;adam&apos;,</span><br><span class="line">              loss=&apos;binary_crossentropy&apos;,</span><br><span class="line">              metrics=[&apos;acc&apos;])</span><br><span class="line"># 创建一个验证集</span><br><span class="line">x_val = train_data[:10000]</span><br><span class="line">partial_x_train = train_data[10000:]</span><br><span class="line"></span><br><span class="line">y_val = train_labels[:10000]</span><br><span class="line">partial_y_train = train_labels[10000:]</span><br></pre></td></tr></table></figure>
+<h3 id="开始进行训练"><a href="#开始进行训练" class="headerlink" title="开始进行训练"></a>开始进行训练</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                    partial_y_train,</span><br><span class="line">                    epochs=40,</span><br><span class="line">                    batch_size=512,</span><br><span class="line">                    validation_data=(x_val, y_val),</span><br><span class="line">                    verbose=1)</span><br></pre></td></tr></table></figure>
+<h3 id="评估对应的结果"><a href="#评估对应的结果" class="headerlink" title="评估对应的结果"></a>评估对应的结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results = model.evaluate(test_data, test_labels)</span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure>
+<h3 id="使用到的相关的术语"><a href="#使用到的相关的术语" class="headerlink" title="使用到的相关的术语"></a>使用到的相关的术语</h3><ol>
+<li>ROC(Receiver Operating Characteristic)的操作方式与之前的P-R图类似,并提出了两个概念,真正利率TPR,假正利率FPR<script type="math/tex; mode=display">
+TPR=TP/(TP+FN)</script><script type="math/tex; mode=display">
+FPR=FP/(FP+TN)</script></li>
+<li>ACC 精确度,即正确与全集之比</li>
+<li>召回率,即正确的与集合中所有真正正确的数据集之比</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://tensorflow.google.cn/tutorials/keras/basic_text_classification" target="_blank" rel="noopener">使用keras进行文本分类</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/">http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2019-02-18T16:00:00.000Z"><a href="/2019/02/19/20190219HandoverMemoList/">2019-02-19</a></time>
       
       
@@ -176,11 +232,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-02-11T16:00:00.000Z"><a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess - 副本/">2019-02-12</a></time>
+        <time datetime="2019-02-11T16:00:00.000Z"><a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">2019-02-12</a></time>
       
       
   
-    <h1 class="title"><a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess - 副本/">用gitlab来优化我们的软件开发流程</a></h1>
+    <h1 class="title"><a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a></h1>
   
 
     </header>
@@ -242,7 +298,7 @@
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/cheny_com/article/details/5528892" target="_blank" rel="noopener">无烟会议室：CMMI vs. Scrum vs. XP（QCon 2010 感受</a><br><a href="https://waylau.com/why-we-need-continuous-integration/" target="_blank" rel="noopener">为什么我们迫切需要持续集成</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess">http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess</a> - 副本/</p>
+<p>本文链接为：<a href="http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/">http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/</a></p>
 
       
     </div>
@@ -937,90 +993,6 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-09-24T16:00:00.000Z"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">2018-09-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">在alpine上，从零开始安装DVWA</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="alpine系统"><a href="#alpine系统" class="headerlink" title="alpine系统"></a>alpine系统</h2><p>目前 alpine 系统已经作为 docker 容器的默认安装系统，其最大的特点是安装的体积非常小，镜像的大小最少只有 5M ，这对于在 docker 集群中大规模使用容器的情况下，极大的降低了磁盘占用，并且其还有：</p>
-<ol>
-<li>因体积较小，从而提升了启动速度<br>2.因体积小，组件少，从而暴露面降低，最终提升系统的安全</li>
-</ol>
-<p>当我们能够熟练的配置该系统之后，可以大大加快 devops 的整体流程，迅速搭建原型系统，提高资源的利用率。</p>
-<h2 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h2><p>DVWA:Damn Vulnerable Web Application</p>
-<p>老牌的安全测试靶场，后端使用的是 PHP + MySQL 的组合，可以方便快捷的让安全从业者，对常见的安全漏洞的原理进行学习，并在实践中巩固自己的学习成果。</p>
-<p>DVWA的官网在<a href="2">这里</a>。</p>
-<h1 id="安装alpine系统"><a href="#安装alpine系统" class="headerlink" title="安装alpine系统"></a>安装alpine系统</h1><p>首先从 alpine 的<a href="1">官网</a>，根据需要下载指定的alpine安装包，这里选择了 3.8.1 的Extend版本。</p>
-<p>之后，可以将下载的iso文件制作成U盘启动器进行安装，这里由于演示使用 VMware Fusion 进行安装演示。</p>
-<p>虚拟机的配置为默认配置如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/45987778-f5285c80-c0a5-11e8-8fbe-b63975cc7999.png" alt="image"></p>
-<p>启动后直接使用 root 账号登录，并输入 <code>setup-alpine</code> ，进入配置界面，这里的操作的目的是将目前运行在内存中的系统，配置完整后安装至实际的硬盘上，如下图所示：</p>
-<p><img src="https://user-images.githubusercontent.com/7655877/45991497-c6b37d00-c0b7-11e8-9e4e-93541bb790f3.png" alt="image"></p>
-<p>图中可根据自己的需要配置，如键盘的布局、主机名、网卡信息、时间服务器组件、root密码、时区等，本文选择时区为Asia/Shanghai，重点是选择安装的实际物理磁盘（ sda ）以及安装的用途（ sys ）</p>
-<p><img src="https://user-images.githubusercontent.com/7655877/45996293-48aea080-c0ce-11e8-99da-a06a52475a94.png" alt="image"></p>
-<p>安装完成后 reboot</p>
-<h1 id="安装系统必备组件"><a href="#安装系统必备组件" class="headerlink" title="安装系统必备组件"></a>安装系统必备组件</h1><h2 id="安装Bash、Vim"><a href="#安装Bash、Vim" class="headerlink" title="安装Bash、Vim"></a>安装Bash、Vim</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add bash vim</span><br></pre></td></tr></table></figure>
-<h1 id="开启远程root登录的权限以及扩展的包镜像源"><a href="#开启远程root登录的权限以及扩展的包镜像源" class="headerlink" title="开启远程root登录的权限以及扩展的包镜像源"></a>开启远程root登录的权限以及扩展的包镜像源</h1><p>方便直接通过远程终端进行操作，打开<code>vim /etc/ssh/sshd_config</code>，在配置文件的末尾添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes</span><br></pre></td></tr></table></figure>
-<p>重启 ssh 服务，<code>service sshd restart</code></p>
-<h1 id="开启community-testing-edge包仓库"><a href="#开启community-testing-edge包仓库" class="headerlink" title="开启community testing edge包仓库"></a>开启community testing edge包仓库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apk/repositories</span><br></pre></td></tr></table></figure>
-<p>将其中所有对应的库链接注释打开</p>
-<h1 id="安装配置-MySQL-MariaDB"><a href="#安装配置-MySQL-MariaDB" class="headerlink" title="安装配置 MySQL/MariaDB"></a>安装配置 MySQL/MariaDB</h1><h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add mariadb mariadb-client</span><br></pre></td></tr></table></figure>
-<h2 id="配置MariaDB"><a href="#配置MariaDB" class="headerlink" title="配置MariaDB"></a>配置MariaDB</h2><p>MariaDB安装后还不能直接使用，需要创建用户等配置工作</p>
-<h3 id="设定环境变量，稍后使用"><a href="#设定环境变量，稍后使用" class="headerlink" title="设定环境变量，稍后使用"></a>设定环境变量，稍后使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export DB_DATA_PATH=/var/lib/mysql</span><br><span class="line">export DB_ROOT_PASS=root_password</span><br><span class="line">export DB_USER=dvwa</span><br><span class="line">export DB_PASS=dvwa_password</span><br></pre></td></tr></table></figure>
-<h2 id="启动配置MariaDB"><a href="#启动配置MariaDB" class="headerlink" title="启动配置MariaDB"></a>启动配置MariaDB</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --user=mysql --datadir=$&#123;DB_DATA_PATH&#125; &amp;&amp;\</span><br><span class="line">chown -R mysql:mysql $&#123;DB_DATA_PATH&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="启动-MariaDB-并添加默认启动"><a href="#启动-MariaDB-并添加默认启动" class="headerlink" title="启动 MariaDB 并添加默认启动"></a>启动 MariaDB 并添加默认启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc-service mariadb start</span><br><span class="line">rc-update add mariadb default</span><br></pre></td></tr></table></figure>
-<h2 id="改-root-密码"><a href="#改-root-密码" class="headerlink" title="改 root 密码"></a>改 root 密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password &quot;$&#123;DB_ROOT_PASS&#125;&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="创建一个dvwa用户，以及dvwa数据库"><a href="#创建一个dvwa用户，以及dvwa数据库" class="headerlink" title="创建一个dvwa用户，以及dvwa数据库"></a>创建一个dvwa用户，以及dvwa数据库</h2><p><em>建议添加该用户，不建议使用 MariaDB 的 root 账户登录MariaDB</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;CREATE DATABASE dvwa;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;127.0.0.1&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;localhost&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;GRANT ALL ON *.* TO $&#123;DB_USER&#125;@&apos;::1&apos; IDENTIFIED BY &apos;$&#123;DB_PASS&#125;&apos; WITH GRANT OPTION;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;DELETE FROM mysql.user WHERE User=&apos;&apos;;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;DROP DATABASE test;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">echo &quot;FLUSH PRIVILEGES;&quot; &gt;&gt; /tmp/sql</span><br><span class="line">cat /tmp/sql | mysql -u root --password=&quot;$&#123;DB_ROOT_PASS&#125;&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="重启主机，验证是否安装完成"><a href="#重启主机，验证是否安装完成" class="headerlink" title="重启主机，验证是否安装完成"></a>重启主机，验证是否安装完成</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">ps -ef | grep mysql</span><br></pre></td></tr></table></figure>
-<h1 id="安装PHP-以及所需要的库组件"><a href="#安装PHP-以及所需要的库组件" class="headerlink" title="安装PHP 以及所需要的库组件"></a>安装PHP 以及所需要的库组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add lighttpd php5-common php5-iconv php5-json php5-gd php5-curl php5-xml php5-pgsql php5-mysql php5-imap php5-cgi fcgi php5-pdo php5-pdo_pgsql  php5-pdo_mysql  php5-soap php5-xmlrpc php5-posix php5-mcrypt php5-gettext php5-ldap php5-ctype php5-dom</span><br></pre></td></tr></table></figure>
-<h1 id="安装配置-lighttp"><a href="#安装配置-lighttp" class="headerlink" title="安装配置 lighttp"></a>安装配置 lighttp</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/lighttpd.conf</span><br></pre></td></tr></table></figure>
-<p>取消掉注释<code>include &quot;mod_fastcgi.conf&quot;</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/mod_fastcgi.conf</span><br></pre></td></tr></table></figure>
-<p>替换<code>/usr/bin/php-cgi</code> 为 <code>/usr/bin/php-cgi5</code></p>
-<p>打开对应的选项，便于漏洞学习<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/php5/php.ini</span><br></pre></td></tr></table></figure></p>
-<p>找到<code>allow_url_open</code> 和 <code>allow_url_include</code> 均设置为 <code>On</code></p>
-<p>启动Lighttpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service lighttpd start &amp;&amp; rc-update add lighttpd default</span><br></pre></td></tr></table></figure></p>
-<h1 id="安装配置-DVWA"><a href="#安装配置-DVWA" class="headerlink" title="安装配置 DVWA"></a>安装配置 DVWA</h1><h2 id="创建项目文件夹"><a href="#创建项目文件夹" class="headerlink" title="创建项目文件夹"></a>创建项目文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/webapps/</span><br></pre></td></tr></table></figure>
-<h2 id="下载DVWA"><a href="#下载DVWA" class="headerlink" title="下载DVWA"></a>下载DVWA</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webapps/</span><br><span class="line">wget https://github.com/RandomStorm/DVWA/archive/v1.9.zip</span><br></pre></td></tr></table></figure>
-<h2 id="将DVWA放到指定的web项目目录中"><a href="#将DVWA放到指定的web项目目录中" class="headerlink" title="将DVWA放到指定的web项目目录中"></a>将DVWA放到指定的web项目目录中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip v1.9.zip</span><br><span class="line">rm v1.9.zip</span><br><span class="line">chmod -R 777 /usr/share/webapps/</span><br><span class="line">ln -s /usr/share/webapps/DVWA-1.9/ /var/www/localhost/htdocs/dvwa</span><br></pre></td></tr></table></figure>
-<h2 id="配置DVWA"><a href="#配置DVWA" class="headerlink" title="配置DVWA"></a>配置DVWA</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/webapps/DVWA-1.9/config/config.inc.php</span><br></pre></td></tr></table></figure>
-<p>设置用户名 密码 以及端口号</p>
-<p><img src="https://user-images.githubusercontent.com/7655877/46000851-53703200-c0dc-11e8-91ad-9afe94ab15fb.png" alt="image"></p>
-<h2 id="验证安装情况"><a href="#验证安装情况" class="headerlink" title="验证安装情况"></a>验证安装情况</h2><p>打开<code>http://IP/dvwa/setup.php</code><br>查看 Setup Check  各项应均为绿色</p>
-<p><img src="https://user-images.githubusercontent.com/7655877/46001168-3b4ce280-c0dd-11e8-902d-f4516d0f6439.png" alt="image"></p>
-<p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -1041,6 +1013,8 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <div class="widget tag">
   <h3 class="title">分类</h3>
   <ul class="entry">
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>1</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -1110,7 +1084,7 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
   
     <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
   
-    <li><a href="/tags/NLP/">NLP</a><small>3</small></li>
+    <li><a href="/tags/NLP/">NLP</a><small>4</small></li>
   
     <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
   
@@ -1164,11 +1138,15 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
         <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
       </li>
     
       <li>
-        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess - 副本/">用gitlab来优化我们的软件开发流程</a>
+        <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
       </li>
     
       <li>
@@ -1177,10 +1155,6 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
     
       <li>
         <a href="/2018/12/22/20181222MLReview2/">七天算法梳理之逻辑回归</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/18/20181218MLReview1/">七天算法梳理之线性回归</a>
       </li>
     
   </ul>
