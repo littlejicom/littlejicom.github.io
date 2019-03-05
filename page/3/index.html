@@ -76,6 +76,59 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-12-01T02:40:20.000Z"><a href="/2016/12/01/20161201UseJavaApiForElasticSearch2/">2016-12-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/01/20161201UseJavaApiForElasticSearch2/">使用ElasticSearch的JavaAPI2(UseJavaApiForElasticSearch2)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="单独文档的APIs"><a href="#单独文档的APIs" class="headerlink" title="单独文档的APIs"></a>单独文档的APIs</h2><h3 id="Index-API"><a href="#Index-API" class="headerlink" title="Index API"></a>Index API</h3><h4 id="生成Json"><a href="#生成Json" class="headerlink" title="生成Json"></a>生成Json</h4><ul>
+<li>手动</li>
+<li>使用<code>Map</code></li>
+<li>使用第三方库如Jackson</li>
+<li>使用內建的jsonBuilder()</li>
+</ul>
+<h4 id="建立索引文档"><a href="#建立索引文档" class="headerlink" title="建立索引文档"></a>建立索引文档</h4><p>下面的例子是建立一个索引为twitter,类型为tweet,id为1的文档,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import static org.elasticsearch.common.xcontent.XContentFactory.*;</span><br><span class="line"> </span><br><span class="line">IndexResponse response = client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;trying out Elasticsearch&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure></p>
+<p>或者通过另一种建立json的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;&quot; +</span><br><span class="line">        &quot;\&quot;user\&quot;:\&quot;kimchy\&quot;,&quot; +</span><br><span class="line">        &quot;\&quot;postDate\&quot;:\&quot;2013-01-30\&quot;,&quot; +</span><br><span class="line">        &quot;\&quot;message\&quot;:\&quot;trying out Elasticsearch\&quot;&quot; +</span><br><span class="line">    &quot;&#125;&quot;;</span><br><span class="line"> </span><br><span class="line">IndexResponse response = client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;)</span><br><span class="line">        .setSource(json)</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure></p>
+<p>之后你可以通过调用上面的<code>response</code>来查看建立的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Index name</span><br><span class="line">String _index = response.getIndex();</span><br><span class="line">// Type name</span><br><span class="line">String _type = response.getType();</span><br><span class="line">// Document ID (generated or not)</span><br><span class="line">String _id = response.getId();</span><br><span class="line">// Version (if it&apos;s the first time you index this document, you will get: 1)</span><br><span class="line">long _version = response.getVersion();</span><br><span class="line">// isCreated() is true if the document is a new one, false if it has been updated</span><br><span class="line">boolean created = response.isCreated();</span><br></pre></td></tr></table></figure></p>
+<h3 id="GetAPI"><a href="#GetAPI" class="headerlink" title="GetAPI"></a>GetAPI</h3><p>下面使用client调用 index是 twitter type是tweet id为1的文档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GetResponse response = client.prepareGet(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;).get();</span><br></pre></td></tr></table></figure></p>
+<p>更多的getapi则需要参考<a href="http://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-get.html" target="_blank" rel="noopener">get docs</a></p>
+<p>其它的delete update multiget  bulkapi都需要查看es的相应rest调用文档</p>
+<h3 id="BulkAPI"><a href="#BulkAPI" class="headerlink" title="BulkAPI"></a>BulkAPI</h3><p>bulk API 允许你通过一个请求来检索或者删除多个文档,增加吞吐量,下面是一个应用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import static org.elasticsearch.common.xcontent.XContentFactory.*;</span><br><span class="line"> </span><br><span class="line">BulkRequestBuilder bulkRequest = client.prepareBulk();</span><br><span class="line"> </span><br><span class="line">// either use client#prepare, or use Requests# to directly build index/delete requests</span><br><span class="line">bulkRequest.add(client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;trying out Elasticsearch&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        );</span><br><span class="line"> </span><br><span class="line">bulkRequest.add(client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;2&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;another post&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        );</span><br><span class="line"> </span><br><span class="line">BulkResponse bulkResponse = bulkRequest.get();</span><br><span class="line">if (bulkResponse.hasFailures()) &#123;</span><br><span class="line">    // process failures by iterating through each bulk response item</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用Using-Bulk-Processor"><a href="#使用Using-Bulk-Processor" class="headerlink" title="使用Using Bulk Processor"></a>使用Using Bulk Processor</h3><p><code>BulkProcessor</code>类提供了一个简单的接口可以通过请求的数量或者给定的时间来自动的进行flush操作.<br>使用这个类,首先要创建一个BulkProcessor实例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import org.elasticsearch.action.bulk.BackoffPolicy;</span><br><span class="line">import org.elasticsearch.action.bulk.BulkProcessor;</span><br><span class="line">import org.elasticsearch.common.unit.ByteSizeUnit;</span><br><span class="line">import org.elasticsearch.common.unit.ByteSizeValue;</span><br><span class="line">import org.elasticsearch.common.unit.TimeValue;</span><br><span class="line"> </span><br><span class="line">BulkProcessor bulkProcessor = BulkProcessor.builder(</span><br><span class="line">        client, </span><br><span class="line">        new BulkProcessor.Listener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void beforeBulk(long executionId,</span><br><span class="line">                                   BulkRequest request) &#123; ... &#125;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void afterBulk(long executionId,</span><br><span class="line">                                  BulkRequest request,</span><br><span class="line">                                  BulkResponse response) &#123; ... &#125;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void afterBulk(long executionId,</span><br><span class="line">                                  BulkRequest request,</span><br><span class="line">                                  Throwable failure) &#123; ... &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        .setBulkActions(10000)</span><br><span class="line">        .setBulkSize(new ByteSizeValue(5, ByteSizeUnit.MB))</span><br><span class="line">        .setFlushInterval(TimeValue.timeValueSeconds(5))</span><br><span class="line">        .setConcurrentRequests(1)</span><br><span class="line">        .setBackoffPolicy(</span><br><span class="line">            BackoffPolicy.exponentialBackoff(TimeValue.timeValueMillis(100), 3))</span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure></p>
+<p>其中的<code>setConcurrentRequests(1)</code>指同时允许多少个并发,0的话意味着不允许,1则表示允许一个并发请求.<br><code>setBackoffPolicy</code>则可以允许用户自定义当一个或者多个bulk请求失败后,该执行如何操作,而这个失败是要求基于<code>EsRejectedExecutionException</code>,也就是说集群内的计算资源不够导致的请求失败,如果不设定的话使用<code>BackoffPolicy.noBackoff()</code><br>当所有的需要执行的操作加载到bulk中之后,可使用两种方式来关闭这个bulk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bulkProcessor.awaitClose(10, TimeUnit.MINUTES);</span><br><span class="line">or</span><br><span class="line">bulkProcessor.close();</span><br></pre></td></tr></table></figure></p>
+<p>这两个操作都会flush所有的剩余bulk操作,前者会等待一段时间,如果在这段时间 flush成功,则返回<code>true</code> 否则返回<code>false</code>,<br>后者则会直接退出,不在等待所有的bulk执行操作完成</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/" target="_blank" rel="noopener">ElasticSearch Java API</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="http://littleji.com/2016/12/01/20161201UseJavaApiForElasticSearch2/">http://littleji.com/2016/12/01/20161201UseJavaApiForElasticSearch2/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-30T06:27:20.000Z"><a href="/2016/11/30/20161130UseJavaApiForElasticSearch1/">2016-11-30</a></time>
       
       
@@ -468,7 +521,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-03/">2019-03</a><small>1</small></li>
+    <li><a href="/categories/2019-03/">2019-03</a><small>2</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -538,7 +591,7 @@
   
     <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
   
-    <li><a href="/tags/NLP/">NLP</a><small>4</small></li>
+    <li><a href="/tags/NLP/">NLP</a><small>5</small></li>
   
     <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
   
@@ -592,6 +645,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
         <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
       </li>
     
@@ -605,10 +662,6 @@
     
       <li>
         <a href="/2018/12/25/20181225MLReview3/">七天算法梳理之决策树</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/22/20181222MLReview2/">七天算法梳理之逻辑回归</a>
       </li>
     
   </ul>

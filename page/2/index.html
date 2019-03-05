@@ -76,6 +76,78 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-10-15T16:00:00.000Z"><a href="/2018/10/16/20181016FormalLanguageGenerality/">2018-10-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/10/16/20181016FormalLanguageGenerality/">形式语法概述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>形式语言作为精确描述语言的工具，广泛的应用在机器翻译等自然语言处理的领域</p>
+<p>描述语言的常用三个方法：</p>
+<ol>
+<li>穷举法，对于句子数目有限的语言可以使用这种方法将所有的句子进行枚举，从而定义。</li>
+<li>文法，可以理解为我们在英文、中文中学习的语法，通过严格定义规则，来生成合法的句子，<strong>重点</strong>在于生成句子。</li>
+<li>自动机，不同于文法，自动机<strong>更偏向</strong>与对于输入句子的合法性检测，从而区分哪些是语言中的句子，哪些不是。</li>
+</ol>
+<p>文法与自动机二者皆有所长，一定条件下可以相互转换。</p>
+<h2 id="符号与符号串"><a href="#符号与符号串" class="headerlink" title="符号与符号串"></a>符号与符号串</h2><h3 id="字母表，符号集"><a href="#字母表，符号集" class="headerlink" title="字母表，符号集"></a>字母表，符号集</h3><p>字母或者符号的又穷非空集合。<br>例：汉语字母表为汉字、数字、标点符号。</p>
+<h3 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h3><p>字母表中的符号组成的任何有穷序列。<br>例：有符号集<br><img src="https://user-images.githubusercontent.com/7655877/46996847-9314c180-d150-11e8-9367-fca90bcc4c86.png" alt="image"><br>符号串为：0，1，01，10，11，00</p>
+<h3 id="空字符串"><a href="#空字符串" class="headerlink" title="空字符串"></a>空字符串</h3><p><img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">表示，长度为0</p>
+<h3 id="符号串的头、尾、固有头、固有尾"><a href="#符号串的头、尾、固有头、固有尾" class="headerlink" title="符号串的头、尾、固有头、固有尾"></a>符号串的头、尾、固有头、固有尾</h3><p>例：如果z=abc，则<br>z的头为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab，abc<br>z的尾为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc，cba<br>z的固有头：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab<br>z的固有尾：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc</p>
+<h3 id="符号串连接"><a href="#符号串连接" class="headerlink" title="符号串连接"></a>符号串连接</h3><p>有符号串x，y，连接xy指y符号串写在x符号串之后<br>例：x=ab，y=cd，xy=abcd</p>
+<h3 id="符号串的方幂"><a href="#符号串的方幂" class="headerlink" title="符号串的方幂"></a>符号串的方幂</h3><p>有符号串x，z=xxxx….，称z为x的方幂，记为<img src="https://user-images.githubusercontent.com/7655877/46997369-1aaf0000-d152-11e8-9fe2-15669611d07f.png" alt="image"><br>且<br><img src="https://user-images.githubusercontent.com/7655877/46997436-44682700-d152-11e8-81b0-2e666a016eda.png" alt="image"></p>
+<h3 id="符号串的相乘"><a href="#符号串的相乘" class="headerlink" title="符号串的相乘"></a>符号串的相乘</h3><p>有符号串<img src="https://user-images.githubusercontent.com/7655877/46997662-d6702f80-d152-11e8-8624-c2bd89787f26.png" alt="image"><br>例：有A={a,b} B={c,d},则AB={ac,ad,bc,bd}</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>字母表<img src="https://user-images.githubusercontent.com/7655877/46999201-98c1d580-d157-11e8-9f72-e44129b97319.png" alt="image">上所有又穷长的字符串的集合用<img src="https://user-images.githubusercontent.com/7655877/46999213-a0817a00-d157-11e8-9da5-49f7d12b8df4.png" alt="image"><br>来表示，其中正闭包<img src="https://user-images.githubusercontent.com/7655877/46999164-7af47080-d157-11e8-82d2-88a9f3c888a5.png" alt="image">不包括空集</p>
+<h2 id="文法和语言的形式定义"><a href="#文法和语言的形式定义" class="headerlink" title="文法和语言的形式定义"></a>文法和语言的形式定义</h2><h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><p>也称为产生式：<br><img src="https://user-images.githubusercontent.com/7655877/46999289-d6bef980-d157-11e8-8607-e0407655604f.png" alt="image"><br>其中，<img src="https://user-images.githubusercontent.com/7655877/46999328-f5bd8b80-d157-11e8-9468-08b46507690a.png" alt="image"></p>
+<h3 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h3><p>定义：G定义为四元组<img src="https://user-images.githubusercontent.com/7655877/46999397-28678400-d158-11e8-9dc1-bfbdfac5462e.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7655877/46999410-30bfbf00-d158-11e8-8c83-d1f35dc4d3d8.png" alt="image"></p>
+<h3 id="句型"><a href="#句型" class="headerlink" title="句型"></a>句型</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999714-0a4e5380-d159-11e8-8a22-4cac5e52f986.png" alt="image"><br>句子一定是句型，句型不一定是句子</p>
+<h3 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999780-336ee400-d159-11e8-8067-05c802ea65bb.png" alt="image">记为L(G)</p>
+<h2 id="文法类型"><a href="#文法类型" class="headerlink" title="文法类型"></a>文法类型</h2><p><img src="https://user-images.githubusercontent.com/7655877/47000450-e2f88600-d15a-11e8-9f6f-2c76109410e1.png" alt="image"></p>
+<h3 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001280-aa59ac00-d15c-11e8-89ba-c9a2200b1f17.png" alt="image"><br>重点是在规则的左部只有一个非终结字符</p>
+<h3 id="正规文法"><a href="#正规文法" class="headerlink" title="正规文法"></a>正规文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001685-a0847880-d15d-11e8-87f0-fe81ca258def.png" alt="image"></p>
+<h3 id="语法树"><a href="#语法树" class="headerlink" title="语法树"></a>语法树</h3><p>语法树表明了推倒过程中使用了什么样的产生式和用到了哪些非终结字符，并不表明顺序。<br>例：有下图<br><img src="https://user-images.githubusercontent.com/7655877/47007060-f9f2a480-d169-11e8-8f60-9e1edf81a9ad.png" alt="image"><br>构造aabbaa的语法树，步骤如下<br><img src="https://user-images.githubusercontent.com/7655877/47007084-07a82a00-d16a-11e8-9aaa-8fc4df075698.png" alt="image"></p>
+<h3 id="文法的二义性"><a href="#文法的二义性" class="headerlink" title="文法的二义性"></a>文法的二义性</h3><p><img src="https://user-images.githubusercontent.com/7655877/47002932-c0696b80-d160-11e8-9759-84258745460f.png" alt="image"></p>
+<h2 id="句型分析"><a href="#句型分析" class="headerlink" title="句型分析"></a>句型分析</h2><p>识别一个符号串是否为某文法的句型是整个推导的构建过程</p>
+<h3 id="自上而下分析法"><a href="#自上而下分析法" class="headerlink" title="自上而下分析法"></a>自上而下分析法</h3><p>由非终结字符串推导至终结字符串，并查看该终结字符串是否匹配</p>
+<h3 id="自下而上分析法"><a href="#自下而上分析法" class="headerlink" title="自下而上分析法"></a>自下而上分析法</h3><p>有终结字符串进行规约，最终生成的非终结字符串，是否符合规则</p>
+<h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47004899-2657f200-d165-11e8-94fb-5463a90dd1f7.png" alt="image"><br>这时候使用回溯法进行计算</p>
+<h2 id="简化文法"><a href="#简化文法" class="headerlink" title="简化文法"></a>简化文法</h2><p>主要是去除规则中的两种类型的规则，有害规则和多与规则</p>
+<h3 id="有害规则"><a href="#有害规则" class="headerlink" title="有害规则"></a>有害规则</h3><p>例如：<br>U-&gt;U这种产生式，会引起文法的二义性。<br>多余规则：指文法中任何句子的推倒都不会用到的规则，主要有两种：</p>
+<ol>
+<li>非终结字符不在任何规则的右部出现。</li>
+<li>非终结字符无法推出终结符号串</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>宗成庆. 统计自然语言处理[M]. 清华大学出版社, 2008.<br><a href="http://ccl.pku.edu.cn/ALCourse/Compiling/" target="_blank" rel="noopener">北京大学编译原理课程</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/">http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-09-24T16:00:00.000Z"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">2018-09-25</a></time>
       
       
@@ -639,59 +711,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-12-01T02:40:20.000Z"><a href="/2016/12/01/20161201UseJavaApiForElasticSearch2/">2016-12-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/12/01/20161201UseJavaApiForElasticSearch2/">使用ElasticSearch的JavaAPI2(UseJavaApiForElasticSearch2)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="单独文档的APIs"><a href="#单独文档的APIs" class="headerlink" title="单独文档的APIs"></a>单独文档的APIs</h2><h3 id="Index-API"><a href="#Index-API" class="headerlink" title="Index API"></a>Index API</h3><h4 id="生成Json"><a href="#生成Json" class="headerlink" title="生成Json"></a>生成Json</h4><ul>
-<li>手动</li>
-<li>使用<code>Map</code></li>
-<li>使用第三方库如Jackson</li>
-<li>使用內建的jsonBuilder()</li>
-</ul>
-<h4 id="建立索引文档"><a href="#建立索引文档" class="headerlink" title="建立索引文档"></a>建立索引文档</h4><p>下面的例子是建立一个索引为twitter,类型为tweet,id为1的文档,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import static org.elasticsearch.common.xcontent.XContentFactory.*;</span><br><span class="line"> </span><br><span class="line">IndexResponse response = client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;trying out Elasticsearch&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure></p>
-<p>或者通过另一种建立json的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;&quot; +</span><br><span class="line">        &quot;\&quot;user\&quot;:\&quot;kimchy\&quot;,&quot; +</span><br><span class="line">        &quot;\&quot;postDate\&quot;:\&quot;2013-01-30\&quot;,&quot; +</span><br><span class="line">        &quot;\&quot;message\&quot;:\&quot;trying out Elasticsearch\&quot;&quot; +</span><br><span class="line">    &quot;&#125;&quot;;</span><br><span class="line"> </span><br><span class="line">IndexResponse response = client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;)</span><br><span class="line">        .setSource(json)</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure></p>
-<p>之后你可以通过调用上面的<code>response</code>来查看建立的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Index name</span><br><span class="line">String _index = response.getIndex();</span><br><span class="line">// Type name</span><br><span class="line">String _type = response.getType();</span><br><span class="line">// Document ID (generated or not)</span><br><span class="line">String _id = response.getId();</span><br><span class="line">// Version (if it&apos;s the first time you index this document, you will get: 1)</span><br><span class="line">long _version = response.getVersion();</span><br><span class="line">// isCreated() is true if the document is a new one, false if it has been updated</span><br><span class="line">boolean created = response.isCreated();</span><br></pre></td></tr></table></figure></p>
-<h3 id="GetAPI"><a href="#GetAPI" class="headerlink" title="GetAPI"></a>GetAPI</h3><p>下面使用client调用 index是 twitter type是tweet id为1的文档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GetResponse response = client.prepareGet(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;).get();</span><br></pre></td></tr></table></figure></p>
-<p>更多的getapi则需要参考<a href="http://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-get.html" target="_blank" rel="noopener">get docs</a></p>
-<p>其它的delete update multiget  bulkapi都需要查看es的相应rest调用文档</p>
-<h3 id="BulkAPI"><a href="#BulkAPI" class="headerlink" title="BulkAPI"></a>BulkAPI</h3><p>bulk API 允许你通过一个请求来检索或者删除多个文档,增加吞吐量,下面是一个应用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import static org.elasticsearch.common.xcontent.XContentFactory.*;</span><br><span class="line"> </span><br><span class="line">BulkRequestBuilder bulkRequest = client.prepareBulk();</span><br><span class="line"> </span><br><span class="line">// either use client#prepare, or use Requests# to directly build index/delete requests</span><br><span class="line">bulkRequest.add(client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;trying out Elasticsearch&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        );</span><br><span class="line"> </span><br><span class="line">bulkRequest.add(client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;, &quot;2&quot;)</span><br><span class="line">        .setSource(jsonBuilder()</span><br><span class="line">                    .startObject()</span><br><span class="line">                        .field(&quot;user&quot;, &quot;kimchy&quot;)</span><br><span class="line">                        .field(&quot;postDate&quot;, new Date())</span><br><span class="line">                        .field(&quot;message&quot;, &quot;another post&quot;)</span><br><span class="line">                    .endObject()</span><br><span class="line">                  )</span><br><span class="line">        );</span><br><span class="line"> </span><br><span class="line">BulkResponse bulkResponse = bulkRequest.get();</span><br><span class="line">if (bulkResponse.hasFailures()) &#123;</span><br><span class="line">    // process failures by iterating through each bulk response item</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="使用Using-Bulk-Processor"><a href="#使用Using-Bulk-Processor" class="headerlink" title="使用Using Bulk Processor"></a>使用Using Bulk Processor</h3><p><code>BulkProcessor</code>类提供了一个简单的接口可以通过请求的数量或者给定的时间来自动的进行flush操作.<br>使用这个类,首先要创建一个BulkProcessor实例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import org.elasticsearch.action.bulk.BackoffPolicy;</span><br><span class="line">import org.elasticsearch.action.bulk.BulkProcessor;</span><br><span class="line">import org.elasticsearch.common.unit.ByteSizeUnit;</span><br><span class="line">import org.elasticsearch.common.unit.ByteSizeValue;</span><br><span class="line">import org.elasticsearch.common.unit.TimeValue;</span><br><span class="line"> </span><br><span class="line">BulkProcessor bulkProcessor = BulkProcessor.builder(</span><br><span class="line">        client, </span><br><span class="line">        new BulkProcessor.Listener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void beforeBulk(long executionId,</span><br><span class="line">                                   BulkRequest request) &#123; ... &#125;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void afterBulk(long executionId,</span><br><span class="line">                                  BulkRequest request,</span><br><span class="line">                                  BulkResponse response) &#123; ... &#125;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void afterBulk(long executionId,</span><br><span class="line">                                  BulkRequest request,</span><br><span class="line">                                  Throwable failure) &#123; ... &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        .setBulkActions(10000)</span><br><span class="line">        .setBulkSize(new ByteSizeValue(5, ByteSizeUnit.MB))</span><br><span class="line">        .setFlushInterval(TimeValue.timeValueSeconds(5))</span><br><span class="line">        .setConcurrentRequests(1)</span><br><span class="line">        .setBackoffPolicy(</span><br><span class="line">            BackoffPolicy.exponentialBackoff(TimeValue.timeValueMillis(100), 3))</span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure></p>
-<p>其中的<code>setConcurrentRequests(1)</code>指同时允许多少个并发,0的话意味着不允许,1则表示允许一个并发请求.<br><code>setBackoffPolicy</code>则可以允许用户自定义当一个或者多个bulk请求失败后,该执行如何操作,而这个失败是要求基于<code>EsRejectedExecutionException</code>,也就是说集群内的计算资源不够导致的请求失败,如果不设定的话使用<code>BackoffPolicy.noBackoff()</code><br>当所有的需要执行的操作加载到bulk中之后,可使用两种方式来关闭这个bulk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bulkProcessor.awaitClose(10, TimeUnit.MINUTES);</span><br><span class="line">or</span><br><span class="line">bulkProcessor.close();</span><br></pre></td></tr></table></figure></p>
-<p>这两个操作都会flush所有的剩余bulk操作,前者会等待一段时间,如果在这段时间 flush成功,则返回<code>true</code> 否则返回<code>false</code>,<br>后者则会直接退出,不在等待所有的bulk执行操作完成</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/" target="_blank" rel="noopener">ElasticSearch Java API</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2016/12/01/20161201UseJavaApiForElasticSearch2/">http://littleji.com/2016/12/01/20161201UseJavaApiForElasticSearch2/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -715,7 +734,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-03/">2019-03</a><small>1</small></li>
+    <li><a href="/categories/2019-03/">2019-03</a><small>2</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -785,7 +804,7 @@
   
     <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
   
-    <li><a href="/tags/NLP/">NLP</a><small>4</small></li>
+    <li><a href="/tags/NLP/">NLP</a><small>5</small></li>
   
     <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
   
@@ -839,6 +858,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
         <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
       </li>
     
@@ -852,10 +875,6 @@
     
       <li>
         <a href="/2018/12/25/20181225MLReview3/">七天算法梳理之决策树</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/22/20181222MLReview2/">七天算法梳理之逻辑回归</a>
       </li>
     
   </ul>
