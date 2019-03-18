@@ -78,6 +78,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-10-21T16:00:00.000Z"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">2018-10-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">概率图模型之一</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概率图概述"><a href="#概率图概述" class="headerlink" title="概率图概述"></a>概率图概述</h1><p>概率图模型使用图的方法来表示概率分布，在该模型中，结点表示变量，节点之间的边表示变量之间的概略关系。</p>
+<p>根据图模型中的边是否有向，将概率图的代表模型如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/47288361-5f420c00-d628-11e8-9ad1-555e47176c16.png" alt="image"></p>
+<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A-&gt;B-&gt;C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
+<p>各个图模型的演变关系如下：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/47288381-7a148080-d628-11e8-836a-fbe66c555d01.png" alt="image"></p>
+<p>其中横向，由点到线（序列结构），最终到面。<br>纵向则是在一定的条件下生成式模型转换为判别式模型。<br>下面假设有观测序列x，状态序列y，并依次来说明生成式与判别式模型的区别。</p>
+<h2 id="生成式模型"><a href="#生成式模型" class="headerlink" title="生成式模型"></a>生成式模型</h2><p>生成式模型的定义是：“状态（输出）序列y按照一定的规律生成观测（输入）序列x”。生成式模型的本质是对于联合概率分布p(x,y)进行建模，并根据生成概率最大的生成序列来获取y。</p>
+<p>这类模型中，一般有严格的独立性假设，模型变量之间的关系清楚，处理单类问题时较为灵活。</p>
+<p>弱点是模型的推导与学习较为复杂。</p>
+<p>主要的模型有：n-gram，HMM、朴素贝叶斯、概率上下文无关文法。</p>
+<h2 id="判别式模型"><a href="#判别式模型" class="headerlink" title="判别式模型"></a>判别式模型</h2><p>判别式模型的定义是：“状态（输出）序列y是由观测序列（输入）所决定的。”判别式模型的本质是对后验概率p（y|x）进行建模，优点是处理多累问题或分辨某一类与其他类差异时更为灵活，模型构造简单。</p>
+<p>缺点是模型的描述能力有限，变量之间的关系不清楚。大多数模型都是有监督学习，不能很好地扩展为无监督学习。</p>
+<p>主要模型有：最大熵模型、最大熵马尔科夫模型、支持向量机、条件随机场、感知机。</p>
+<h1 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h1><p>贝叶斯网络也称为belief networks，是一种基于概率推理的数学模型，理论基础为贝叶斯公式。</p>
+<p>贝叶斯网络形式上是一个有向无环图（DAG directed acyclic graph），结点表示随机变量，结点之间的边表示条件依存关系，箭头出发的节点为父节点，箭头到达的节点为子节点，子节点依存于父节点。</p>
+<p>如果两个节点没有连接关系，表示两个随机变量能够在某些特定情况下条件独立。</p>
+<h2 id="构造贝叶斯网络"><a href="#构造贝叶斯网络" class="headerlink" title="构造贝叶斯网络"></a>构造贝叶斯网络</h2><p>构造贝叶斯网络是一个复杂的任务，其主要有三个方面的问题：表示、推断、学习</p>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p>在简单某一随机变量的组合上<br><img src="https://user-images.githubusercontent.com/7655877/47356431-a4cd0a80-d6f6-11e8-9304-e72390800815.png" alt="image"><br>即便是随机变量只有两个取值，那么联合概率分布P需要对 2^n 种不同取值下的概率情况进行说明，然而这件事的计算代价非常高。</p>
+<h3 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h3><p>由于贝叶斯网络是变量以及关系的完整模型，那么在观测到某些变量变化的时候就需要使用一些推断方法，来得知另一些变量子集的变化。<br>概率推理：在已知某些证据的情况下，计算变量的后验分布的过程。<br>常用的精确推理方法有两种</p>
+<ul>
+<li>变量消除法 variable elimination</li>
+<li>团树法 clique tree</li>
+</ul>
+<p>常用的近似推理</p>
+<ul>
+<li>重要性抽样 importance sampling</li>
+<li>随机马尔科夫链蒙特卡洛模拟法 Markov chain Monte Carlo，MCMC</li>
+<li>循环信念传播法 loopy belief propagation</li>
+<li>泛化信念传播法 generalized belief propagation</li>
+</ul>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>参数学习的目的就是得知各个变量结点之间相互依存的强度。<br>比如给定某个节点X，需要计算 P(X|父节点1，父节点2…)，这些概率分布可以是任意形式，通常是离散分布与高斯分布。</p>
+<p>常用的参数学习方法包括：</p>
+<ul>
+<li>最大似然估计 MLE</li>
+<li>最大后验概率 MAP</li>
+<li>期望最大 EM</li>
+<li>贝叶斯估计方法，贝叶斯图模型中，使用较多的是该种方法</li>
+</ul>
+<p>除了参数学习，还需要结构学习来学习各个变量之间的图关系，简单的贝叶斯可以由有经验的专家来构造，但一般情况下人工构造一个贝叶斯网络的结构几乎不可能，所以自动结构学习是一项颇具挑战的任务。</p>
+<h2 id="MLE-MAP-贝叶斯估计之间的关系"><a href="#MLE-MAP-贝叶斯估计之间的关系" class="headerlink" title="MLE MAP 贝叶斯估计之间的关系"></a>MLE MAP 贝叶斯估计之间的关系</h2><p>其中，最大似然估计（MLE）是频率派的代表，贝叶斯估计（Bayes）是贝叶斯派的代表，最大后验估计是频率派和贝叶斯派的合成，是一种规则化后的最大似然估计。</p>
+<p>一般来说，在我们对于先验概率一无所知时，只能假设每种猜测的先验概率是均等的（其实这也是人类经验的结果），这个时候就只有用最大似然了，但不能忘记一个重要的前提是所有的采样都是独立同分布。</p>
+<p>如果我们有足够的自信，训练集中的样本分布的确很接近真实的情况，这时就应该用贝叶斯方法。贝叶斯学派强调的是“靠谱的先验概率”。所以说贝叶斯学派的适用范围更广，关键要先验概率靠谱，而频率学派有效的前提也是他们的先验概率同样是经验统计的结果。但也说明了贝叶斯计算要更为复杂，因为需要选择一个常用分布，并确定一个初始参数集作为先验分布。</p>
+<p>再者，MAP与MLE最大区别是MAP中加入了模型参数本身的概率分布，即是否考虑了先验知识。或者说。MLE中认为模型参数本身的概率的是均匀的，即该概率为一个固定值。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>统计自然语言处理（第2版）<br><a href="https://blog.csdn.net/Mr_tyting/article/details/62882162?utm_source=blogxgwz1" target="_blank" rel="noopener">1</a><br><a href="https://blog.csdn.net/juanjuan1314/article/details/78189527" target="_blank" rel="noopener">2</a><br><a href="https://zhuanlan.zhihu.com/p/32568242" target="_blank" rel="noopener">3</a><br><a href="https://zhuanlan.zhihu.com/p/32616870" target="_blank" rel="noopener">4</a><br><a href="https://blog.csdn.net/guohecang/article/details/52313046" target="_blank" rel="noopener">5</a></p>
+<hr>
+<p>本文链接为：<a href="http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-10-15T16:00:00.000Z"><a href="/2018/10/16/20181016FormalLanguageGenerality/">2018-10-16</a></time>
       
       
@@ -125,7 +206,6 @@
 </ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>宗成庆. 统计自然语言处理[M]. 清华大学出版社, 2008.<br><a href="http://ccl.pku.edu.cn/ALCourse/Compiling/" target="_blank" rel="noopener">北京大学编译原理课程</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/">http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
 
       
@@ -211,7 +291,6 @@
 <p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
 
       
@@ -284,7 +363,6 @@
 <p>作者：<a href="https://opensource.com/users/rgerardi" target="_blank" rel="noopener">Ricardo Gerardi</a><br>选题：<a href="https://github.com/lujun9972" target="_blank" rel="noopener">lujun9972</a><br>译者：<a href="https://github.com/littleji" target="_blank" rel="noopener">littleji</a><br>校对：<a href="https://github.com/校对者ID" target="_blank" rel="noopener">校对者ID</a></p>
 <p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="noopener">LCTT</a> 原创编译，<a href="https://linux.cn/" target="_blank" rel="noopener">Linux中国</a> 荣誉推出</p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
 
       
@@ -366,7 +444,6 @@
 <p>需要注意的是 默认使用int就足够,并且其速度是可以保证的<br>将小的整数转换为大整数总是安全的,但是如果向下转换会产生截断或者得到一个不可预期的值,如果想使用一个完美的精度,可以使用big.Rat或者big.Int类型,该类型只受限于机器的内存大小</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://book.douban.com/subject/24869910/" target="_blank" rel="noopener">Go语言程序设计</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/02/04/20180204ProgrammingInGo1/">http://littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
 
       
@@ -409,7 +486,6 @@
 <h2 id="0x03时间戳服务器"><a href="#0x03时间戳服务器" class="headerlink" title="0x03时间戳服务器"></a>0x03时间戳服务器</h2><p>时间戳服务器是一切的开始，时间戳服务器工作原理是对一个block进行hash，并对其结果进行广播。建立时间戳服务器的意义主要是为了证明某一个数据在一个时间点一定存在。在组成一个链的时候，每一个时间戳的生成都会考虑到之前时间戳的信息。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">比特币白皮书</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/01/18/20180117BitCoin/">http://littleji.com/2018/01/18/20180117BitCoin/</a></p>
 
       
@@ -477,7 +553,6 @@
 <h2 id="0x0103-该怎么做？"><a href="#0x0103-该怎么做？" class="headerlink" title="0x0103 该怎么做？"></a>0x0103 该怎么做？</h2><p>无他，对于交易的双方来说，都应该关注好交易的彼此，莫让对方受了委屈，才是持续推动双方进步的不二法门。切莫为了蝇头甜点，预支了未来的大块蛋糕。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://wiki.mbalib.com/wiki/%E7%AD%89%E4%BB%B7%E4%BA%A4%E6%8D%A2" target="_blank" rel="noopener">等价交换</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/01/14/20180114ThereAndBackAgain/">http://littleji.com/2018/01/14/20180114ThereAndBackAgain/</a></p>
 
       
@@ -531,7 +606,6 @@
 <h1 id="程序员实践"><a href="#程序员实践" class="headerlink" title="程序员实践"></a>程序员实践</h1><p>卓有成效的程序员<br>高效程序员的修炼<br>程序员的思维训练 8.3<br>程序员的职业素养 8.6<br>高效程序员的45个习惯——敏捷开发修炼之道<br>程序员修炼之道——从小工到专家<br>重构 9.0(《重构与模式》一样，充其量只是一本案例集，无法达到《重构》的高度)<br>编写可读代码的艺术 8.6<br>编程珠玑 9.2<br>编码 9.2</p>
 <h1 id="程序员泛读"><a href="#程序员泛读" class="headerlink" title="程序员泛读"></a>程序员泛读</h1><p>哥德尔、艾舍尔、巴赫 9.4<br>暗时间 8.4<br>把时间当朋友<br>影响力 8.6<br>黑客 8.3<br>编程人生 8.4</p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2017/05/10/20170510MyBookList/">http://littleji.com/2017/05/10/20170510MyBookList/</a></p>
 
       
@@ -579,7 +653,6 @@
 <p>重新启动数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/6443428/cant-find-file-ci-users-frm-errno-13" target="_blank" rel="noopener">stackoverflow#1</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/">http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/</a></p>
 
       
@@ -654,66 +727,7 @@
 <h3 id="测试批的方式发送请求"><a href="#测试批的方式发送请求" class="headerlink" title="测试批的方式发送请求"></a>测试批的方式发送请求</h3><p>原理非常简单,只需要将发送的一组请求使用数组的形式括起来即可,代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST &quot;http://192.168.101.188:8080/rpc&quot; -d &quot;[&#123;\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;, \&quot;id\&quot;:\&quot;1\&quot;, \&quot;method\&quot;:\&quot;getString\&quot;, \&quot;params\&quot;:[\&quot;Test\&quot;]&#125;,&#123;\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;, \&quot;id\&quot;:\&quot;2\&quot;, \&quot;method\&quot;:\&quot;getString\&quot;, \&quot;params\&quot;:[\&quot;哈哈\&quot;]&#125;]&quot;</span><br></pre></td></tr></table></figure></p>
 <p>服务端返回:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:&quot;1&quot;,&quot;result&quot;:&quot;&#123;Test&#125;&quot;&#125;</span><br><span class="line">,&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:&quot;2&quot;,&quot;result&quot;:&quot;&#123;哈哈&#125;&quot;&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2016/12/12/20161212UseJsonRPCFormatToGetWhatYouWant/">http://littleji.com/2016/12/12/20161212UseJsonRPCFormatToGetWhatYouWant/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-    
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-12-06T11:50:20.000Z"><a href="/2016/12/06/20161206QuickStartForJsonrpc4j/">2016-12-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/12/06/20161206QuickStartForJsonrpc4j/">jsonrpc4j初步使用(Quick Start For Jsonrpc4j)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>目前有个项目需要向外提供服务:</p>
-<ol>
-<li>不打算用spring相对来说比较重的框架</li>
-<li>后来考虑过jersey+jetty的restful框架,但是restful本身的应用场景,或者说是抽象较为局限,主要是编者水平有限</li>
-<li>再之后又看了thrift的使用,稍微上手,认为操作还是较为繁杂.</li>
-<li>json-rpc以前并没有接触过,json相对来说又有传输占用带宽较小等广为人知的优点,便以此篇为个契机学习一下.<br>jsonrpc4j是briandilley开发,项目的地址是<a href="https://github.com/briandilley/jsonrpc4j" target="_blank" rel="noopener">github</a><br>jsonrpc4j 服从json-rpc的规范,<a href="http://www.jsonrpc.org/" target="_blank" rel="noopener">规范链接在此</a><br>其主要支持下面这4类客户端:<br>Streaming server (InputStream \ OutputStream)<br>HTTP Server (HttpServletRequest \ HttpServletResponse)<br>Portlet Server (ResourceRequest \ ResourceResponse)<br>Socket Server (StreamServer)<br>这次主要使用的是HTTP Server</li>
-</ol>
-<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><p>jsonrpc项目通过Maven构建,首先需要在pom.xm中加入对jsonrpc4j的依赖,如下面所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- jsonrpc4j --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.briandilley.jsonrpc4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jsonrpc4j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>但是仅仅加入上面的依赖还不够,完整的pom.xml如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;groupId&gt;com.littleji&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jsonrpc-demo&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.github.briandilley.jsonrpc4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jsonrpc4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.4.6&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7.9&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;httpcore-nio&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.4.4&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.10&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/javax.portlet/portlet-api --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;javax.portlet&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;portlet-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;net.iharder&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;base64&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.3.9&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置测试用的model-service"><a href="#配置测试用的model-service" class="headerlink" title="配置测试用的model,service"></a>配置测试用的model,service</h2><h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package com.littleji.jsonrpc.demo;</span><br><span class="line"> </span><br><span class="line">import java.io.Serializable;</span><br><span class="line"> </span><br><span class="line">public class DemoBean implements Serializable&#123;</span><br><span class="line">    private static final long serialVersionUID = -5141784935371524L;</span><br><span class="line">    private int code;</span><br><span class="line">    private String msg;</span><br><span class="line"> </span><br><span class="line">    public int getCode() &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setCode(int code) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public String getMsg() &#123;</span><br><span class="line">        return msg;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setMsg(String msg) &#123;</span><br><span class="line">        this.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Service和其Implement"><a href="#Service和其Implement" class="headerlink" title="Service和其Implement"></a>Service和其Implement</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.littleji.jsonrpc.demo;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* Created by Jimmy on 2016/12/6.</span><br><span class="line">*/</span><br><span class="line">public interface DemoService &#123;</span><br><span class="line">        public DemoBean getDemo(String code, String msg);</span><br><span class="line"> </span><br><span class="line">        public Integer getInt(Integer code);</span><br><span class="line"> </span><br><span class="line">        public String getString(String msg);</span><br><span class="line"> </span><br><span class="line">        public void doSomething();</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class DemoServiceImply implements DemoService &#123;</span><br><span class="line"> </span><br><span class="line">    public DemoBean getDemo(String code, String msg) &#123;</span><br><span class="line">        DemoBean bean1 = new DemoBean();</span><br><span class="line">        bean1.setCode(Integer.parseInt(code));</span><br><span class="line">        bean1.setMsg(msg);</span><br><span class="line">        return bean1;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public Integer getInt(Integer code) &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public String getString(String msg) &#123;</span><br><span class="line">        return &quot;&#123;&quot;+msg+&quot;&#125;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void doSomething() &#123;</span><br><span class="line">        System.out.println(&quot;do something&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="配置server端"><a href="#配置server端" class="headerlink" title="配置server端"></a>配置server端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package com.littleji.jsonrpc.demo;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* Created by Jimmy on 2016/12/6.</span><br><span class="line">*/</span><br><span class="line">import java.io.IOException;</span><br><span class="line"> </span><br><span class="line">import javax.servlet.ServletConfig;</span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServlet;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">import com.googlecode.jsonrpc4j.JsonRpcServer;</span><br><span class="line">import com.googlecode.jsonrpc4j.ProxyUtil;</span><br><span class="line"> </span><br><span class="line">public class RpcServer extends HttpServlet &#123;</span><br><span class="line">    private static final long serialVersionUID = 12341234345L;</span><br><span class="line">    private JsonRpcServer rpcServer = null;</span><br><span class="line">    private DemoService demoService = null;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void init(ServletConfig config) throws ServletException &#123;</span><br><span class="line">        super.init(config);</span><br><span class="line">        demoService = new DemoServiceImply();</span><br><span class="line">        Object compositeService = ProxyUtil.createCompositeServiceProxy(</span><br><span class="line">                this.getClass().getClassLoader(),</span><br><span class="line">                new Object[] &#123; demoService&#125;,</span><br><span class="line">                new Class&lt;?&gt;[] &#123; DemoService.class&#125;,</span><br><span class="line">                true);</span><br><span class="line"> </span><br><span class="line">        rpcServer = new JsonRpcServer(compositeService);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    protected void service(HttpServletRequest request,</span><br><span class="line">                           HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        rpcServer.handle(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Servlet的web-xml"><a href="#Servlet的web-xml" class="headerlink" title="Servlet的web.xml"></a>Servlet的web.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE web-app PUBLIC</span><br><span class="line">&quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span><br><span class="line">&quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span><br><span class="line"> </span><br><span class="line">&lt;web-app&gt;</span><br><span class="line">  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;</span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">      &lt;servlet-name&gt;RpcServer&lt;/servlet-name&gt;</span><br><span class="line">      &lt;display-name&gt;RpcServer&lt;/display-name&gt;</span><br><span class="line">      &lt;description&gt;&lt;/description&gt;</span><br><span class="line">      &lt;servlet-class&gt;com.littleji.jsonrpc.demo.RpcServer&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">      &lt;servlet-name&gt;RpcServer&lt;/servlet-name&gt;</span><br><span class="line">      &lt;url-pattern&gt;/rpc&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.littleji.jsonrpc.test;</span><br><span class="line"> </span><br><span class="line">import com.googlecode.jsonrpc4j.JsonRpcHttpClient;</span><br><span class="line">import com.googlecode.jsonrpc4j.ProxyUtil;</span><br><span class="line">import com.littleji.jsonrpc.demo.DemoService;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">import java.net.URL;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* Created by Jimmy on 2016/12/7.</span><br><span class="line">*/</span><br><span class="line">public class jsonrpctest2 &#123;</span><br><span class="line">    public static void main(String [] args) throws Throwable &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            JsonRpcHttpClient client = new JsonRpcHttpClient(</span><br><span class="line">                    new URL(&quot;http://127.0.0.1:8080/rpc&quot;));</span><br><span class="line"> </span><br><span class="line">            DemoService userService = ProxyUtil.createClientProxy(</span><br><span class="line">                    client.getClass().getClassLoader(),</span><br><span class="line">                    DemoService.class,</span><br><span class="line">                    client);</span><br><span class="line">             //两种调用方式</span><br><span class="line">            System.out.println(userService.getString(&quot;aa&quot;));</span><br><span class="line">            System.out.println( client.invoke(&quot;getString&quot;, new String[] &#123; &quot;haha&quot; &#125;, String.class));</span><br><span class="line">            System.out.println( client.invoke(&quot;getInt&quot;, new Integer[] &#123; 2 &#125;, Integer.class));</span><br><span class="line"> </span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Streaming-server-and-client"><a href="#Streaming-server-and-client" class="headerlink" title="Streaming server and client"></a>Streaming server and client</h2><p>jsonrpc4j 主要是通过流服务器和客户端来处理应用(不仅仅是HTTP)的请求,而<code>JsonRpcClient</code>和<code>JsonRpcServer</code>有一些简单的方法来获得输入和输出流,且在库中附带着一个JsonRpcHttpClient,用来扩展JsonRpcClient对于HTTP的支持</p>
-<h2 id="Without-the-Spring-Framework"><a href="#Without-the-Spring-Framework" class="headerlink" title="Without the Spring Framework"></a>Without the Spring Framework</h2><p>jsonrpc4j可以不使用spring框架,事实上二者均可运行于Android环境中</p>
-<h2 id="对测试的解释"><a href="#对测试的解释" class="headerlink" title="对测试的解释"></a>对测试的解释</h2><p>其实测试类就是一个客户端的简单使用<br>下面是一个客户端使用JSON-RPC服务的例子,具体如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JsonRpcHttpClient client = new JsonRpcHttpClient(</span><br><span class="line">    new URL(&quot;http://example.com/UserService.json&quot;));</span><br><span class="line"> </span><br><span class="line">User user = client.invoke(&quot;createUser&quot;, new Object[] &#123; &quot;bob&quot;, &quot;the builder&quot; &#125;, User.class);</span><br></pre></td></tr></table></figure></p>
-<p>或者使用ProxyUtil类结合接口,来创建一个动态的代理,如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">JsonRpcHttpClient client = new JsonRpcHttpClient(</span><br><span class="line">    new URL(&quot;http://example.com/UserService.json&quot;));</span><br><span class="line"> </span><br><span class="line">UserService userService = ProxyUtil.createClientProxy(</span><br><span class="line">    getClass().getClassLoader(),</span><br><span class="line">    UserService.class,</span><br><span class="line">    client);</span><br><span class="line"> </span><br><span class="line">User user = userService.createUser(&quot;bob&quot;, &quot;the builder&quot;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/briandilley/jsonrpc4j" target="_blank" rel="noopener">jsonrpc4j</a><br><a href="http://blog.csdn.net/hjcenry/article/details/52440925" target="_blank" rel="noopener">JSON-RPC（jsonrpc4j）使用demo</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2016/12/06/20161206QuickStartForJsonrpc4j/">http://littleji.com/2016/12/06/20161206QuickStartForJsonrpc4j/</a></p>
 
       
     </div>
@@ -754,7 +768,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-03/">2019-03</a><small>2</small></li>
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -840,6 +854,8 @@
   
     <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
   
+    <li><a href="/tags/Software-Engineering/">Software Engineering</a><small>1</small></li>
+  
     <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>2</small></li>
   
     <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
@@ -878,6 +894,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
         <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
       </li>
     
@@ -891,10 +911,6 @@
     
       <li>
         <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/25/20181225MLReview3/">七天算法梳理之决策树</a>
       </li>
     
   </ul>
@@ -948,5 +964,20 @@ var disqus_shortname = 'littleji';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

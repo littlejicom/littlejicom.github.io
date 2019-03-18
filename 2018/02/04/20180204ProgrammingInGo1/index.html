@@ -132,7 +132,6 @@
 <p>需要注意的是 默认使用int就足够,并且其速度是可以保证的<br>将小的整数转换为大整数总是安全的,但是如果向下转换会产生截断或者得到一个不可预期的值,如果想使用一个完美的精度,可以使用big.Rat或者big.Int类型,该类型只受限于机器的内存大小</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://book.douban.com/subject/24869910/" target="_blank" rel="noopener">Go语言程序设计</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/02/04/20180204ProgrammingInGo1/">http://littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
 
       
@@ -183,7 +182,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-03/">2019-03</a><small>2</small></li>
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -269,6 +268,8 @@
   
     <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
   
+    <li><a href="/tags/Software-Engineering/">Software Engineering</a><small>1</small></li>
+  
     <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>2</small></li>
   
     <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
@@ -307,6 +308,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
         <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
       </li>
     
@@ -320,10 +325,6 @@
     
       <li>
         <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/25/20181225MLReview3/">七天算法梳理之决策树</a>
       </li>
     
   </ul>
@@ -377,5 +378,20 @@ var disqus_shortname = 'littleji';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

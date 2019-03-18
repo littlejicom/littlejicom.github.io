@@ -78,6 +78,180 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2019-03-14T16:00:00.000Z"><a href="/2019/03/15/20190318HeadFirstForGitLab/">2019-03-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="GitLab-入门"><a href="#GitLab-入门" class="headerlink" title="GitLab 入门"></a>GitLab 入门</h1><h2 id="我不想再尴尬下去了"><a href="#我不想再尴尬下去了" class="headerlink" title="我不想再尴尬下去了"></a>我不想再尴尬下去了</h2><p>当你在照镜子时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt=""></p>
+<p>当你觉得在正常地开发用户的需求时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt=""></p>
+<p>当你作为一个萌新准备接手别人的代码时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt=""></p>
+<p>当你在准备跟用户进行展示你开发的产品时</p>
+<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt=""></p>
+<p>当你在咆哮这段恶心的代码是谁写的时候</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt=""></p>
+<p>当你准备跟甲方好好唠嗑的时候</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt=""></p>
+<h2 id="上面到底是什么问题？"><a href="#上面到底是什么问题？" class="headerlink" title="上面到底是什么问题？"></a>上面到底是什么问题？</h2><ol>
+<li>软件开发进度难以预测</li>
+<li>用户对产品功能难以满足</li>
+<li>软件产品质量无法保证</li>
+<li>软件产品难以维护</li>
+<li>软件缺少适当的文档资料</li>
+</ol>
+<p>归根结底是因为我们使用了一种小作坊式/游击队式地开发方式</p>
+<h2 id="从游击队转向正规军"><a href="#从游击队转向正规军" class="headerlink" title="从游击队转向正规军"></a>从游击队转向正规军</h2><p>以前在游击队里面人们在无数次的管理混乱导致项目搁浅（钱没了，什么都没做出来）的教训下，逐渐摸索出了一些“办事流程”，这些办事流程在实践中被证明效果还不错，被广泛采用，借以提高项目的成功率，以及<strong>降低掉头发的速率</strong>。</p>
+<p>技术思维得有，工程思维也少不了</p>
+<p>工程思维的起点是流程。流程的背后是科学，以既定的步骤、阶段性的输入/输出去完成价值创造，通过过程控制确保最终结果让人满意。</p>
+<h2 id="为什么使用GitLab搞这一套东西"><a href="#为什么使用GitLab搞这一套东西" class="headerlink" title="为什么使用GitLab搞这一套东西"></a>为什么使用GitLab搞这一套东西</h2><p>GitLab 本身是一个工具,是一个让大家达成共识的工具，帮助各位进行工程化地软件开发与管理，最终目的是<strong>拯救程序员们日益稀少的头发</strong>。</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt=""></p>
+<h2 id="GitLab中的组织结构"><a href="#GitLab中的组织结构" class="headerlink" title="GitLab中的组织结构"></a>GitLab中的组织结构</h2><p>主要使用group subgroup project的方式进行组织,一个典型的人员组织结构如下所示:</p>
+<ul>
+<li>Organization Group - GitLab<ul>
+<li>Category Subgroup - Marketing<ul>
+<li>(project) Design</li>
+<li>(project) General</li>
+</ul>
+</li>
+<li>Category Subgroup - Software<ul>
+<li>(project) GitLab CE</li>
+<li>(project) GitLab EE</li>
+<li>(project) Omnibus GitLab</li>
+<li>(project) GitLab Runner</li>
+<li>(project) GitLab Pages daemon</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>group的作用是让团队人员可以一次性授权并访问多个项目</p>
+<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt=""></p>
+<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt=""></p>
+<ul>
+<li>产品/用研user_research/UR</li>
+<li>用户体验user_experience/UE</li>
+<li>用户界面user_interface/UI</li>
+<li>开发develop/DEV</li>
+<li>质量quality_assurance/QA</li>
+<li>运维operation_maintenance/OP</li>
+<li>文档documentation/DOC</li>
+<li>开发经理pproject_manager/PM</li>
+</ul>
+<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt=""></p>
+<p>sprint:译作短跑,指一个迭代,一般包括几个功能和bug修复,开发周期为2-4周</p>
+<p>milestone:译作里程碑,为了便于大家进行回顾是否偏离的航道或者进度,一般为3个sprint,也就是之后的一个季度</p>
+<p>release:一般是一个产品的deadline</p>
+<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt=""></p>
+<ul>
+<li>IDEA： 每一个从点子开始的项目，通常来源于一次闲聊。在这个阶段，项目组内的所有人对需求提出自己的想法.</li>
+<li>ISSUE： 最有效的讨论一个点子的方法，就是为这个点子建立一个工单讨论。你的团队和你的合作伙伴可以在 工单追踪器issue tracker 中帮助你去提升这个点子</li>
+<li>PLAN： 一旦讨论得到一致的同意，就是开始编码的时候了。首先，我们需要优先考虑组织我们的工作流。对于此，我们可以使用 工单看板Issue Board。</li>
+<li>CODE： 现在，当一切准备就绪，我们可以开始写代码了。</li>
+<li>COMMIT： 当我们为我们的初步成果欢呼的时候，我们就可以在版本控制下，提交代码到功能分支了。</li>
+<li>TEST： 通过 GitLab CI，我们可以运行脚本来构建和测试我们的应用。</li>
+<li>REVIEW： 一旦脚本成功运行，我们测试和构建成功，我们就可以进行 代码复审code review 以及批准。</li>
+<li>STAGING：： 现在是时候将我们的代码部署到演示环境来检查一下，看看是否一切就像我们预估的那样顺畅——或者我们可能仍然需要修改。</li>
+<li>PRODUCTION： 当一切都如预期，就是部署到生产环境的时候了！</li>
+<li>FEEDBACK： 现在是时候返回去看我们项目中需要提升的部分了。我们使用周期分析 Cycle Analytics来对当前项目中关键的部分进行的反馈。</li>
+</ul>
+<h2 id="为什么说要使用一个issue开始一切"><a href="#为什么说要使用一个issue开始一切" class="headerlink" title="为什么说要使用一个issue开始一切"></a>为什么说要使用一个issue开始一切</h2><ul>
+<li>在issue中,通过规范化的模板,项目中的任何人可以知道这个需求或者bug的任何详细信息和讨论以及历史</li>
+<li>通过issue中的文档信息,开发者与项目经理可以进行实时交流某一个feature的最新设计思路,这个可以作为一份实时的共享编辑文档</li>
+<li>使用issue的label功能可以实现工作流\时间估计等较复杂的功能</li>
+</ul>
+<h3 id="issue本身需要包含哪些东西"><a href="#issue本身需要包含哪些东西" class="headerlink" title="issue本身需要包含哪些东西"></a>issue本身需要包含哪些东西</h3><p>一个 feature类型 issue基本上长成这个样子</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line">&lt;!--- 说明该变更主要完成了什么事情 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line">&lt;!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line">&lt;!--- 为需要变更的模块列表 --&gt;</span><br><span class="line">&lt;!--- 别忘了前面的# --&gt;</span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line">&lt;!--- 请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line">&lt;!--- 说明如何进行修改的 --&gt;</span><br><span class="line">&lt;!--- 功能列表可以作为子任务列表 --&gt;</span><br><span class="line">&lt;!--- 如果完成了指定的功能,请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line">&lt;!--- 包括测试环境，如何运行测试 --&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="issue的type"><a href="#issue的type" class="headerlink" title="issue的type"></a>issue的type</h3><ul>
+<li>feature:开发功能点</li>
+<li>bug: 软件缺陷</li>
+<li>tech debt:不改变功能的情况下增强产品性能</li>
+<li>ux debt:用户体验需要提升</li>
+</ul>
+<h3 id="对issues进行plan"><a href="#对issues进行plan" class="headerlink" title="对issues进行plan"></a>对issues进行plan</h3><p>plan说是计划，实则是沟通</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt=""></p>
+<ul>
+<li>process-needs confirmed</li>
+<li>process-reject(拒绝)</li>
+<li>process-doing</li>
+</ul>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>优先级的意义是便于在同时处理大量需求的时候有一个计划。</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt=""></p>
+<ul>
+<li>P1 特高级 目前的sprint搞定</li>
+<li>P2 高级 下个sprint搞定</li>
+<li>P3 中级 目前的里程碑再搞定</li>
+<li>P4 低级 下个里程碑再搞定</li>
+</ul>
+<h3 id="严重性"><a href="#严重性" class="headerlink" title="严重性"></a>严重性</h3><ul>
+<li>S1 完蛋 系统崩溃/数据丢失/数据泄漏/coredump 没有数据可用性</li>
+<li>S2 严重 无法在前台查询数据,但是数据库完整 部分数据可用性丢失</li>
+<li>S3 中级 前台显示错位 数据无丢失可用性受损</li>
+<li>S4 初级 前台颜色显示错误 数据无丢失 可用性也无受损</li>
+</ul>
+<h2 id="issue-board，工作看板"><a href="#issue-board，工作看板" class="headerlink" title="issue board，工作看板"></a>issue board，工作看板</h2><p>我们做了这么多准备，都是为了这个，让整个项目组成员清晰的了解到，目前的计划与进度，加快信息的传递</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt=""></p>
+<p>正儿八经的issue应该有三个标签、责任人、截止时间：</p>
+<ul>
+<li>process-*</li>
+<li>优先级</li>
+<li>团队，以团队为基础建立起来的看板可以通过拖拽自动加上团队标签</li>
+</ul>
+<h2 id="FQA"><a href="#FQA" class="headerlink" title="FQA"></a>FQA</h2><ul>
+<li><p>问：能不能想svn那样单独的文件夹设置权限？</p>
+<ul>
+<li>答：不可以,同一个repo的每个文件夹的权限是一致,如果想根据人来设置请使用两个repo</li>
+</ul>
+</li>
+<li><p>问：分支权限可以做什么？</p>
+<ul>
+<li>答：只允许部分人进行merge、只允许部分人进行push。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="">程序员的那些事儿</a></p>
+<p><a href="https://zh.wikipedia.org/zh/%E5%A5%B6%E5%A4%B4%E4%B9%90" target="_blank" rel="noopener">奶头乐维基百科</a></p>
+<p><a href="https://www.cnhzz.com/gitlab-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A6%82%E8%A7%88/" target="_blank" rel="noopener">GitLab工作流概览</a></p>
+<p><a href="https://about.gitlab.com/2016/10/25/gitlab-workflow-an-overview/#gitlab-workflow-use-case-scenario" target="_blank" rel="noopener">GitLab Workflow: An Overview</a></p>
+<p><a href="https://about.gitlab.com/2016/03/03/start-with-an-issue/" target="_blank" rel="noopener">Always start with an issue </a></p>
+<p><a href="https://pm.stackexchange.com/questions/22510/scrum-sprint-vs-milestone-vs-release" target="_blank" rel="noopener">scrum-sprint-vs-milestone-vs-release</a></p>
+<p><a href="https://www.cnblogs.com/baiyanhuang/archive/2010/11/29/1890728.html" target="_blank" rel="noopener">我们是怎么scrum</a></p>
+<p><a href="https://medium.com/@shaky.girl/%E5%88%A5%E5%86%8D%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85-%E7%A9%B6%E7%AB%9Fpm-ux-ui-web-designer-front-end-developer%E7%9A%84%E5%B0%88%E6%A5%AD%E5%B7%AE%E5%9C%A8%E5%93%AA-b8206dd49d32" target="_blank" rel="noopener">別再傻傻分不清，究竟PM, UX, UI, Web designer, Front-End Developer的專業差在哪？</a></p>
+<hr>
+<p>本文链接为：<a href="http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/">http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2019-03-04T16:00:00.000Z"><a href="/2019/03/05/20190305DataWhaleNLPTask2/">2019-03-05</a></time>
       
       
@@ -125,7 +299,6 @@
 <p>一个bow与ngram的python例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"></span><br><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line">from collections import deque</span><br><span class="line">from itertools import islice</span><br><span class="line">from itertools import tee</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    from itertools import izip as zip</span><br><span class="line">except ImportError:</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">def ngram(iterable, n=2):</span><br><span class="line">    &quot;&quot;&quot;s -&gt; (s0,s1), (s1,s2), (s2, s3), ...&quot;&quot;&quot;</span><br><span class="line">    assert n &gt; 0, &apos;Cannot create negative n-grams.&apos;</span><br><span class="line">    l = tee(iterable, n)</span><br><span class="line">    for i, s in enumerate(l):</span><br><span class="line">        for _ in range(i):</span><br><span class="line">            next(s, None)</span><br><span class="line">    return zip(*l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ngram_generator(words, n=2):</span><br><span class="line">    &quot;s -&gt; (s0,s1), (s1,s2), (s2, s3), ...&quot;</span><br><span class="line">    assert n &gt; 0, &quot;n is not in (0,inf)&quot;</span><br><span class="line">    for i in range(len(words)-n+1):</span><br><span class="line">        yield tuple(words[i:i+n])</span><br><span class="line"></span><br><span class="line">def cbow(iterable, window=1):</span><br><span class="line">    &quot;s -&gt; ((s0,s2), s1), ((s1,s3), s2), ((s2, s4), s3), ...&quot;</span><br><span class="line">    context = [consume(s, i) for i, s in enumerate(tee(iterable, 2*window+1))]</span><br><span class="line">    target = context[window]</span><br><span class="line">    del context[window]</span><br><span class="line">    return zip(zip(*context), target)</span><br></pre></td></tr></table></figure></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.lis.ac.cn/CN/article/downloadArticleFile.do?attachType=PDF&amp;id=11361" target="_blank" rel="noopener">奉国和, 郑伟. 国内中文自动分词技术研究综述. 图书情报工作, 2011, 54(02): 41-45.</a><br><a href="">自然语言处理综述</a><br><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴分词</a><br><a href="http://www.cnblogs.com/xlturing/p/8467021.html" target="_blank" rel="noopener">谈分词算法（2）基于词典的分词方法</a><br><a href="https://zhuanlan.zhihu.com/p/33261835" target="_blank" rel="noopener">中文分词算法简介</a><br><a href="https://blog.csdn.net/u010213393/article/details/40987945" target="_blank" rel="noopener">BoW（词袋）模型详细介绍</a><br><a href="https://ilewseu.github.io/2018/06/16/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/" target="_blank" rel="noopener">自然语言处理基础-中文分词</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/05/20190305DataWhaleNLPTask2/">http://littleji.com/2019/03/05/20190305DataWhaleNLPTask2/</a></p>
 
       
@@ -183,7 +356,6 @@ FPR=FP/(FP+TN)</script></li>
 </ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://tensorflow.google.cn/tutorials/keras/basic_text_classification" target="_blank" rel="noopener">使用keras进行文本分类</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/">http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/</a></p>
 
       
@@ -285,7 +457,6 @@ FPR=FP/(FP+TN)</script></li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zhuanlan.zhihu.com/p/29297794" target="_blank" rel="noopener">程序员如何做好交接</a><br><a href="http://www.kuqin.com/projectmanage/20110824/263959.html" target="_blank" rel="noopener">项目交接小总结</a><br><a href="https://blog.csdn.net/shehun1/article/details/7788875" target="_blank" rel="noopener">文档交接说明书</a><br><a href="https://www.jianshu.com/p/00490a9ae109" target="_blank" rel="noopener">前端项目交接文档</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/02/19/20190219HandoverMemoList/">http://littleji.com/2019/02/19/20190219HandoverMemoList/</a></p>
 
       
@@ -377,7 +548,6 @@ FPR=FP/(FP+TN)</script></li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/cheny_com/article/details/5528892" target="_blank" rel="noopener">无烟会议室：CMMI vs. Scrum vs. XP（QCon 2010 感受</a><br><a href="https://waylau.com/why-we-need-continuous-integration/" target="_blank" rel="noopener">为什么我们迫切需要持续集成</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/">http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/</a></p>
 
       
@@ -476,7 +646,6 @@ Gini(D,A=a)=\frac{|D_{1}|}{|D|}Gini(D_{1})+\frac{|D_{2}|}{|D|}Gini(D_{2})</scrip
 <p>主要的函数为</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="">统计自然语言处理-宗成庆</a><br><a href="">机器学习-周志华</a><br><a href="">统计学习方法-李航</a><br><a href="https://blog.csdn.net/weixin_36586536/article/details/80468426" target="_blank" rel="noopener">决策树(分类树、回归树</a><br><a href="https://pythonprogramminglanguage.com/decision-tree-visual-example/" target="_blank" rel="noopener">Decision tree visual example</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/25/20181225MLReview3/">http://littleji.com/2018/12/25/20181225MLReview3/</a></p>
 
       
@@ -531,7 +700,6 @@ y=\frac{1}{1+e^{-(w^{T}x+b)}}</script><h1 id="逻辑回归的原理"><a href="#�
 </li>
 </ol>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/22/20181222MLReview2/">http://littleji.com/2018/12/22/20181222MLReview2/</a></p>
 
       
@@ -629,7 +797,6 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <p>除了上面的模型还有包括 lasso ridge等回归模型在<code>linear_model</code>包内</p>
 <h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;qid=1545063695&amp;sr=8-1&amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&amp;pd_rd_i=B007TSFMTA&amp;pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&amp;pd_rd_w=PIcAR&amp;pd_rd_wg=9xBdB&amp;pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&amp;pf_rd_r=WPZZ4JN9QDGJN49CCH7G&amp;psc=1&amp;refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/18/20181218MLReview1/">http://littleji.com/2018/12/18/20181218MLReview1/</a></p>
 
       
@@ -777,7 +944,6 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 </ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.zhihu.com/question/20446337" target="_blank" rel="noopener">知乎:机器学习“判定模型”和“生成模型”有什么区别？</a><br><a href="https://en.wikipedia.org/wiki/Generative_model" target="_blank" rel="noopener">Generative model</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/11/27/20181127GenerativeVSDiscriminative/">http://littleji.com/2018/11/27/20181127GenerativeVSDiscriminative/</a></p>
 
       
@@ -912,90 +1078,7 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 输入</span><br><span class="line">依然是上文中使用的例子</span><br><span class="line"></span><br><span class="line"># Logstash 配置文件如下</span><br><span class="line">filter &#123;</span><br><span class="line">  grok &#123;</span><br><span class="line">    pattern_definitions =&gt; &#123;</span><br><span class="line">      &quot;ID&quot; =&gt; &quot;\d+(?=,)&quot;</span><br><span class="line">      &quot;DEVICE&quot; =&gt; &quot;[a-zA-Z]+(?=,)&quot;</span><br><span class="line">      &quot;MESSAGE_BODY&quot; =&gt; &quot;.+(?=,2)&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    #patterns_dir =&gt; [&quot;/root/custom-patterns.txt&quot;]</span><br><span class="line">    match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;ID:id&#125;,%&#123;DEVICE:device&#125;,%&#123;MESSAGE_BODY:message&#125;,%&#123;TIMESTAMP_ISO8601:timestamp&#125;&quot; &#125;</span><br><span class="line">    overwrite =&gt; [&quot;message&quot;]</span><br><span class="line">    add_tag =&gt; [ &quot;test_%&#123;id&#125;&quot;]</span><br><span class="line">    add_field =&gt; &#123;</span><br><span class="line">      &quot;test_%&#123;timestamp&#125;&quot; =&gt; &quot;test&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    remove_field =&gt; [&quot;device&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 结果如下</span><br><span class="line">&quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">&quot;timestamp&quot;: &quot;2016-05-23T13:46:57Z&quot;,</span><br><span class="line">&quot;id&quot;: &quot;734742416494845952&quot;,</span><br><span class="line">&quot;tags&quot;: [</span><br><span class="line">&quot;test_734742416494845952&quot;</span><br><span class="line">],</span><br><span class="line">&quot;@version&quot;: &quot;1&quot;,</span><br><span class="line">&quot;@timestamp&quot;: &quot;2018-10-21T01:47:31.552Z&quot;,</span><br><span class="line">&quot;message&quot;: &quot;In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!&quot;,</span><br><span class="line">&quot;path&quot;: &quot;/root/trump-test.csv&quot;,</span><br><span class="line">&quot;test_2016-05-23T13:46:57Z&quot;: &quot;test&quot;</span><br></pre></td></tr></table></figure>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html" target="_blank" rel="noopener">grok manual</a></p>
 <hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/10/25/20181025LogstashGrokOverview/">http://littleji.com/2018/10/25/20181025LogstashGrokOverview/</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-    
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-10-21T16:00:00.000Z"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">2018-10-22</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">概率图模型之一</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概率图概述"><a href="#概率图概述" class="headerlink" title="概率图概述"></a>概率图概述</h1><p>概率图模型使用图的方法来表示概率分布，在该模型中，结点表示变量，节点之间的边表示变量之间的概略关系。</p>
-<p>根据图模型中的边是否有向，将概率图的代表模型如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/47288361-5f420c00-d628-11e8-9ad1-555e47176c16.png" alt="image"></p>
-<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A-&gt;B-&gt;C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
-<p>各个图模型的演变关系如下：</p>
-<p><img src="https://user-images.githubusercontent.com/7655877/47288381-7a148080-d628-11e8-836a-fbe66c555d01.png" alt="image"></p>
-<p>其中横向，由点到线（序列结构），最终到面。<br>纵向则是在一定的条件下生成式模型转换为判别式模型。<br>下面假设有观测序列x，状态序列y，并依次来说明生成式与判别式模型的区别。</p>
-<h2 id="生成式模型"><a href="#生成式模型" class="headerlink" title="生成式模型"></a>生成式模型</h2><p>生成式模型的定义是：“状态（输出）序列y按照一定的规律生成观测（输入）序列x”。生成式模型的本质是对于联合概率分布p(x,y)进行建模，并根据生成概率最大的生成序列来获取y。</p>
-<p>这类模型中，一般有严格的独立性假设，模型变量之间的关系清楚，处理单类问题时较为灵活。</p>
-<p>弱点是模型的推导与学习较为复杂。</p>
-<p>主要的模型有：n-gram，HMM、朴素贝叶斯、概率上下文无关文法。</p>
-<h2 id="判别式模型"><a href="#判别式模型" class="headerlink" title="判别式模型"></a>判别式模型</h2><p>判别式模型的定义是：“状态（输出）序列y是由观测序列（输入）所决定的。”判别式模型的本质是对后验概率p（y|x）进行建模，优点是处理多累问题或分辨某一类与其他类差异时更为灵活，模型构造简单。</p>
-<p>缺点是模型的描述能力有限，变量之间的关系不清楚。大多数模型都是有监督学习，不能很好地扩展为无监督学习。</p>
-<p>主要模型有：最大熵模型、最大熵马尔科夫模型、支持向量机、条件随机场、感知机。</p>
-<h1 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h1><p>贝叶斯网络也称为belief networks，是一种基于概率推理的数学模型，理论基础为贝叶斯公式。</p>
-<p>贝叶斯网络形式上是一个有向无环图（DAG directed acyclic graph），结点表示随机变量，结点之间的边表示条件依存关系，箭头出发的节点为父节点，箭头到达的节点为子节点，子节点依存于父节点。</p>
-<p>如果两个节点没有连接关系，表示两个随机变量能够在某些特定情况下条件独立。</p>
-<h2 id="构造贝叶斯网络"><a href="#构造贝叶斯网络" class="headerlink" title="构造贝叶斯网络"></a>构造贝叶斯网络</h2><p>构造贝叶斯网络是一个复杂的任务，其主要有三个方面的问题：表示、推断、学习</p>
-<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p>在简单某一随机变量的组合上<br><img src="https://user-images.githubusercontent.com/7655877/47356431-a4cd0a80-d6f6-11e8-9304-e72390800815.png" alt="image"><br>即便是随机变量只有两个取值，那么联合概率分布P需要对 2^n 种不同取值下的概率情况进行说明，然而这件事的计算代价非常高。</p>
-<h3 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h3><p>由于贝叶斯网络是变量以及关系的完整模型，那么在观测到某些变量变化的时候就需要使用一些推断方法，来得知另一些变量子集的变化。<br>概率推理：在已知某些证据的情况下，计算变量的后验分布的过程。<br>常用的精确推理方法有两种</p>
-<ul>
-<li>变量消除法 variable elimination</li>
-<li>团树法 clique tree</li>
-</ul>
-<p>常用的近似推理</p>
-<ul>
-<li>重要性抽样 importance sampling</li>
-<li>随机马尔科夫链蒙特卡洛模拟法 Markov chain Monte Carlo，MCMC</li>
-<li>循环信念传播法 loopy belief propagation</li>
-<li>泛化信念传播法 generalized belief propagation</li>
-</ul>
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>参数学习的目的就是得知各个变量结点之间相互依存的强度。<br>比如给定某个节点X，需要计算 P(X|父节点1，父节点2…)，这些概率分布可以是任意形式，通常是离散分布与高斯分布。</p>
-<p>常用的参数学习方法包括：</p>
-<ul>
-<li>最大似然估计 MLE</li>
-<li>最大后验概率 MAP</li>
-<li>期望最大 EM</li>
-<li>贝叶斯估计方法，贝叶斯图模型中，使用较多的是该种方法</li>
-</ul>
-<p>除了参数学习，还需要结构学习来学习各个变量之间的图关系，简单的贝叶斯可以由有经验的专家来构造，但一般情况下人工构造一个贝叶斯网络的结构几乎不可能，所以自动结构学习是一项颇具挑战的任务。</p>
-<h2 id="MLE-MAP-贝叶斯估计之间的关系"><a href="#MLE-MAP-贝叶斯估计之间的关系" class="headerlink" title="MLE MAP 贝叶斯估计之间的关系"></a>MLE MAP 贝叶斯估计之间的关系</h2><p>其中，最大似然估计（MLE）是频率派的代表，贝叶斯估计（Bayes）是贝叶斯派的代表，最大后验估计是频率派和贝叶斯派的合成，是一种规则化后的最大似然估计。</p>
-<p>一般来说，在我们对于先验概率一无所知时，只能假设每种猜测的先验概率是均等的（其实这也是人类经验的结果），这个时候就只有用最大似然了，但不能忘记一个重要的前提是所有的采样都是独立同分布。</p>
-<p>如果我们有足够的自信，训练集中的样本分布的确很接近真实的情况，这时就应该用贝叶斯方法。贝叶斯学派强调的是“靠谱的先验概率”。所以说贝叶斯学派的适用范围更广，关键要先验概率靠谱，而频率学派有效的前提也是他们的先验概率同样是经验统计的结果。但也说明了贝叶斯计算要更为复杂，因为需要选择一个常用分布，并确定一个初始参数集作为先验分布。</p>
-<p>再者，MAP与MLE最大区别是MAP中加入了模型参数本身的概率分布，即是否考虑了先验知识。或者说。MLE中认为模型参数本身的概率的是均匀的，即该概率为一个固定值。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>统计自然语言处理（第2版）<br><a href="https://blog.csdn.net/Mr_tyting/article/details/62882162?utm_source=blogxgwz1" target="_blank" rel="noopener">1</a><br><a href="https://blog.csdn.net/juanjuan1314/article/details/78189527" target="_blank" rel="noopener">2</a><br><a href="https://zhuanlan.zhihu.com/p/32568242" target="_blank" rel="noopener">3</a><br><a href="https://zhuanlan.zhihu.com/p/32616870" target="_blank" rel="noopener">4</a><br><a href="https://blog.csdn.net/guohecang/article/details/52313046" target="_blank" rel="noopener">5</a></p>
-<hr>
-<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
-<p>本文链接为：<a href="http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
 
       
     </div>
@@ -1034,7 +1117,7 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/2019-03/">2019-03</a><small>2</small></li>
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
   
     <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
   
@@ -1120,6 +1203,8 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
   
     <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
   
+    <li><a href="/tags/Software-Engineering/">Software Engineering</a><small>1</small></li>
+  
     <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>2</small></li>
   
     <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
@@ -1158,6 +1243,10 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
   <ul class="entry">
     
       <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
         <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
       </li>
     
@@ -1171,10 +1260,6 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
     
       <li>
         <a href="/2019/02/12/20190212OptimizeTheDevelopmentProcess/">用gitlab来优化我们的软件开发流程</a>
-      </li>
-    
-      <li>
-        <a href="/2018/12/25/20181225MLReview3/">七天算法梳理之决策树</a>
       </li>
     
   </ul>
@@ -1228,5 +1313,20 @@ var disqus_shortname = 'littleji';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
