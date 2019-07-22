@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>Gitlab 入门与 工作流 | littleji</title>
@@ -90,17 +90,17 @@
     <div class="entry">
       
         <h1 id="GitLab-入门"><a href="#GitLab-入门" class="headerlink" title="GitLab 入门"></a>GitLab 入门</h1><h2 id="我不想再尴尬下去了"><a href="#我不想再尴尬下去了" class="headerlink" title="我不想再尴尬下去了"></a>我不想再尴尬下去了</h2><p>当你在照镜子时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt></p>
 <p>当你觉得在正常地开发用户的需求时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt></p>
 <p>当你作为一个萌新准备接手别人的代码时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt></p>
 <p>当你在准备跟用户进行展示你开发的产品时</p>
-<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt=""></p>
+<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt></p>
 <p>当你在咆哮这段恶心的代码是谁写的时候</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt></p>
 <p>当你准备跟甲方好好唠嗑的时候</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt></p>
 <h2 id="上面到底是什么问题？"><a href="#上面到底是什么问题？" class="headerlink" title="上面到底是什么问题？"></a>上面到底是什么问题？</h2><ol>
 <li>软件开发进度难以预测</li>
 <li>用户对产品功能难以满足</li>
@@ -113,7 +113,7 @@
 <p>技术思维得有，工程思维也少不了</p>
 <p>工程思维的起点是流程。流程的背后是科学，以既定的步骤、阶段性的输入/输出去完成价值创造，通过过程控制确保最终结果让人满意。</p>
 <h2 id="为什么使用GitLab搞这一套东西"><a href="#为什么使用GitLab搞这一套东西" class="headerlink" title="为什么使用GitLab搞这一套东西"></a>为什么使用GitLab搞这一套东西</h2><p>GitLab 本身是一个工具,是一个让大家达成共识的工具，帮助各位进行工程化地软件开发与管理，最终目的是<strong>拯救程序员们日益稀少的头发</strong>。</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt></p>
 <h2 id="GitLab中的组织结构"><a href="#GitLab中的组织结构" class="headerlink" title="GitLab中的组织结构"></a>GitLab中的组织结构</h2><p>主要使用group subgroup project的方式进行组织,一个典型的人员组织结构如下所示:</p>
 <ul>
 <li>Organization Group - GitLab<ul>
@@ -134,8 +134,8 @@
 </li>
 </ul>
 <p>group的作用是让团队人员可以一次性授权并访问多个项目</p>
-<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt=""></p>
-<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt=""></p>
+<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt></p>
+<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt></p>
 <ul>
 <li>产品/用研user_research/UR</li>
 <li>用户体验user_experience/UE</li>
@@ -146,11 +146,11 @@
 <li>文档documentation/DOC</li>
 <li>开发经理pproject_manager/PM</li>
 </ul>
-<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt=""></p>
+<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt></p>
 <p>sprint:译作短跑,指一个迭代,一般包括几个功能和bug修复,开发周期为2-4周</p>
 <p>milestone:译作里程碑,为了便于大家进行回顾是否偏离的航道或者进度,一般为3个sprint,也就是之后的一个季度</p>
 <p>release:一般是一个产品的deadline</p>
-<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt=""></p>
+<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt></p>
 <ul>
 <li>IDEA： 每一个从点子开始的项目，通常来源于一次闲聊。在这个阶段，项目组内的所有人对需求提出自己的想法.</li>
 <li>ISSUE： 最有效的讨论一个点子的方法，就是为这个点子建立一个工单讨论。你的团队和你的合作伙伴可以在 工单追踪器issue tracker 中帮助你去提升这个点子</li>
@@ -169,7 +169,7 @@
 <li>使用issue的label功能可以实现工作流\时间估计等较复杂的功能</li>
 </ul>
 <h3 id="issue本身需要包含哪些东西"><a href="#issue本身需要包含哪些东西" class="headerlink" title="issue本身需要包含哪些东西"></a>issue本身需要包含哪些东西</h3><p>一个 feature类型 issue基本上长成这个样子</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line">&lt;!--- 说明该变更主要完成了什么事情 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line">&lt;!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line">&lt;!--- 为需要变更的模块列表 --&gt;</span><br><span class="line">&lt;!--- 别忘了前面的# --&gt;</span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line">&lt;!--- 请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line">&lt;!--- 说明如何进行修改的 --&gt;</span><br><span class="line">&lt;!--- 功能列表可以作为子任务列表 --&gt;</span><br><span class="line">&lt;!--- 如果完成了指定的功能,请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line">&lt;!--- 包括测试环境，如何运行测试 --&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line"><!--- 说明该变更主要完成了什么事情 --></span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line"><!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --></span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line"><!--- 为需要变更的模块列表 --></span><br><span class="line"><!--- 别忘了前面的# --></span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line"><!--- 请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line"><!--- 说明如何进行修改的 --></span><br><span class="line"><!--- 功能列表可以作为子任务列表 --></span><br><span class="line"><!--- 如果完成了指定的功能,请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line"><!--- 包括测试环境，如何运行测试 --></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="issue的type"><a href="#issue的type" class="headerlink" title="issue的type"></a>issue的type</h3><ul>
 <li>feature:开发功能点</li>
 <li>bug: 软件缺陷</li>
@@ -177,15 +177,15 @@
 <li>ux debt:用户体验需要提升</li>
 </ul>
 <h3 id="对issues进行plan"><a href="#对issues进行plan" class="headerlink" title="对issues进行plan"></a>对issues进行plan</h3><p>plan说是计划，实则是沟通</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt=""></p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt></p>
 <ul>
 <li>process-needs confirmed</li>
 <li>process-reject(拒绝)</li>
 <li>process-doing</li>
 </ul>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>优先级的意义是便于在同时处理大量需求的时候有一个计划。</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt></p>
 <ul>
 <li>P1 特高级 目前的sprint搞定</li>
 <li>P2 高级 下个sprint搞定</li>
@@ -199,7 +199,7 @@
 <li>S4 初级 前台颜色显示错误 数据无丢失 可用性也无受损</li>
 </ul>
 <h2 id="issue-board，工作看板"><a href="#issue-board，工作看板" class="headerlink" title="issue board，工作看板"></a>issue board，工作看板</h2><p>我们做了这么多准备，都是为了这个，让整个项目组成员清晰的了解到，目前的计划与进度，加快信息的传递</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt></p>
 <p>正儿八经的issue应该有三个标签、责任人、截止时间：</p>
 <ul>
 <li>process-*</li>
@@ -218,7 +218,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="">程序员的那些事儿</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href>程序员的那些事儿</a></p>
 <p><a href="https://zh.wikipedia.org/zh/%E5%A5%B6%E5%A4%B4%E4%B9%90" target="_blank" rel="noopener">奶头乐维基百科</a></p>
 <p><a href="https://www.cnhzz.com/gitlab-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A6%82%E8%A7%88/" target="_blank" rel="noopener">GitLab工作流概览</a></p>
 <p><a href="https://about.gitlab.com/2016/10/25/gitlab-workflow-an-overview/#gitlab-workflow-use-case-scenario" target="_blank" rel="noopener">GitLab Workflow: An Overview</a></p>
@@ -229,7 +229,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/">http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

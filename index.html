@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>littleji</title>
@@ -91,7 +91,7 @@
     <div class="entry">
       
         <h2 id="NLP流水线总览"><a href="#NLP流水线总览" class="headerlink" title="NLP流水线总览"></a>NLP流水线总览</h2><p>NLP处理套路无非以下该图中描述</p>
-<p><img src="https://stanfordnlp.github.io/CoreNLP/images/AnnotationPipeline.png" alt=""></p>
+<p><img src="https://stanfordnlp.github.io/CoreNLP/images/AnnotationPipeline.png" alt></p>
 <p>该文的重点则对所有该流水线之前的任务进行补充</p>
 <h2 id="数据本身处理"><a href="#数据本身处理" class="headerlink" title="数据本身处理"></a>数据本身处理</h2><ul>
 <li>简繁体转换或其他同义转换(中文)</li>
@@ -110,13 +110,13 @@
 <li>错词纠正(将词替换为词典中最近的词或者<unk>)</unk></li>
 <li>单位替换(将文本中的单位替换为统一格式如：将4kgs、4kg统一替换为4 kg，将4k替换为4000，将100或100 100或100100或100替换为100 dollar)</li>
 <li>词形还原(lemmatization)</li>
-<li>其他语言进行翻译(比如对于中文中的英文单词归一化为<_e_>)</_e_></li>
-<li>数字归一化(比如将小于10的为&lt;如果在之后的实体识别中需要对应的原始数字则跳过该步骤.1:NUM&gt; 大于10<2:num>)</2:num></li>
+<li>其他语言进行翻译(比如对于中文中的英文单词归一化为<_e_>)<!--_e_--></li>
+<li>数字归一化(比如将小于10的为<如果在之后的实体识别中需要对应的原始数字则跳过该步骤.1:NUM> 大于10<2:num>)<!--2:num--></li>
 </ul>
 <h2 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h2><ul>
 <li>长句截断</li>
 <li>dropout</li>
-<li>shuffle<br><img src="https://pic3.zhimg.com/80/v2-d3aaee7f330d475a0643abd5199a1f16_hd.png" alt=""></li>
+<li>shuffle<br><img src="https://pic3.zhimg.com/80/v2-d3aaee7f330d475a0643abd5199a1f16_hd.png" alt></li>
 <li>文档裁减(这样我将获得更多的数据。开始的时候我尝试从文档中抽取几个句子并创建10个新文档。这些新创建的文档句子间没有逻辑关系，所以用它们训练得到的分类器性能很差。第二次，我尝试将每篇文章分成若干段，每段由文章中五个连续的句子组成。这个方法就运行得非常好，让分类器的性能提升很大)</li>
 <li>文本对齐</li>
 <li>同义词替换</li>
@@ -130,7 +130,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/">http://littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -166,17 +184,17 @@
     <div class="entry">
       
         <h1 id="GitLab-入门"><a href="#GitLab-入门" class="headerlink" title="GitLab 入门"></a>GitLab 入门</h1><h2 id="我不想再尴尬下去了"><a href="#我不想再尴尬下去了" class="headerlink" title="我不想再尴尬下去了"></a>我不想再尴尬下去了</h2><p>当你在照镜子时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt></p>
 <p>当你觉得在正常地开发用户的需求时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt></p>
 <p>当你作为一个萌新准备接手别人的代码时</p>
-<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt></p>
 <p>当你在准备跟用户进行展示你开发的产品时</p>
-<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt=""></p>
+<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt></p>
 <p>当你在咆哮这段恶心的代码是谁写的时候</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt></p>
 <p>当你准备跟甲方好好唠嗑的时候</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt></p>
 <h2 id="上面到底是什么问题？"><a href="#上面到底是什么问题？" class="headerlink" title="上面到底是什么问题？"></a>上面到底是什么问题？</h2><ol>
 <li>软件开发进度难以预测</li>
 <li>用户对产品功能难以满足</li>
@@ -189,7 +207,7 @@
 <p>技术思维得有，工程思维也少不了</p>
 <p>工程思维的起点是流程。流程的背后是科学，以既定的步骤、阶段性的输入/输出去完成价值创造，通过过程控制确保最终结果让人满意。</p>
 <h2 id="为什么使用GitLab搞这一套东西"><a href="#为什么使用GitLab搞这一套东西" class="headerlink" title="为什么使用GitLab搞这一套东西"></a>为什么使用GitLab搞这一套东西</h2><p>GitLab 本身是一个工具,是一个让大家达成共识的工具，帮助各位进行工程化地软件开发与管理，最终目的是<strong>拯救程序员们日益稀少的头发</strong>。</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt></p>
 <h2 id="GitLab中的组织结构"><a href="#GitLab中的组织结构" class="headerlink" title="GitLab中的组织结构"></a>GitLab中的组织结构</h2><p>主要使用group subgroup project的方式进行组织,一个典型的人员组织结构如下所示:</p>
 <ul>
 <li>Organization Group - GitLab<ul>
@@ -210,8 +228,8 @@
 </li>
 </ul>
 <p>group的作用是让团队人员可以一次性授权并访问多个项目</p>
-<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt=""></p>
-<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt=""></p>
+<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt></p>
+<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt></p>
 <ul>
 <li>产品/用研user_research/UR</li>
 <li>用户体验user_experience/UE</li>
@@ -222,11 +240,11 @@
 <li>文档documentation/DOC</li>
 <li>开发经理pproject_manager/PM</li>
 </ul>
-<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt=""></p>
+<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt></p>
 <p>sprint:译作短跑,指一个迭代,一般包括几个功能和bug修复,开发周期为2-4周</p>
 <p>milestone:译作里程碑,为了便于大家进行回顾是否偏离的航道或者进度,一般为3个sprint,也就是之后的一个季度</p>
 <p>release:一般是一个产品的deadline</p>
-<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt=""></p>
+<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt></p>
 <ul>
 <li>IDEA： 每一个从点子开始的项目，通常来源于一次闲聊。在这个阶段，项目组内的所有人对需求提出自己的想法.</li>
 <li>ISSUE： 最有效的讨论一个点子的方法，就是为这个点子建立一个工单讨论。你的团队和你的合作伙伴可以在 工单追踪器issue tracker 中帮助你去提升这个点子</li>
@@ -245,7 +263,7 @@
 <li>使用issue的label功能可以实现工作流\时间估计等较复杂的功能</li>
 </ul>
 <h3 id="issue本身需要包含哪些东西"><a href="#issue本身需要包含哪些东西" class="headerlink" title="issue本身需要包含哪些东西"></a>issue本身需要包含哪些东西</h3><p>一个 feature类型 issue基本上长成这个样子</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line">&lt;!--- 说明该变更主要完成了什么事情 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line">&lt;!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line">&lt;!--- 为需要变更的模块列表 --&gt;</span><br><span class="line">&lt;!--- 别忘了前面的# --&gt;</span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line">&lt;!--- 请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line">&lt;!--- 说明如何进行修改的 --&gt;</span><br><span class="line">&lt;!--- 功能列表可以作为子任务列表 --&gt;</span><br><span class="line">&lt;!--- 如果完成了指定的功能,请在指定的括号中填入'x'--&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line">&lt;!--- 说明如何进行添加的 --&gt;</span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line">&lt;!--- 包括测试环境，如何运行测试 --&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line"><!--- 说明该变更主要完成了什么事情 --></span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line"><!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --></span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line"><!--- 为需要变更的模块列表 --></span><br><span class="line"><!--- 别忘了前面的# --></span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line"><!--- 请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line"><!--- 说明如何进行修改的 --></span><br><span class="line"><!--- 功能列表可以作为子任务列表 --></span><br><span class="line"><!--- 如果完成了指定的功能,请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line"><!--- 包括测试环境，如何运行测试 --></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="issue的type"><a href="#issue的type" class="headerlink" title="issue的type"></a>issue的type</h3><ul>
 <li>feature:开发功能点</li>
 <li>bug: 软件缺陷</li>
@@ -253,15 +271,15 @@
 <li>ux debt:用户体验需要提升</li>
 </ul>
 <h3 id="对issues进行plan"><a href="#对issues进行plan" class="headerlink" title="对issues进行plan"></a>对issues进行plan</h3><p>plan说是计划，实则是沟通</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt=""></p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt></p>
 <ul>
 <li>process-needs confirmed</li>
 <li>process-reject(拒绝)</li>
 <li>process-doing</li>
 </ul>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>优先级的意义是便于在同时处理大量需求的时候有一个计划。</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt></p>
 <ul>
 <li>P1 特高级 目前的sprint搞定</li>
 <li>P2 高级 下个sprint搞定</li>
@@ -275,7 +293,7 @@
 <li>S4 初级 前台颜色显示错误 数据无丢失 可用性也无受损</li>
 </ul>
 <h2 id="issue-board，工作看板"><a href="#issue-board，工作看板" class="headerlink" title="issue board，工作看板"></a>issue board，工作看板</h2><p>我们做了这么多准备，都是为了这个，让整个项目组成员清晰的了解到，目前的计划与进度，加快信息的传递</p>
-<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt></p>
 <p>正儿八经的issue应该有三个标签、责任人、截止时间：</p>
 <ul>
 <li>process-*</li>
@@ -294,7 +312,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="">程序员的那些事儿</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href>程序员的那些事儿</a></p>
 <p><a href="https://zh.wikipedia.org/zh/%E5%A5%B6%E5%A4%B4%E4%B9%90" target="_blank" rel="noopener">奶头乐维基百科</a></p>
 <p><a href="https://www.cnhzz.com/gitlab-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A6%82%E8%A7%88/" target="_blank" rel="noopener">GitLab工作流概览</a></p>
 <p><a href="https://about.gitlab.com/2016/10/25/gitlab-workflow-an-overview/#gitlab-workflow-use-case-scenario" target="_blank" rel="noopener">GitLab Workflow: An Overview</a></p>
@@ -305,7 +323,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/">http://littleji.com/2019/03/15/20190318HeadFirstForGitLab/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -345,7 +381,7 @@
 <p>分词理论主要包含三个部分：分词算法、中文分词消歧、未登录词识别，而分词算法又包括词典分词、理解分词、统计分词、组合分词等几大类。下面的说明重点就是基于分词算法。</p>
 <h2 id="1-词典分词算法"><a href="#1-词典分词算法" class="headerlink" title="1 词典分词算法"></a>1 词典分词算法</h2><p>基于词典的分词核心要确定两个内容：分词的算法与词典的结构，其中主要使用的集中基于词典的方法有正向最大匹配、逆向最大匹配、双向最大匹配、最少切分等。</p>
 <h3 id="1-1-前向最大匹配算法、后向最大匹配、双向匹配、最小切分"><a href="#1-1-前向最大匹配算法、后向最大匹配、双向匹配、最小切分" class="headerlink" title="1.1 前向最大匹配算法、后向最大匹配、双向匹配、最小切分"></a>1.1 前向最大匹配算法、后向最大匹配、双向匹配、最小切分</h3><p>前向最大切词，是以可变滑动窗口对文本进行顺序取词，若改词在词典中存在，则进行一次切分；否则，缩小窗口大小，继续取词与词典库进行搜索，知道窗口词长为1。后向切词原理相似，只不过是从后面开始进行窗口滑动。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ustring = string_need_to_be_segmented</span><br><span class="line">while :</span><br><span class="line">if sentence_len &lt; word_max_len:</span><br><span class="line">    word_max_len = sentence_len</span><br><span class="line">for i in range(word_max_len, 0, -1):</span><br><span class="line">    if ustring[:i] in word_set or i == 1:</span><br><span class="line">        wordList.append(ustring[:i])</span><br><span class="line">        ustring = ustring[i:]</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        i -= 1</span><br><span class="line">return wordList</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ustring = string_need_to_be_segmented</span><br><span class="line">while :</span><br><span class="line">if sentence_len < word_max_len:</span><br><span class="line">    word_max_len = sentence_len</span><br><span class="line">for i in range(word_max_len, 0, -1):</span><br><span class="line">    if ustring[:i] in word_set or i == 1:</span><br><span class="line">        wordList.append(ustring[:i])</span><br><span class="line">        ustring = ustring[i:]</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        i -= 1</span><br><span class="line">return wordList</span><br></pre></td></tr></tbody></table></figure>
 <p>后向匹配与前向类似只不过方向从后往前进行匹配，双向匹配利用了前后两方面的信息,并从中选择词数最少的作为分词依据。</p>
 <p>最小切分方法使用这样一条原则即:”每一句中切出的词数最小”</p>
 <p>基于这种匹配的方法有这样的优点：</p>
@@ -371,15 +407,33 @@
 
     John also likes to watch football games.
 </code></pre><p>基于上述两个文档中出现的单词，构建如下一个词典 (dictionary)：</p>
-<pre><code>   {&quot;John&quot;: 1, &quot;likes&quot;: 2,&quot;to&quot;: 3, &quot;watch&quot;: 4, &quot;movies&quot;: 5,&quot;also&quot;: 6, &quot;football&quot;: 7, &quot;games&quot;: 8,&quot;Mary&quot;: 9, &quot;too&quot;: 10}
+<pre><code>   {"John": 1, "likes": 2,"to": 3, "watch": 4, "movies": 5,"also": 6, "football": 7, "games": 8,"Mary": 9, "too": 10}
 </code></pre><p>上面的词典中包含10个单词, 每个单词有唯一的索引, 那么每个文本我们可以使用一个10维的向量来表示。如下：<br>       [1, 2, 1, 1, 1, 0, 0, 0, 1, 1]<br>       [1, 1,1, 1, 0, 1, 1, 1, 0, 0]</p>
 <p>该向量与原来文本中单词出现的顺序没有关系，而是词典中每个单词在文本中出现的频率。</p>
-<p>一个bow与ngram的python例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"></span><br><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line">from collections import deque</span><br><span class="line">from itertools import islice</span><br><span class="line">from itertools import tee</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    from itertools import izip as zip</span><br><span class="line">except ImportError:</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">def ngram(iterable, n=2):</span><br><span class="line">    &quot;&quot;&quot;s -&gt; (s0,s1), (s1,s2), (s2, s3), ...&quot;&quot;&quot;</span><br><span class="line">    assert n &gt; 0, &apos;Cannot create negative n-grams.&apos;</span><br><span class="line">    l = tee(iterable, n)</span><br><span class="line">    for i, s in enumerate(l):</span><br><span class="line">        for _ in range(i):</span><br><span class="line">            next(s, None)</span><br><span class="line">    return zip(*l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ngram_generator(words, n=2):</span><br><span class="line">    &quot;s -&gt; (s0,s1), (s1,s2), (s2, s3), ...&quot;</span><br><span class="line">    assert n &gt; 0, &quot;n is not in (0,inf)&quot;</span><br><span class="line">    for i in range(len(words)-n+1):</span><br><span class="line">        yield tuple(words[i:i+n])</span><br><span class="line"></span><br><span class="line">def cbow(iterable, window=1):</span><br><span class="line">    &quot;s -&gt; ((s0,s2), s1), ((s1,s3), s2), ((s2, s4), s3), ...&quot;</span><br><span class="line">    context = [consume(s, i) for i, s in enumerate(tee(iterable, 2*window+1))]</span><br><span class="line">    target = context[window]</span><br><span class="line">    del context[window]</span><br><span class="line">    return zip(zip(*context), target)</span><br></pre></td></tr></table></figure></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.lis.ac.cn/CN/article/downloadArticleFile.do?attachType=PDF&amp;id=11361" target="_blank" rel="noopener">奉国和, 郑伟. 国内中文自动分词技术研究综述. 图书情报工作, 2011, 54(02): 41-45.</a><br><a href="">自然语言处理综述</a><br><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴分词</a><br><a href="http://www.cnblogs.com/xlturing/p/8467021.html" target="_blank" rel="noopener">谈分词算法（2）基于词典的分词方法</a><br><a href="https://zhuanlan.zhihu.com/p/33261835" target="_blank" rel="noopener">中文分词算法简介</a><br><a href="https://blog.csdn.net/u010213393/article/details/40987945" target="_blank" rel="noopener">BoW（词袋）模型详细介绍</a><br><a href="https://ilewseu.github.io/2018/06/16/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/" target="_blank" rel="noopener">自然语言处理基础-中文分词</a></p>
+<p>一个bow与ngram的python例子:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"></span><br><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line">from collections import deque</span><br><span class="line">from itertools import islice</span><br><span class="line">from itertools import tee</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    from itertools import izip as zip</span><br><span class="line">except ImportError:</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">def ngram(iterable, n=2):</span><br><span class="line">    """s -> (s0,s1), (s1,s2), (s2, s3), ..."""</span><br><span class="line">    assert n > 0, 'Cannot create negative n-grams.'</span><br><span class="line">    l = tee(iterable, n)</span><br><span class="line">    for i, s in enumerate(l):</span><br><span class="line">        for _ in range(i):</span><br><span class="line">            next(s, None)</span><br><span class="line">    return zip(*l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ngram_generator(words, n=2):</span><br><span class="line">    "s -> (s0,s1), (s1,s2), (s2, s3), ..."</span><br><span class="line">    assert n > 0, "n is not in (0,inf)"</span><br><span class="line">    for i in range(len(words)-n+1):</span><br><span class="line">        yield tuple(words[i:i+n])</span><br><span class="line"></span><br><span class="line">def cbow(iterable, window=1):</span><br><span class="line">    "s -> ((s0,s2), s1), ((s1,s3), s2), ((s2, s4), s3), ..."</span><br><span class="line">    context = [consume(s, i) for i, s in enumerate(tee(iterable, 2*window+1))]</span><br><span class="line">    target = context[window]</span><br><span class="line">    del context[window]</span><br><span class="line">    return zip(zip(*context), target)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.lis.ac.cn/CN/article/downloadArticleFile.do?attachType=PDF&id=11361" target="_blank" rel="noopener">奉国和, 郑伟. 国内中文自动分词技术研究综述. 图书情报工作, 2011, 54(02): 41-45.</a><br><a href>自然语言处理综述</a><br><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴分词</a><br><a href="http://www.cnblogs.com/xlturing/p/8467021.html" target="_blank" rel="noopener">谈分词算法（2）基于词典的分词方法</a><br><a href="https://zhuanlan.zhihu.com/p/33261835" target="_blank" rel="noopener">中文分词算法简介</a><br><a href="https://blog.csdn.net/u010213393/article/details/40987945" target="_blank" rel="noopener">BoW（词袋）模型详细介绍</a><br><a href="https://ilewseu.github.io/2018/06/16/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/" target="_blank" rel="noopener">自然语言处理基础-中文分词</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/05/20190305DataWhaleNLPTask2/">http://littleji.com/2019/03/05/20190305DataWhaleNLPTask2/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -414,18 +468,18 @@
     </header>
     <div class="entry">
       
-        <h2 id="windows下进行TensorFlow-GPU版本安装-不适用于CPU版本"><a href="#windows下进行TensorFlow-GPU版本安装-不适用于CPU版本" class="headerlink" title="windows下进行TensorFlow GPU版本安装(不适用于CPU版本)"></a>windows下进行TensorFlow GPU版本安装(不适用于CPU版本)</h2><p>基于各种原因，本次的实验环境在windows下进行。<br>其中本机的配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">硬件：</span><br><span class="line"> - CPU：Intel Xeon E3-1505M</span><br><span class="line"> - RAM：64GB</span><br><span class="line"> - GPU：NVIDIA Quadro M2000M</span><br><span class="line">软件：</span><br><span class="line"> - OS：Windows 10 专业工作站 1809 x64</span><br></pre></td></tr></table></figure></p>
-<p>正确的步骤如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 请务必保证安装的 `Python` 版本为 `3.6.X`, `TensorFlow` 对于 `3.7.X`还未支持完全</span><br><span class="line">2. 安装 Cuda 10.0, 目前不要使用Cuda 10.1的版本,因为还未支持</span><br><span class="line">3. 安装 cudnn for 10.0 </span><br><span class="line">4. 安装 tensorflow-gpu</span><br><span class="line">5. 添加对应的环境变量</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;%PATH%</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64;%PATH%</span><br><span class="line">SET PATH=C:\tools\cuda\bin;%PATH%</span><br><span class="line">6. 验证(在输入下面的代码并运行后,会出现3min的等待,目前原因不明)</span><br><span class="line">python -c &quot;import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))&quot;</span><br><span class="line">7. 结果</span><br><span class="line">2019-03-03 17:28:53.391788: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</span><br><span class="line">2019-03-03 17:28:53.569006: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties:</span><br><span class="line">name: Quadro M2000M major: 5 minor: 0 memoryClockRate(GHz): 1.137</span><br><span class="line">pciBusID: 0000:01:00.0</span><br><span class="line">totalMemory: 4.00GiB freeMemory: 3.34GiB</span><br><span class="line">2019-03-03 17:28:53.600653: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0</span><br><span class="line">2019-03-03 17:28:54.903988: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:</span><br><span class="line">2019-03-03 17:28:54.921578: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0</span><br><span class="line">2019-03-03 17:28:54.932974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0: N</span><br><span class="line">2019-03-03 17:28:54.946509: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3048 MB memory) -&gt; physical GPU (device: 0, name: Quadro M2000M, pci bus id: 0000:01:00.0, compute capability: 5.0)</span><br><span class="line">tf.Tensor(1187.2697, shape=(), dtype=float32)</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用-imdb数据集进行文本分类"><a href="#使用-imdb数据集进行文本分类" class="headerlink" title="使用 imdb数据集进行文本分类"></a>使用 imdb数据集进行文本分类</h2><p>首先使用下属的代码下载数据集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imdb = keras.datasets.imdb</span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)</span><br></pre></td></tr></table></figure></p>
-<p>下载完之后我们可以看到该数据集包含了25000条训练数据和25000条测试数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;Training entries: &#123;&#125;, labels: &#123;&#125;&quot;.format(len(train_data), len(test_data)))</span><br></pre></td></tr></table></figure></p>
-<p>我们查看某一条具体的imdb影评是什么样的格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(train_data[0])</span><br><span class="line">----</span><br><span class="line">[1, 14, 22, 16, 43, 530, 973, 1622, 1385, 65, 458, 4468, 66, 3941, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 4536, 1111, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2025, 19, 14, 22, 4, 1920, 4613, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 1247, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2223, 5244, 16, 480, 66, 3785, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 1415, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 5952, 15, 256, 4, 2, 7, 3766, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 1029, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2071, 56, 26, 141, 6, 194, 7486, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 5535, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 1334, 88, 12, 16, 283, 5, 16, 4472, 113, 103, 32, 15, 16, 5345, 19, 178, 32]</span><br></pre></td></tr></table></figure></p>
-<p>说明所有的影评根据词典已经转化为相应的数字,我们尝试将对应的数字转换为真实的词<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 构建一个词与数字的映射字典</span><br><span class="line">word_index = imdb.get_word_index()</span><br><span class="line"># 创建一个数字与词的映射字典</span><br><span class="line">word_index = &#123;k:(v+3) for k,v in word_index.items()&#125; </span><br><span class="line">word_index[&quot;&lt;PAD&gt;&quot;] = 0</span><br><span class="line">word_index[&quot;&lt;START&gt;&quot;] = 1</span><br><span class="line">word_index[&quot;&lt;UNK&gt;&quot;] = 2 # unknown</span><br><span class="line">word_index[&quot;&lt;UNUSED&gt;&quot;] = 3</span><br><span class="line"></span><br><span class="line">index_word = dict([(value, key) for (key, value) in word_index.items()])</span><br><span class="line"></span><br><span class="line">def decode_review(text):</span><br><span class="line">    return &apos; &apos;.join([index_word.get(i, &apos;?&apos;) for i in text])</span><br></pre></td></tr></table></figure></p>
-<p>现在我们就可以通过<code>decode_review(train_data[0])</code>来获得原始的影评了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;START&gt; this film was just brilliant casting location scenery story direction everyone&apos;s really suited the part they played and you could just imagine being there robert &lt;UNK&gt; is an amazing actor and now the same being director &lt;UNK&gt; father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for &lt;UNK&gt; and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also &lt;UNK&gt; to the two little boy&apos;s that played the &lt;UNK&gt; of norman and paul they were just brilliant children are often left out of the &lt;UNK&gt; list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don&apos;t you think the whole story was so lovely because it was true and was someone&apos;s life after all that was shared with us all&quot;</span><br></pre></td></tr></table></figure></p>
-<p>为了更好的进行下一步的神经网络处理,我们将对应的影评数据进行向量化,向量的长度为256<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">train_data = keras.preprocessing.sequence.pad_sequences(train_data,</span><br><span class="line">                                                        value=word_index[&quot;&lt;PAD&gt;&quot;],</span><br><span class="line">                                                        padding=&apos;post&apos;,</span><br><span class="line">                                                        maxlen=256)</span><br><span class="line"></span><br><span class="line">test_data = keras.preprocessing.sequence.pad_sequences(test_data,</span><br><span class="line">                                                       value=word_index[&quot;&lt;PAD&gt;&quot;],</span><br><span class="line">                                                       padding=&apos;post&apos;,</span><br><span class="line">                                                       maxlen=256)</span><br></pre></td></tr></table></figure></p>
-<h3 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 初始化10000词的词典</span><br><span class="line">vocab_size = 10000</span><br><span class="line"></span><br><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(keras.layers.Embedding(vocab_size, 16))#每个词的向量长度为16</span><br><span class="line">model.add(keras.layers.GlobalAveragePooling1D())</span><br><span class="line">model.add(keras.layers.Dense(16, activation=tf.nn.relu))</span><br><span class="line">model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
-<h3 id="创建优化器"><a href="#创建优化器" class="headerlink" title="创建优化器"></a>创建优化器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 使用adam算法</span><br><span class="line">model.compile(optimizer=&apos;adam&apos;,</span><br><span class="line">              loss=&apos;binary_crossentropy&apos;,</span><br><span class="line">              metrics=[&apos;acc&apos;])</span><br><span class="line"># 创建一个验证集</span><br><span class="line">x_val = train_data[:10000]</span><br><span class="line">partial_x_train = train_data[10000:]</span><br><span class="line"></span><br><span class="line">y_val = train_labels[:10000]</span><br><span class="line">partial_y_train = train_labels[10000:]</span><br></pre></td></tr></table></figure>
-<h3 id="开始进行训练"><a href="#开始进行训练" class="headerlink" title="开始进行训练"></a>开始进行训练</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                    partial_y_train,</span><br><span class="line">                    epochs=40,</span><br><span class="line">                    batch_size=512,</span><br><span class="line">                    validation_data=(x_val, y_val),</span><br><span class="line">                    verbose=1)</span><br></pre></td></tr></table></figure>
-<h3 id="评估对应的结果"><a href="#评估对应的结果" class="headerlink" title="评估对应的结果"></a>评估对应的结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results = model.evaluate(test_data, test_labels)</span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure>
+        <h2 id="windows下进行TensorFlow-GPU版本安装-不适用于CPU版本"><a href="#windows下进行TensorFlow-GPU版本安装-不适用于CPU版本" class="headerlink" title="windows下进行TensorFlow GPU版本安装(不适用于CPU版本)"></a>windows下进行TensorFlow GPU版本安装(不适用于CPU版本)</h2><p>基于各种原因，本次的实验环境在windows下进行。<br>其中本机的配置如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">硬件：</span><br><span class="line"> - CPU：Intel Xeon E3-1505M</span><br><span class="line"> - RAM：64GB</span><br><span class="line"> - GPU：NVIDIA Quadro M2000M</span><br><span class="line">软件：</span><br><span class="line"> - OS：Windows 10 专业工作站 1809 x64</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>正确的步骤如下所示:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 请务必保证安装的 `Python` 版本为 `3.6.X`, `TensorFlow` 对于 `3.7.X`还未支持完全</span><br><span class="line">2. 安装 Cuda 10.0, 目前不要使用Cuda 10.1的版本,因为还未支持</span><br><span class="line">3. 安装 cudnn for 10.0 </span><br><span class="line">4. 安装 tensorflow-gpu</span><br><span class="line">5. 添加对应的环境变量</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;%PATH%</span><br><span class="line">SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64;%PATH%</span><br><span class="line">SET PATH=C:\tools\cuda\bin;%PATH%</span><br><span class="line">6. 验证(在输入下面的代码并运行后,会出现3min的等待,目前原因不明)</span><br><span class="line">python -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"</span><br><span class="line">7. 结果</span><br><span class="line">2019-03-03 17:28:53.391788: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</span><br><span class="line">2019-03-03 17:28:53.569006: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties:</span><br><span class="line">name: Quadro M2000M major: 5 minor: 0 memoryClockRate(GHz): 1.137</span><br><span class="line">pciBusID: 0000:01:00.0</span><br><span class="line">totalMemory: 4.00GiB freeMemory: 3.34GiB</span><br><span class="line">2019-03-03 17:28:53.600653: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0</span><br><span class="line">2019-03-03 17:28:54.903988: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:</span><br><span class="line">2019-03-03 17:28:54.921578: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0</span><br><span class="line">2019-03-03 17:28:54.932974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0: N</span><br><span class="line">2019-03-03 17:28:54.946509: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3048 MB memory) -> physical GPU (device: 0, name: Quadro M2000M, pci bus id: 0000:01:00.0, compute capability: 5.0)</span><br><span class="line">tf.Tensor(1187.2697, shape=(), dtype=float32)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="使用-imdb数据集进行文本分类"><a href="#使用-imdb数据集进行文本分类" class="headerlink" title="使用 imdb数据集进行文本分类"></a>使用 imdb数据集进行文本分类</h2><p>首先使用下属的代码下载数据集<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imdb = keras.datasets.imdb</span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>下载完之后我们可以看到该数据集包含了25000条训练数据和25000条测试数据<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print("Training entries: {}, labels: {}".format(len(train_data), len(test_data)))</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>我们查看某一条具体的imdb影评是什么样的格式<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(train_data[0])</span><br><span class="line">----</span><br><span class="line">[1, 14, 22, 16, 43, 530, 973, 1622, 1385, 65, 458, 4468, 66, 3941, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 4536, 1111, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2025, 19, 14, 22, 4, 1920, 4613, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 1247, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2223, 5244, 16, 480, 66, 3785, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 1415, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 5952, 15, 256, 4, 2, 7, 3766, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 1029, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2071, 56, 26, 141, 6, 194, 7486, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 5535, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 1334, 88, 12, 16, 283, 5, 16, 4472, 113, 103, 32, 15, 16, 5345, 19, 178, 32]</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>说明所有的影评根据词典已经转化为相应的数字,我们尝试将对应的数字转换为真实的词<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 构建一个词与数字的映射字典</span><br><span class="line">word_index = imdb.get_word_index()</span><br><span class="line"># 创建一个数字与词的映射字典</span><br><span class="line">word_index = {k:(v+3) for k,v in word_index.items()} </span><br><span class="line">word_index["<PAD>"] = 0</span><br><span class="line">word_index["<START>"] = 1</span><br><span class="line">word_index["<UNK>"] = 2 # unknown</span><br><span class="line">word_index["<UNUSED>"] = 3</span><br><span class="line"></span><br><span class="line">index_word = dict([(value, key) for (key, value) in word_index.items()])</span><br><span class="line"></span><br><span class="line">def decode_review(text):</span><br><span class="line">    return ' '.join([index_word.get(i, '?') for i in text])</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>现在我们就可以通过<code>decode_review(train_data[0])</code>来获得原始的影评了<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"<START> this film was just brilliant casting location scenery story direction everyone's really suited the part they played and you could just imagine being there robert <UNK> is an amazing actor and now the same being director <UNK> father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for <UNK> and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also <UNK> to the two little boy's that played the <UNK> of norman and paul they were just brilliant children are often left out of the <UNK> list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don't you think the whole story was so lovely because it was true and was someone's life after all that was shared with us all"</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>为了更好的进行下一步的神经网络处理,我们将对应的影评数据进行向量化,向量的长度为256<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">train_data = keras.preprocessing.sequence.pad_sequences(train_data,</span><br><span class="line">                                                        value=word_index["<PAD>"],</span><br><span class="line">                                                        padding='post',</span><br><span class="line">                                                        maxlen=256)</span><br><span class="line"></span><br><span class="line">test_data = keras.preprocessing.sequence.pad_sequences(test_data,</span><br><span class="line">                                                       value=word_index["<PAD>"],</span><br><span class="line">                                                       padding='post',</span><br><span class="line">                                                       maxlen=256)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 初始化10000词的词典</span><br><span class="line">vocab_size = 10000</span><br><span class="line"></span><br><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(keras.layers.Embedding(vocab_size, 16))#每个词的向量长度为16</span><br><span class="line">model.add(keras.layers.GlobalAveragePooling1D())</span><br><span class="line">model.add(keras.layers.Dense(16, activation=tf.nn.relu))</span><br><span class="line">model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="创建优化器"><a href="#创建优化器" class="headerlink" title="创建优化器"></a>创建优化器</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 使用adam算法</span><br><span class="line">model.compile(optimizer='adam',</span><br><span class="line">              loss='binary_crossentropy',</span><br><span class="line">              metrics=['acc'])</span><br><span class="line"># 创建一个验证集</span><br><span class="line">x_val = train_data[:10000]</span><br><span class="line">partial_x_train = train_data[10000:]</span><br><span class="line"></span><br><span class="line">y_val = train_labels[:10000]</span><br><span class="line">partial_y_train = train_labels[10000:]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="开始进行训练"><a href="#开始进行训练" class="headerlink" title="开始进行训练"></a>开始进行训练</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                    partial_y_train,</span><br><span class="line">                    epochs=40,</span><br><span class="line">                    batch_size=512,</span><br><span class="line">                    validation_data=(x_val, y_val),</span><br><span class="line">                    verbose=1)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="评估对应的结果"><a href="#评估对应的结果" class="headerlink" title="评估对应的结果"></a>评估对应的结果</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results = model.evaluate(test_data, test_labels)</span><br><span class="line">print(results)</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="使用到的相关的术语"><a href="#使用到的相关的术语" class="headerlink" title="使用到的相关的术语"></a>使用到的相关的术语</h3><ol>
 <li>ROC(Receiver Operating Characteristic)的操作方式与之前的P-R图类似,并提出了两个概念,真正利率TPR,假正利率FPR<script type="math/tex; mode=display">
 TPR=TP/(TP+FN)</script><script type="math/tex; mode=display">
@@ -437,7 +491,25 @@ FPR=FP/(FP+TN)</script></li>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/">http://littleji.com/2019/03/03/20190303DataWhaleNLPTask1/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -539,7 +611,25 @@ FPR=FP/(FP+TN)</script></li>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/02/19/20190219HandoverMemoList/">http://littleji.com/2019/02/19/20190219HandoverMemoList/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -584,7 +674,7 @@ FPR=FP/(FP+TN)</script></li>
 <li>代码实现清晰易读,无法阅读自然无法审查。</li>
 <li>快速学习他人的代码思路提高自身水平。</li>
 <li>你确定真的开发完功能了?开发的是不是想要的功能?</li>
-<li>AT &amp; T 的一个 200 多人的部门在开始执行 code review 后，开发效率提高了 14%，而错误减少了 90% 左右。</li>
+<li>AT & T 的一个 200 多人的部门在开始执行 code review 后，开发效率提高了 14%，而错误减少了 90% 左右。</li>
 </ol>
 <h2 id="建立看板（scrum）开发流程的好处"><a href="#建立看板（scrum）开发流程的好处" class="headerlink" title="建立看板（scrum）开发流程的好处"></a>建立看板（scrum）开发流程的好处</h2><ol>
 <li>现在让你说有三个大功能分别是（重新设计网站首页，增加用户登录功能，增加日志审计功能）问你什么时候大概能完成？帮助你评估项目的时间节点</li>
@@ -631,7 +721,25 @@ FPR=FP/(FP+TN)</script></li>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/">http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -724,13 +832,31 @@ Gini(D,A=a)=\frac{|D_{1}|}{|D|}Gini(D_{1})+\frac{|D_{2}|}{|D|}Gini(D_{2})</scrip
 <li>剪枝,即当前节点的划分无法带来决策树泛化性能的提升,增删除对应的节点</li>
 </ol>
 <h1 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h1><p>可以使用之前梳理的AUC ROC 交叉验证 随机抽样等方法,这里就不再赘述了.</p>
-<h1 id="python可视化决策树与对应的函数实现"><a href="#python可视化决策树与对应的函数实现" class="headerlink" title="python可视化决策树与对应的函数实现"></a>python可视化决策树与对应的函数实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import pydotplus</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn import tree</span><br><span class="line">import collections</span><br><span class="line"># Data Collection</span><br><span class="line">X = [ [180, 15,0],     </span><br><span class="line">      [177, 42,0],</span><br><span class="line">      [136, 35,1],</span><br><span class="line">      [174, 65,0],</span><br><span class="line">      [141, 28,1]]</span><br><span class="line"></span><br><span class="line">Y = [&apos;man&apos;, &apos;woman&apos;, &apos;woman&apos;, &apos;man&apos;, &apos;woman&apos;]    </span><br><span class="line"></span><br><span class="line">data_feature_names = [ &apos;height&apos;, &apos;hair length&apos;, &apos;voice pitch&apos; ]</span><br><span class="line"># Training</span><br><span class="line">clf = tree.DecisionTreeClassifier()</span><br><span class="line">clf = clf.fit(X,Y)</span><br><span class="line"># Visualize data</span><br><span class="line">dot_data = tree.export_graphviz(clf,</span><br><span class="line">                                feature_names=data_feature_names,</span><br><span class="line">                                out_file=None,</span><br><span class="line">                                filled=True,</span><br><span class="line">                                rounded=True)</span><br><span class="line">graph = pydotplus.graph_from_dot_data(dot_data)</span><br><span class="line"></span><br><span class="line">colors = (&apos;turquoise&apos;, &apos;orange&apos;)</span><br><span class="line">edges = collections.defaultdict(list)</span><br><span class="line"></span><br><span class="line">for edge in graph.get_edge_list():</span><br><span class="line">    edges[edge.get_source()].append(int(edge.get_destination()))</span><br><span class="line"></span><br><span class="line">for edge in edges:</span><br><span class="line">    edges[edge].sort()    </span><br><span class="line">    for i in range(2):</span><br><span class="line">        dest = graph.get_node(str(edges[edge][i]))[0]</span><br><span class="line">        dest.set_fillcolor(colors[i])</span><br><span class="line"></span><br><span class="line">graph.write_png(&apos;tree.png&apos;)</span><br></pre></td></tr></table></figure>
+<h1 id="python可视化决策树与对应的函数实现"><a href="#python可视化决策树与对应的函数实现" class="headerlink" title="python可视化决策树与对应的函数实现"></a>python可视化决策树与对应的函数实现</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import pydotplus</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn import tree</span><br><span class="line">import collections</span><br><span class="line"># Data Collection</span><br><span class="line">X = [ [180, 15,0],     </span><br><span class="line">      [177, 42,0],</span><br><span class="line">      [136, 35,1],</span><br><span class="line">      [174, 65,0],</span><br><span class="line">      [141, 28,1]]</span><br><span class="line"></span><br><span class="line">Y = ['man', 'woman', 'woman', 'man', 'woman']    </span><br><span class="line"></span><br><span class="line">data_feature_names = [ 'height', 'hair length', 'voice pitch' ]</span><br><span class="line"># Training</span><br><span class="line">clf = tree.DecisionTreeClassifier()</span><br><span class="line">clf = clf.fit(X,Y)</span><br><span class="line"># Visualize data</span><br><span class="line">dot_data = tree.export_graphviz(clf,</span><br><span class="line">                                feature_names=data_feature_names,</span><br><span class="line">                                out_file=None,</span><br><span class="line">                                filled=True,</span><br><span class="line">                                rounded=True)</span><br><span class="line">graph = pydotplus.graph_from_dot_data(dot_data)</span><br><span class="line"></span><br><span class="line">colors = ('turquoise', 'orange')</span><br><span class="line">edges = collections.defaultdict(list)</span><br><span class="line"></span><br><span class="line">for edge in graph.get_edge_list():</span><br><span class="line">    edges[edge.get_source()].append(int(edge.get_destination()))</span><br><span class="line"></span><br><span class="line">for edge in edges:</span><br><span class="line">    edges[edge].sort()    </span><br><span class="line">    for i in range(2):</span><br><span class="line">        dest = graph.get_node(str(edges[edge][i]))[0]</span><br><span class="line">        dest.set_fillcolor(colors[i])</span><br><span class="line"></span><br><span class="line">graph.write_png('tree.png')</span><br></pre></td></tr></tbody></table></figure>
 <p>主要的函数为</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="">统计自然语言处理-宗成庆</a><br><a href="">机器学习-周志华</a><br><a href="">统计学习方法-李航</a><br><a href="https://blog.csdn.net/weixin_36586536/article/details/80468426" target="_blank" rel="noopener">决策树(分类树、回归树</a><br><a href="https://pythonprogramminglanguage.com/decision-tree-visual-example/" target="_blank" rel="noopener">Decision tree visual example</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href>统计自然语言处理-宗成庆</a><br><a href>机器学习-周志华</a><br><a href>统计学习方法-李航</a><br><a href="https://blog.csdn.net/weixin_36586536/article/details/80468426" target="_blank" rel="noopener">决策树(分类树、回归树</a><br><a href="https://pythonprogramminglanguage.com/decision-tree-visual-example/" target="_blank" rel="noopener">Decision tree visual example</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/25/20181225MLReview3/">http://littleji.com/2018/12/25/20181225MLReview3/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -785,7 +911,25 @@ y=\frac{1}{1+e^{-(w^{T}x+b)}}</script><h1 id="逻辑回归的原理"><a href="#�
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/22/20181222MLReview2/">http://littleji.com/2018/12/22/20181222MLReview2/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -866,7 +1010,7 @@ P=\frac{TP}{TP+FP}</script><script type="math/tex; mode=display">
  R=\frac{TP}{TP+FN}</script><p> 二者一般矛盾,因为查全率高意味着查的个数多,这样又会导致查准率下降<br>由查全率作为横轴,查准率作为纵轴形成P-R曲线,比较学习期的的性能时,比较该曲线的面积是一个方法<br>平衡点(Break-Event Point)是查准率等于查全率的取值,这样可以权衡查全率和查准率<br>BEP还是有些简化,更常用的是F1度量,目的是为了找出更好的学习器<br>F1:基于查准率和查全率的调和平均值(harmonic mean):</p>
 <script type="math/tex; mode=display">
 F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><script type="math/tex; mode=display">
-F_\beta=\frac{(1+\beta^{2})*P*R}{\beta^2*P +R}</script><p> 其中β&gt;0, β=1时就退化为标准的F1,β<1时则查准更重要,β>1则查全更重要<br>很多时候我们有多个二分类混淆矩阵,例如进行多次训练和测试,每次都有一个,或者执行多分类任务,每每两个组合都对应一个混淆矩阵<br>一种直接的做法是在所有的混淆矩阵都计算,然后计算所有的平均值也就是宏查重率macro-P和macro-R以及对应的macro F1</1时则查准更重要,β></p>
+F_\beta=\frac{(1+\beta^{2})*P*R}{\beta^2*P +R}</script><p> 其中β>0, β=1时就退化为标准的F1,β<1时则查准更重要,β>1则查全更重要<br>很多时候我们有多个二分类混淆矩阵,例如进行多次训练和测试,每次都有一个,或者执行多分类任务,每每两个组合都对应一个混淆矩阵<br>一种直接的做法是在所有的混淆矩阵都计算,然后计算所有的平均值也就是宏查重率macro-P和macro-R以及对应的macro F1<!--1时则查准更重要,β--></p>
 <h2 id="4-2-ROC与AUC"><a href="#4-2-ROC与AUC" class="headerlink" title="4.2 ROC与AUC"></a>4.2 ROC与AUC</h2><p>学习预测就是将样本进行排序,最可能是正例的排在前面<br>神经网络一般情形下对每个测试样本预测出一个0-1的实值,然后将这个值作为截断点,大于这个截断点的样本为正例,其他的为反例,如果更重视查准率则可选择排序中靠前的位置,重视查全率则选择较后的截断点<br>排序本身的质量好环则是体现了学习器在不同任务下的期望泛化性能,ROC曲线就是从这个角度来研究学习器泛化性能</p>
 <p>ROC(Receiver Operating Characteristic)的操作方式与之前的P-R图类似,并提出了两个概念,真正利率TPR,假正利率FPR</p>
 <script type="math/tex; mode=display">
@@ -877,13 +1021,31 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <li>比较ROC曲线的面积也就是AUC</li>
 </ol>
 <p>AUC更考虑的是样本预测的排序质量</p>
-<h1 id="5-sklearn参数详解"><a href="#5-sklearn参数详解" class="headerlink" title="5 sklearn参数详解"></a>5 sklearn参数详解</h1><p>下面对于一个最普通的sklearn 线性模型的使用方式进行说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个普通的线性模型</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"># 输入对应的训练数据x,以及对应的标签数据y</span><br><span class="line">regr.fit(datasets_train_x, datasets_train_y)</span><br><span class="line"></span><br><span class="line"># 输入对对应的测试数据x,得出模型的预测输出</span><br><span class="line">pred_y = regr.predict(datasets_test_x)</span><br><span class="line"></span><br><span class="line"># 最终使用下面的命令轲输出对应的w 与 b</span><br><span class="line">reg.coef_</span><br></pre></td></tr></table></figure></p>
+<h1 id="5-sklearn参数详解"><a href="#5-sklearn参数详解" class="headerlink" title="5 sklearn参数详解"></a>5 sklearn参数详解</h1><p>下面对于一个最普通的sklearn 线性模型的使用方式进行说明<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个普通的线性模型</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"># 输入对应的训练数据x,以及对应的标签数据y</span><br><span class="line">regr.fit(datasets_train_x, datasets_train_y)</span><br><span class="line"></span><br><span class="line"># 输入对对应的测试数据x,得出模型的预测输出</span><br><span class="line">pred_y = regr.predict(datasets_test_x)</span><br><span class="line"></span><br><span class="line"># 最终使用下面的命令轲输出对应的w 与 b</span><br><span class="line">reg.coef_</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>除了上面的模型还有包括 lasso ridge等回归模型在<code>linear_model</code>包内</p>
-<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;qid=1545063695&amp;sr=8-1&amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&amp;pd_rd_i=B007TSFMTA&amp;pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&amp;pd_rd_w=PIcAR&amp;pd_rd_wg=9xBdB&amp;pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&amp;pf_rd_r=WPZZ4JN9QDGJN49CCH7G&amp;psc=1&amp;refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
+<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1545063695&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&pd_rd_i=B007TSFMTA&pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&pd_rd_w=PIcAR&pd_rd_wg=9xBdB&pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&pf_rd_r=WPZZ4JN9QDGJN49CCH7G&psc=1&refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/18/20181218MLReview1/">http://littleji.com/2018/12/18/20181218MLReview1/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
@@ -928,7 +1090,7 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <li>生成式模型:先去学习这两种不同的语言,再根据语言的输入去判断语言的种类</li>
 <li>判断式模型:直接根据输入判断到底属于哪种语言</li>
 </ol>
-<h2 id="第二个例子"><a href="#第二个例子" class="headerlink" title="第二个例子"></a>第二个例子</h2><p>假设有<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/82eadd7786ea06b1d32108962c79118245872703" alt=""><br>以及<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7c66170a51fd7b916d42c2cf8e8512c75c85a594" alt=""><br>以及对应的几个数据:<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4b9386c4024115b82d7cb8135d3a1a589ec87e16" alt=""><br>那么根据定义就可以求出联合概率分布为</p>
+<h2 id="第二个例子"><a href="#第二个例子" class="headerlink" title="第二个例子"></a>第二个例子</h2><p>假设有<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/82eadd7786ea06b1d32108962c79118245872703" alt><br>以及<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7c66170a51fd7b916d42c2cf8e8512c75c85a594" alt><br>以及对应的几个数据:<br><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4b9386c4024115b82d7cb8135d3a1a589ec87e16" alt><br>那么根据定义就可以求出联合概率分布为</p>
 <div class="table-container">
 <table>
 <thead>
@@ -977,7 +1139,7 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 </tbody>
 </table>
 </div>
-<h1 id="一张图理解生成模型与判别模型的关系"><a href="#一张图理解生成模型与判别模型的关系" class="headerlink" title="一张图理解生成模型与判别模型的关系"></a>一张图理解生成模型与判别模型的关系</h1><p><img src="https://datawarrior.files.wordpress.com/2016/05/discriminative_vs_generative.png?w=1314" alt=""></p>
+<h1 id="一张图理解生成模型与判别模型的关系"><a href="#一张图理解生成模型与判别模型的关系" class="headerlink" title="一张图理解生成模型与判别模型的关系"></a>一张图理解生成模型与判别模型的关系</h1><p><img src="https://datawarrior.files.wordpress.com/2016/05/discriminative_vs_generative.png?w=1314" alt></p>
 <p>学习的目标是正确的将未知的数据进行分类,从图中我们可以很容易的看出:</p>
 <ol>
 <li>判别模型学习得到的是那条分类的曲线,其关注点在于分类的边界学习</li>
@@ -1031,7 +1193,25 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/11/27/20181127GenerativeVSDiscriminative/">http://littleji.com/2018/11/27/20181127GenerativeVSDiscriminative/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

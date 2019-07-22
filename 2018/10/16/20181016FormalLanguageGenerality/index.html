@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>形式语法概述 | littleji</title>
@@ -119,7 +119,7 @@
 <h3 id="自下而上分析法"><a href="#自下而上分析法" class="headerlink" title="自下而上分析法"></a>自下而上分析法</h3><p>有终结字符串进行规约，最终生成的非终结字符串，是否符合规则</p>
 <h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47004899-2657f200-d165-11e8-94fb-5463a90dd1f7.png" alt="image"><br>这时候使用回溯法进行计算</p>
 <h2 id="简化文法"><a href="#简化文法" class="headerlink" title="简化文法"></a>简化文法</h2><p>主要是去除规则中的两种类型的规则，有害规则和多与规则</p>
-<h3 id="有害规则"><a href="#有害规则" class="headerlink" title="有害规则"></a>有害规则</h3><p>例如：<br>U-&gt;U这种产生式，会引起文法的二义性。<br>多余规则：指文法中任何句子的推倒都不会用到的规则，主要有两种：</p>
+<h3 id="有害规则"><a href="#有害规则" class="headerlink" title="有害规则"></a>有害规则</h3><p>例如：<br>U->U这种产生式，会引起文法的二义性。<br>多余规则：指文法中任何句子的推倒都不会用到的规则，主要有两种：</p>
 <ol>
 <li>非终结字符不在任何规则的右部出现。</li>
 <li>非终结字符无法推出终结符号串</li>
@@ -128,7 +128,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/">http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

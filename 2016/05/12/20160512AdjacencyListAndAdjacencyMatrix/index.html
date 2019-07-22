@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>邻接矩阵,邻接列表一些基本概念和应用(Adjacency list and Adjacency matrix) | littleji</title>
@@ -104,9 +104,9 @@
 <li>由于事实上每一组顶点关系只需要一位来来表达,处理一个有4个顶点的图仅仅需要 4<em>4/8个=2个字节,这是很节省空间的,如果是一个无向图的话,所需要的空间则可以再减少一半的空间 4</em>4/16个=1个字节,通过这个方法已经接近信息论中表达一个n个顶点所需要字节数的下界.</li>
 <li>但是也存在一些问题,例如其可能需要存储那些本来不存在的边</li>
 </ul>
-<h3 id="邻接链表"><a href="#邻接链表" class="headerlink" title="邻接链表"></a>邻接链表</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>邻接链表也是一种表达图的方式<br>假设有无向图如下所示<br> <div align="center">
+<h3 id="邻接链表"><a href="#邻接链表" class="headerlink" title="邻接链表"></a>邻接链表</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>邻接链表也是一种表达图的方式<br>假设有无向图如下所示<br> </p><div align="center">
 <img class="little" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Simple_cycle_graph.svg/120px-Simple_cycle_graph.svg.png" align="center">
- </div></p>
+ </div><p></p>
 <p>则相对应的表示为三个list{b,c},{a,c},{a,b}<br>但是换出去空间的节省后,查询时间也会相应的边长<br>例如:查询a与b是否有关系需要首先定位到a的链表{b,c},再对这个链表进行遍历,如果没有b,也就说明对其进行了完整的遍历,浪费了较多的时间,当然可以采用快速搜索的方式进行优化</p>
 <ul>
 <li>事实上邻接列表还有一点是其应用在大型稀疏矩阵中,因为邻接矩阵不需要浪费空间来表达那些不存在的边缘</li>
@@ -118,7 +118,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2016/05/12/20160512AdjacencyListAndAdjacencyMatrix/">http://littleji.com/2016/05/12/20160512AdjacencyListAndAdjacencyMatrix/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

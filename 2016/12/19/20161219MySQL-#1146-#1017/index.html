@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>使用navicat 修改MySQL数据库的某个表后,无法再读取该表(MySQL-#1146-#1017) | littleji</title>
@@ -90,19 +90,37 @@
     <div class="entry">
       
         <h2 id="概述-abstract"><a href="#概述-abstract" class="headerlink" title="概述(abstract)"></a>概述(abstract)</h2><p>问题的产生原因是由于在Windows下使用Navicat客户端,操作位于CentOS上MySQL 5.6时,具体的执行一个重命名字段的操作时,Navicat停止了运行,然后将该Navicat强制的关闭后,再运行Navicat打开刚才重命名字段所在的表,再次卡死,反复操作几次,结果并没有改变.</p>
-<h2 id="解决1-figure-it-1"><a href="#解决1-figure-it-1" class="headerlink" title="解决1(figure it 1)"></a>解决1(figure it 1)</h2><p>首先,去MySQL数据库所在的服务器,对MySQL服务进行重启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure></p>
+<h2 id="解决1-figure-it-1"><a href="#解决1-figure-it-1" class="headerlink" title="解决1(figure it 1)"></a>解决1(figure it 1)</h2><p>首先,去MySQL数据库所在的服务器,对MySQL服务进行重启<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>再去用Navicat操作MySQL ,报 ERROR 1146 table ‘’ doesn’t exist 的错误</p>
-<h2 id="解决2-figure-it-2"><a href="#解决2-figure-it-2" class="headerlink" title="解决2(figure it 2)"></a>解决2(figure it 2)</h2><p>之后,通过查阅stackoverflow,可能是数据库文件权限的问题,然后照葫芦画瓢,使用下面的命令对其进行修改:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /var/lib/mysql/ci/*</span><br></pre></td></tr></table></figure></p>
+<h2 id="解决2-figure-it-2"><a href="#解决2-figure-it-2" class="headerlink" title="解决2(figure it 2)"></a>解决2(figure it 2)</h2><p>之后,通过查阅stackoverflow,可能是数据库文件权限的问题,然后照葫芦画瓢,使用下面的命令对其进行修改:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /var/lib/mysql/ci/*</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>直接报,没有该文件</p>
-<h2 id="解决3-figure-it-3"><a href="#解决3-figure-it-3" class="headerlink" title="解决3(figure it 3)"></a>解决3(figure it 3)</h2><p>需要通过下面的命令查询mysql data文件具体在什么位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure></p>
-<p>找到下面这行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datadir = /opt/mysql/db/data</span><br></pre></td></tr></table></figure></p>
-<p>再通过语句修改对应数据表所在数据库的权限,比如出现错误的表所在数据库的名字是’tmp_db’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /opt/mysql/db/data/tmp_db/*</span><br></pre></td></tr></table></figure></p>
-<p>重新启动数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure></p>
+<h2 id="解决3-figure-it-3"><a href="#解决3-figure-it-3" class="headerlink" title="解决3(figure it 3)"></a>解决3(figure it 3)</h2><p>需要通过下面的命令查询mysql data文件具体在什么位置<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>找到下面这行<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datadir = /opt/mysql/db/data</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>再通过语句修改对应数据表所在数据库的权限,比如出现错误的表所在数据库的名字是’tmp_db’<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /opt/mysql/db/data/tmp_db/*</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>重新启动数据库<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/6443428/cant-find-file-ci-users-frm-errno-13" target="_blank" rel="noopener">stackoverflow#1</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/">http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

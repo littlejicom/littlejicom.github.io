@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>我的程序员书单(My Programmer Book List) | littleji</title>
@@ -89,7 +89,7 @@
     </header>
     <div class="entry">
       
-        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>程序员实用算法 原书<br>算法导论-&gt;大餐 9.4<br>Algorithms Unlocked-&gt;开胃<br>算法引论——一种创造性方法（建议先看第5章，真是爽爆了）<br>The Science of Programming<br>求解数学题《怎样解题》<br>计算机程序设计艺术 9.3<br>基础数学 9.5<br>怎样解题 9.1<br>An Introduction to Probability Theory and Its Applications, Vol. 1, 3rd Edition 9.6<br>如何求解问题 8.5<br>数理逻辑 8.9<br>集合论基础 9.1<br>概率论及其应用 9.1<br>图论导引 8.8<br>来自圣经的证明 9.4</p>
+        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>程序员实用算法 原书<br>算法导论->大餐 9.4<br>Algorithms Unlocked->开胃<br>算法引论——一种创造性方法（建议先看第5章，真是爽爆了）<br>The Science of Programming<br>求解数学题《怎样解题》<br>计算机程序设计艺术 9.3<br>基础数学 9.5<br>怎样解题 9.1<br>An Introduction to Probability Theory and Its Applications, Vol. 1, 3rd Edition 9.6<br>如何求解问题 8.5<br>数理逻辑 8.9<br>集合论基础 9.1<br>概率论及其应用 9.1<br>图论导引 8.8<br>来自圣经的证明 9.4</p>
 <h1 id="计算机原理"><a href="#计算机原理" class="headerlink" title="计算机原理"></a>计算机原理</h1><p>计算机程序的构造与解释 9.5<br>领域特定语言 9.1<br>编译原理 9.1</p>
 <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>Effective Akka<br>Java 8 in action<br>java puzz<br>java 并发编程实战 9.0<br>effective java 9.1</p>
 <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>Learning Python<br>Python Programming</p>
@@ -108,7 +108,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2017/05/10/20170510MyBookList/">http://littleji.com/2017/05/10/20170510MyBookList/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

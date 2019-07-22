@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>git较为完整安装与配置,解决git clone速度慢等问题(Almost perfect git configuration) | littleji</title>
@@ -90,12 +90,30 @@
     <div class="entry">
       
         <h2 id="概述-abstract"><a href="#概述-abstract" class="headerlink" title="概述(abstract)"></a>概述(abstract)</h2><p>  Github最近又开始不稳定,而在bower等安装的过程中会利用到其上面的源, 在包的下载总会因为网络或者的问题,导致中断安装,而每次重新安装的时间较长.<br>为了让大家不再因为此浪费时间,给大家一些可能有用的配置建议.</p>
-<h2 id="具体配置-configuration"><a href="#具体配置-configuration" class="headerlink" title="具体配置(configuration)"></a>具体配置(configuration)</h2><h3 id="卸载和安装最新-remove-and-update-git"><a href="#卸载和安装最新-remove-and-update-git" class="headerlink" title="卸载和安装最新(remove and update git)"></a>卸载和安装最新(remove and update git)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/APP</span><br><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y</span><br><span class="line">yum install  gcc perl-ExtUtils-MakeMaker -y</span><br><span class="line">yum remove git -y</span><br><span class="line">cd /home/zeppelin/prerequisites</span><br><span class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.2.tar.gz#you can look for the lastest version of git and replace 2.10.2</span><br><span class="line">tar xzf git-2.10.2.tar.gz</span><br><span class="line">cd git-2.10.2</span><br><span class="line">make prefix=/root/APP/git all</span><br><span class="line">make prefix=/root/APP/git install</span><br><span class="line">echo &quot;export PATH=$PATH:/root/APP/git/bin&quot; &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br><span class="line">git config --global url.&quot;https://&quot;.insteadOf git://</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-<h3 id="使用较快的hosts-use-faster-host-for-github-com"><a href="#使用较快的hosts-use-faster-host-for-github-com" class="headerlink" title="使用较快的hosts(use faster host for github.com)"></a>使用较快的hosts(use faster host for github.com)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#add the below hosts into your /etc/hosts</span><br><span class="line">192.30.253.118 gist.github.com</span><br><span class="line">192.30.253.119 gist.github.com</span><br></pre></td></tr></table></figure>
+<h2 id="具体配置-configuration"><a href="#具体配置-configuration" class="headerlink" title="具体配置(configuration)"></a>具体配置(configuration)</h2><h3 id="卸载和安装最新-remove-and-update-git"><a href="#卸载和安装最新-remove-and-update-git" class="headerlink" title="卸载和安装最新(remove and update git)"></a>卸载和安装最新(remove and update git)</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/APP</span><br><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y</span><br><span class="line">yum install  gcc perl-ExtUtils-MakeMaker -y</span><br><span class="line">yum remove git -y</span><br><span class="line">cd /home/zeppelin/prerequisites</span><br><span class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.2.tar.gz#you can look for the lastest version of git and replace 2.10.2</span><br><span class="line">tar xzf git-2.10.2.tar.gz</span><br><span class="line">cd git-2.10.2</span><br><span class="line">make prefix=/root/APP/git all</span><br><span class="line">make prefix=/root/APP/git install</span><br><span class="line">echo "export PATH=$PATH:/root/APP/git/bin" >> /etc/profile</span><br><span class="line">source /etc/profile</span><br><span class="line">git config --global url."https://".insteadOf git://</span><br><span class="line">git --version</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="使用较快的hosts-use-faster-host-for-github-com"><a href="#使用较快的hosts-use-faster-host-for-github-com" class="headerlink" title="使用较快的hosts(use faster host for github.com)"></a>使用较快的hosts(use faster host for github.com)</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#add the below hosts into your /etc/hosts</span><br><span class="line">192.30.253.118 gist.github.com</span><br><span class="line">192.30.253.119 gist.github.com</span><br></pre></td></tr></tbody></table></figure>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2016/11/15/20161115AlmostPerfectGitConfiguration/">http://littleji.com/2016/11/15/20161115AlmostPerfectGitConfiguration/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

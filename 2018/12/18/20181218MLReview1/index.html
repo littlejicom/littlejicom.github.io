@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>七天算法梳理之线性回归 | littleji</title>
@@ -135,7 +135,7 @@ P=\frac{TP}{TP+FP}</script><script type="math/tex; mode=display">
  R=\frac{TP}{TP+FN}</script><p> 二者一般矛盾,因为查全率高意味着查的个数多,这样又会导致查准率下降<br>由查全率作为横轴,查准率作为纵轴形成P-R曲线,比较学习期的的性能时,比较该曲线的面积是一个方法<br>平衡点(Break-Event Point)是查准率等于查全率的取值,这样可以权衡查全率和查准率<br>BEP还是有些简化,更常用的是F1度量,目的是为了找出更好的学习器<br>F1:基于查准率和查全率的调和平均值(harmonic mean):</p>
 <script type="math/tex; mode=display">
 F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><script type="math/tex; mode=display">
-F_\beta=\frac{(1+\beta^{2})*P*R}{\beta^2*P +R}</script><p> 其中β&gt;0, β=1时就退化为标准的F1,β<1时则查准更重要,β>1则查全更重要<br>很多时候我们有多个二分类混淆矩阵,例如进行多次训练和测试,每次都有一个,或者执行多分类任务,每每两个组合都对应一个混淆矩阵<br>一种直接的做法是在所有的混淆矩阵都计算,然后计算所有的平均值也就是宏查重率macro-P和macro-R以及对应的macro F1</1时则查准更重要,β></p>
+F_\beta=\frac{(1+\beta^{2})*P*R}{\beta^2*P +R}</script><p> 其中β>0, β=1时就退化为标准的F1,β<1时则查准更重要,β>1则查全更重要<br>很多时候我们有多个二分类混淆矩阵,例如进行多次训练和测试,每次都有一个,或者执行多分类任务,每每两个组合都对应一个混淆矩阵<br>一种直接的做法是在所有的混淆矩阵都计算,然后计算所有的平均值也就是宏查重率macro-P和macro-R以及对应的macro F1<!--1时则查准更重要,β--></p>
 <h2 id="4-2-ROC与AUC"><a href="#4-2-ROC与AUC" class="headerlink" title="4.2 ROC与AUC"></a>4.2 ROC与AUC</h2><p>学习预测就是将样本进行排序,最可能是正例的排在前面<br>神经网络一般情形下对每个测试样本预测出一个0-1的实值,然后将这个值作为截断点,大于这个截断点的样本为正例,其他的为反例,如果更重视查准率则可选择排序中靠前的位置,重视查全率则选择较后的截断点<br>排序本身的质量好环则是体现了学习器在不同任务下的期望泛化性能,ROC曲线就是从这个角度来研究学习器泛化性能</p>
 <p>ROC(Receiver Operating Characteristic)的操作方式与之前的P-R图类似,并提出了两个概念,真正利率TPR,假正利率FPR</p>
 <script type="math/tex; mode=display">
@@ -146,13 +146,31 @@ FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过�
 <li>比较ROC曲线的面积也就是AUC</li>
 </ol>
 <p>AUC更考虑的是样本预测的排序质量</p>
-<h1 id="5-sklearn参数详解"><a href="#5-sklearn参数详解" class="headerlink" title="5 sklearn参数详解"></a>5 sklearn参数详解</h1><p>下面对于一个最普通的sklearn 线性模型的使用方式进行说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个普通的线性模型</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"># 输入对应的训练数据x,以及对应的标签数据y</span><br><span class="line">regr.fit(datasets_train_x, datasets_train_y)</span><br><span class="line"></span><br><span class="line"># 输入对对应的测试数据x,得出模型的预测输出</span><br><span class="line">pred_y = regr.predict(datasets_test_x)</span><br><span class="line"></span><br><span class="line"># 最终使用下面的命令轲输出对应的w 与 b</span><br><span class="line">reg.coef_</span><br></pre></td></tr></table></figure></p>
+<h1 id="5-sklearn参数详解"><a href="#5-sklearn参数详解" class="headerlink" title="5 sklearn参数详解"></a>5 sklearn参数详解</h1><p>下面对于一个最普通的sklearn 线性模型的使用方式进行说明<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个普通的线性模型</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"># 输入对应的训练数据x,以及对应的标签数据y</span><br><span class="line">regr.fit(datasets_train_x, datasets_train_y)</span><br><span class="line"></span><br><span class="line"># 输入对对应的测试数据x,得出模型的预测输出</span><br><span class="line">pred_y = regr.predict(datasets_test_x)</span><br><span class="line"></span><br><span class="line"># 最终使用下面的命令轲输出对应的w 与 b</span><br><span class="line">reg.coef_</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>除了上面的模型还有包括 lasso ridge等回归模型在<code>linear_model</code>包内</p>
-<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;qid=1545063695&amp;sr=8-1&amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&amp;pd_rd_i=B007TSFMTA&amp;pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&amp;pd_rd_w=PIcAR&amp;pd_rd_wg=9xBdB&amp;pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&amp;pf_rd_r=WPZZ4JN9QDGJN49CCH7G&amp;psc=1&amp;refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
+<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1545063695&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&pd_rd_i=B007TSFMTA&pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&pd_rd_w=PIcAR&pd_rd_wg=9xBdB&pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&pf_rd_r=WPZZ4JN9QDGJN49CCH7G&psc=1&refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/12/18/20181218MLReview1/">http://littleji.com/2018/12/18/20181218MLReview1/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

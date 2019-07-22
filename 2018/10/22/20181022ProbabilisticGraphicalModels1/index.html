@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>概率图模型之一 | littleji</title>
@@ -91,7 +91,7 @@
       
         <h1 id="概率图概述"><a href="#概率图概述" class="headerlink" title="概率图概述"></a>概率图概述</h1><p>概率图模型使用图的方法来表示概率分布，在该模型中，结点表示变量，节点之间的边表示变量之间的概略关系。</p>
 <p>根据图模型中的边是否有向，将概率图的代表模型如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/47288361-5f420c00-d628-11e8-9ad1-555e47176c16.png" alt="image"></p>
-<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A-&gt;B-&gt;C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
+<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A->B->C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
 <p>各个图模型的演变关系如下：</p>
 <p><img src="https://user-images.githubusercontent.com/7655877/47288381-7a148080-d628-11e8-836a-fbe66c555d01.png" alt="image"></p>
 <p>其中横向，由点到线（序列结构），最终到面。<br>纵向则是在一定的条件下生成式模型转换为判别式模型。<br>下面假设有观测序列x，状态序列y，并依次来说明生成式与判别式模型的区别。</p>
@@ -136,7 +136,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

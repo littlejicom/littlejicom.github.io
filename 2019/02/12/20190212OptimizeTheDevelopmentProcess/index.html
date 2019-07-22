@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>用gitlab来优化我们的软件开发流程 | littleji</title>
@@ -99,7 +99,7 @@
 <li>代码实现清晰易读,无法阅读自然无法审查。</li>
 <li>快速学习他人的代码思路提高自身水平。</li>
 <li>你确定真的开发完功能了?开发的是不是想要的功能?</li>
-<li>AT &amp; T 的一个 200 多人的部门在开始执行 code review 后，开发效率提高了 14%，而错误减少了 90% 左右。</li>
+<li>AT & T 的一个 200 多人的部门在开始执行 code review 后，开发效率提高了 14%，而错误减少了 90% 左右。</li>
 </ol>
 <h2 id="建立看板（scrum）开发流程的好处"><a href="#建立看板（scrum）开发流程的好处" class="headerlink" title="建立看板（scrum）开发流程的好处"></a>建立看板（scrum）开发流程的好处</h2><ol>
 <li>现在让你说有三个大功能分别是（重新设计网站首页，增加用户登录功能，增加日志审计功能）问你什么时候大概能完成？帮助你评估项目的时间节点</li>
@@ -146,7 +146,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/">http://littleji.com/2019/02/12/20190212OptimizeTheDevelopmentProcess/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>

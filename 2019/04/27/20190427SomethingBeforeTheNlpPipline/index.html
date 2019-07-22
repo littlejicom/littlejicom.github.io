@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>实施NLP流水线之前干点什么 | littleji</title>
@@ -90,7 +90,7 @@
     <div class="entry">
       
         <h2 id="NLP流水线总览"><a href="#NLP流水线总览" class="headerlink" title="NLP流水线总览"></a>NLP流水线总览</h2><p>NLP处理套路无非以下该图中描述</p>
-<p><img src="https://stanfordnlp.github.io/CoreNLP/images/AnnotationPipeline.png" alt=""></p>
+<p><img src="https://stanfordnlp.github.io/CoreNLP/images/AnnotationPipeline.png" alt></p>
 <p>该文的重点则对所有该流水线之前的任务进行补充</p>
 <h2 id="数据本身处理"><a href="#数据本身处理" class="headerlink" title="数据本身处理"></a>数据本身处理</h2><ul>
 <li>简繁体转换或其他同义转换(中文)</li>
@@ -109,13 +109,13 @@
 <li>错词纠正(将词替换为词典中最近的词或者<unk>)</unk></li>
 <li>单位替换(将文本中的单位替换为统一格式如：将4kgs、4kg统一替换为4 kg，将4k替换为4000，将100或100 100或100100或100替换为100 dollar)</li>
 <li>词形还原(lemmatization)</li>
-<li>其他语言进行翻译(比如对于中文中的英文单词归一化为<_e_>)</_e_></li>
-<li>数字归一化(比如将小于10的为&lt;如果在之后的实体识别中需要对应的原始数字则跳过该步骤.1:NUM&gt; 大于10<2:num>)</2:num></li>
+<li>其他语言进行翻译(比如对于中文中的英文单词归一化为<_e_>)<!--_e_--></li>
+<li>数字归一化(比如将小于10的为<如果在之后的实体识别中需要对应的原始数字则跳过该步骤.1:NUM> 大于10<2:num>)<!--2:num--></li>
 </ul>
 <h2 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h2><ul>
 <li>长句截断</li>
 <li>dropout</li>
-<li>shuffle<br><img src="https://pic3.zhimg.com/80/v2-d3aaee7f330d475a0643abd5199a1f16_hd.png" alt=""></li>
+<li>shuffle<br><img src="https://pic3.zhimg.com/80/v2-d3aaee7f330d475a0643abd5199a1f16_hd.png" alt></li>
 <li>文档裁减(这样我将获得更多的数据。开始的时候我尝试从文档中抽取几个句子并创建10个新文档。这些新创建的文档句子间没有逻辑关系，所以用它们训练得到的分类器性能很差。第二次，我尝试将每篇文章分成若干段，每段由文章中五个连续的句子组成。这个方法就运行得非常好，让分类器的性能提升很大)</li>
 <li>文本对齐</li>
 <li>同义词替换</li>
@@ -129,7 +129,25 @@
 <hr>
 <p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
 <p>本文链接为：<a href="http://littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/">http://littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
     <footer>
