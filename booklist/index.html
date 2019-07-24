@@ -222,8 +222,15 @@
 <td>8</td>
 <td>Rework</td>
 <td>Jason Fried & David Heinemeier Hansson</td>
+<td>100%</td>
+<td>20190724</td>
+</tr>
+<tr>
+<td>9</td>
+<td>持续交付2.0</td>
+<td>乔梁</td>
 <td>0%</td>
-<td>20190722</td>
+<td>20190724</td>
 </tr>
 </tbody>
 </table>
@@ -485,5 +492,20 @@ var disqus_shortname = 'littleji';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
