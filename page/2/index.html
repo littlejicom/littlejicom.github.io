@@ -188,7 +188,8 @@
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 输入</span><br><span class="line">依然是上文中使用的例子</span><br><span class="line"></span><br><span class="line"># Logstash 配置文件如下</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    pattern_definitions => {</span><br><span class="line">      "ID" => "\d+(?=,)"</span><br><span class="line">      "DEVICE" => "[a-zA-Z]+(?=,)"</span><br><span class="line">      "MESSAGE_BODY" => ".+(?=,2)"</span><br><span class="line">    }</span><br><span class="line">    #patterns_dir => ["/root/custom-patterns.txt"]</span><br><span class="line">    match => { "message" => "%{ID:id},%{DEVICE:device},%{MESSAGE_BODY:message},%{TIMESTAMP_ISO8601:timestamp}" }</span><br><span class="line">    overwrite => ["message"]</span><br><span class="line">    add_tag => [ "test_%{id}"]</span><br><span class="line">    add_field => {</span><br><span class="line">      "test_%{timestamp}" => "test"</span><br><span class="line">      }</span><br><span class="line">    remove_field => ["device"]</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 结果如下</span><br><span class="line">"host": "localhost",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"tags": [</span><br><span class="line">"test_734742416494845952"</span><br><span class="line">],</span><br><span class="line">"@version": "1",</span><br><span class="line">"@timestamp": "2018-10-21T01:47:31.552Z",</span><br><span class="line">"message": "In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"test_2016-05-23T13:46:57Z": "test"</span><br></pre></td></tr></tbody></table></figure>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html" target="_blank" rel="noopener">grok manual</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/10/25/20181025LogstashGrokOverview/">http://littleji.com/2018/10/25/20181025LogstashGrokOverview/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/">https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -287,7 +288,8 @@
 <p>再者，MAP与MLE最大区别是MAP中加入了模型参数本身的概率分布，即是否考虑了先验知识。或者说。MLE中认为模型参数本身的概率的是均匀的，即该概率为一个固定值。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>统计自然语言处理（第2版）<br><a href="https://blog.csdn.net/Mr_tyting/article/details/62882162?utm_source=blogxgwz1" target="_blank" rel="noopener">1</a><br><a href="https://blog.csdn.net/juanjuan1314/article/details/78189527" target="_blank" rel="noopener">2</a><br><a href="https://zhuanlan.zhihu.com/p/32568242" target="_blank" rel="noopener">3</a><br><a href="https://zhuanlan.zhihu.com/p/32616870" target="_blank" rel="noopener">4</a><br><a href="https://blog.csdn.net/guohecang/article/details/52313046" target="_blank" rel="noopener">5</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">http://littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -378,7 +380,8 @@
 </ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>宗成庆. 统计自然语言处理[M]. 清华大学出版社, 2008.<br><a href="http://ccl.pku.edu.cn/ALCourse/Compiling/" target="_blank" rel="noopener">北京大学编译原理课程</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/">http://littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/">https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -481,7 +484,8 @@
 <p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">http://littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -571,7 +575,8 @@
 <p>作者：<a href="https://opensource.com/users/rgerardi" target="_blank" rel="noopener">Ricardo Gerardi</a><br>选题：<a href="https://github.com/lujun9972" target="_blank" rel="noopener">lujun9972</a><br>译者：<a href="https://github.com/littleji" target="_blank" rel="noopener">littleji</a><br>校对：<a href="https://github.com/校对者ID" target="_blank" rel="noopener">校对者ID</a></p>
 <p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="noopener">LCTT</a> 原创编译，<a href="https://linux.cn/" target="_blank" rel="noopener">Linux中国</a> 荣誉推出</p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">http://littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -670,7 +675,8 @@
 <p>需要注意的是 默认使用int就足够,并且其速度是可以保证的<br>将小的整数转换为大整数总是安全的,但是如果向下转换会产生截断或者得到一个不可预期的值,如果想使用一个完美的精度,可以使用big.Rat或者big.Int类型,该类型只受限于机器的内存大小</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://book.douban.com/subject/24869910/" target="_blank" rel="noopener">Go语言程序设计</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/02/04/20180204ProgrammingInGo1/">http://littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/">https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -730,7 +736,8 @@
 <h2 id="0x03时间戳服务器"><a href="#0x03时间戳服务器" class="headerlink" title="0x03时间戳服务器"></a>0x03时间戳服务器</h2><p>时间戳服务器是一切的开始，时间戳服务器工作原理是对一个block进行hash，并对其结果进行广播。建立时间戳服务器的意义主要是为了证明某一个数据在一个时间点一定存在。在组成一个链的时候，每一个时间戳的生成都会考虑到之前时间戳的信息。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">比特币白皮书</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/01/18/20180117BitCoin/">http://littleji.com/2018/01/18/20180117BitCoin/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/01/18/20180117BitCoin/">https://blog.littleji.com/2018/01/18/20180117BitCoin/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -815,7 +822,8 @@
 <h2 id="0x0103-该怎么做？"><a href="#0x0103-该怎么做？" class="headerlink" title="0x0103 该怎么做？"></a>0x0103 该怎么做？</h2><p>无他，对于交易的双方来说，都应该关注好交易的彼此，莫让对方受了委屈，才是持续推动双方进步的不二法门。切莫为了蝇头甜点，预支了未来的大块蛋糕。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://wiki.mbalib.com/wiki/%E7%AD%89%E4%BB%B7%E4%BA%A4%E6%8D%A2" target="_blank" rel="noopener">等价交换</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2018/01/14/20180114ThereAndBackAgain/">http://littleji.com/2018/01/14/20180114ThereAndBackAgain/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/01/14/20180114ThereAndBackAgain/">https://blog.littleji.com/2018/01/14/20180114ThereAndBackAgain/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -886,7 +894,8 @@
 <h1 id="程序员实践"><a href="#程序员实践" class="headerlink" title="程序员实践"></a>程序员实践</h1><p>卓有成效的程序员<br>高效程序员的修炼<br>程序员的思维训练 8.3<br>程序员的职业素养 8.6<br>高效程序员的45个习惯——敏捷开发修炼之道<br>程序员修炼之道——从小工到专家<br>重构 9.0(《重构与模式》一样，充其量只是一本案例集，无法达到《重构》的高度)<br>编写可读代码的艺术 8.6<br>编程珠玑 9.2<br>编码 9.2</p>
 <h1 id="程序员泛读"><a href="#程序员泛读" class="headerlink" title="程序员泛读"></a>程序员泛读</h1><p>哥德尔、艾舍尔、巴赫 9.4<br>暗时间 8.4<br>把时间当朋友<br>影响力 8.6<br>黑客 8.3<br>编程人生 8.4</p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2017/05/10/20170510MyBookList/">http://littleji.com/2017/05/10/20170510MyBookList/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2017/05/10/20170510MyBookList/">https://blog.littleji.com/2017/05/10/20170510MyBookList/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -951,7 +960,8 @@
 <p>重新启动数据库<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/6443428/cant-find-file-ci-users-frm-errno-13" target="_blank" rel="noopener">stackoverflow#1</a></p>
 <hr>
-<p>本文链接为：<a href="http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/">http://littleji.com/2016/12/19/20161219MySQL-#1146-#1017/</a></p>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2016/12/19/20161219MySQL-#1146-#1017/">https://blog.littleji.com/2016/12/19/20161219MySQL-#1146-#1017/</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1001,7 +1011,7 @@
   <div class="search">
   <form action="//baidu.com" method="get" accept-charset="utf-8">
     <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:littleji.com">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
   </form>
 </div>
 
